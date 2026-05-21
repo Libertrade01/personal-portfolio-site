@@ -1,7 +1,6 @@
 ---
 import Layout from '../components/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
-import StatusLine from '../components/StatusLine.astro';
 import { site, about } from '../config/site';
 
 const personJsonLd = {
@@ -70,10 +69,6 @@ const personJsonLd = {
       <div class="mt-16">
         <p class="section-label">Beyond work</p>
         <p class="mt-4 leading-relaxed text-muted">{about.personal}</p>
-      </div>
-
-      <div class="mt-12">
-        <StatusLine variant="bar" />
       </div>
     </div>
   </section>
