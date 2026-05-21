@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../utils/content';
+
+interface Props {
+  post: CollectionEntry<'build-log'>;
+}
+
+const { post } = Astro.props;
+const { title, description, date, tags } = post.data;
+---
+
+<article class="card-surface group flex h-full flex-col p-6 md:p-7">
+  <time class="font-mono text-[10px] uppercase tracking-widest text-muted" datetime={date.toISOString()}>
+    {formatDate(date)}
+  </time>
+  <h3 class="mt-4 font-serif text-xl text-off-white transition group-hover:text-amber-bright md:text-2xl">
+    <a href={`/build-log/${post.slug}`} class="block">
+      {title}
+    </a>
+  </h3>
+  <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">{description}</p>
+  {
+    tags.length > 0 && (
+      <div class="mt-5 flex flex-wrap gap-1.5 border-t border-border pt-5">
+        {tags.map((tag) => (
+          <span class="rounded-md border border-border px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-muted-dim">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )
+  }
+  <a href={`/build-log/${post.slug}`} class="link-arrow mt-5">
+    Read
+    <span aria-hidden="true">→</span>
+  </a>
+</article>

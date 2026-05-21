@@ -1,0 +1,43 @@
+---
+/* Global atmospheric layers — grain, grid, orbs */
+---
+
+<div class="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+  <!-- Fine grid -->
+  <div
+    class="absolute inset-0 opacity-[0.35]"
+    style="background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black, transparent);"
+  >
+  </div>
+
+  <!-- Floating orbs -->
+  <div
+    class="animate-pulse-slow absolute -left-32 top-1/4 h-[500px] w-[500px] rounded-full opacity-30 blur-[120px]"
+    style="background: radial-gradient(circle, rgba(var(--accent-rgb),0.15) 0%, transparent 70%);"
+  >
+  </div>
+  <div
+    class="animate-float absolute -right-24 top-1/3 h-[400px] w-[400px] rounded-full opacity-20 blur-[100px]"
+    style="background: radial-gradient(circle, rgba(var(--accent-rgb),0.12) 0%, transparent 70%); animation-delay: -2s;"
+  >
+  </div>
+  <div
+    class="absolute bottom-0 left-1/2 h-[300px] w-[600px] -translate-x-1/2 rounded-full opacity-15 blur-[80px]"
+    style="background: radial-gradient(circle, rgba(var(--accent-rgb),0.08) 0%, transparent 70%);"
+  >
+  </div>
+
+  <!-- Film grain -->
+  <div
+    class="absolute inset-0 opacity-[0.04] mix-blend-overlay"
+    style="background-image: url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\");"
+  >
+  </div>
+
+  <!-- Vignette -->
+  <div
+    class="absolute inset-0"
+    style="background: radial-gradient(ellipse at center, transparent 0%, rgba(8,9,12,0.4) 100%);"
+  >
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <rect width="160" height="160" fill="#1a1f28"/>
+  <circle cx="80" cy="60" r="28" fill="#2a3140"/>
+  <ellipse cx="80" cy="130" rx="45" ry="35" fill="#2a3140"/>
+  <text x="80" y="155" text-anchor="middle" fill="#9ca3af" font-family="system-ui" font-size="10">Add headshot</text>
+</svg>

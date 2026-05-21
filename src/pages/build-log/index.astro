@@ -1,0 +1,17 @@
+---
+import Layout from '../../components/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import BuildLogCard from '../../components/BuildLogCard.astro';
+import { getPublishedBuildLogs } from '../../utils/content';
+
+const posts = await getPublishedBuildLogs();
+---
+
+<Layout title="Build Log — Michael Low" description="Build notes, workflow experiments, and lessons from shipping.">
+  <PageHeader title="Build log" subtitle="Short posts on what I'm building, learning, and shipping." />
+  <section class="section-padding">
+    <div class="container-main grid gap-6 md:grid-cols-2">
+      {posts.map((post) => <BuildLogCard post={post} />)}
+    </div>
+  </section>
+</Layout>

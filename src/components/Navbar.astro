@@ -1,0 +1,84 @@
+---
+import { nav, site } from '../config/site';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50">
+  <div class="border-b border-border/80 bg-charcoal/70 backdrop-blur-xl backdrop-saturate-150">
+    <nav class="container-main flex h-[4.25rem] items-center justify-between">
+      <a href="/" class="group flex items-center gap-3">
+        <span
+          class="flex h-8 w-8 items-center justify-center rounded-lg border border-amber-accent/20 bg-amber-accent/5 font-mono text-xs text-amber-accent transition group-hover:border-amber-accent/40 group-hover:bg-amber-accent/10"
+        >
+          ML
+        </span>
+        <span class="font-mono text-sm tracking-tight text-off-white transition group-hover:text-amber-bright">
+          {site.name}
+        </span>
+      </a>
+
+      <ul class="hidden items-center gap-1 md:flex">
+        {
+          nav.map((item) => {
+            const active =
+              currentPath === item.href ||
+              (item.href !== '/' && currentPath.startsWith(item.href));
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={[
+                    'rounded-lg px-4 py-2 text-sm transition',
+                    active
+                      ? 'bg-amber-accent/10 text-amber-bright'
+                      : 'text-muted hover:bg-white/[0.03] hover:text-off-white',
+                  ]}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <a href="/contact" class="btn-secondary hidden !px-5 !py-2.5 text-xs sm:inline-flex">
+          Contact
+        </a>
+        <details class="relative md:hidden">
+          <summary
+            class="cursor-pointer list-none rounded-lg border border-border bg-charcoal-card/80 px-3 py-2 font-mono text-xs text-muted hover:text-off-white [&::-webkit-details-marker]:hidden"
+          >
+            Menu
+          </summary>
+          <ul
+            class="absolute right-0 mt-2 w-52 rounded-xl border border-border bg-charcoal-elevated/95 py-2 shadow-2xl backdrop-blur-xl"
+          >
+            {
+              nav.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="block px-4 py-2.5 text-sm text-muted hover:bg-white/[0.03] hover:text-off-white"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+            <li>
+              <a href="/now" class="block px-4 py-2.5 text-sm text-muted hover:bg-white/[0.03] hover:text-off-white">
+                Now
+              </a>
+            </li>
+            <li class="border-t border-border mt-1 pt-1">
+              <a href="/contact" class="block px-4 py-2.5 text-sm text-off-white hover:text-amber-bright">Contact</a>
+            </li>
+          </ul>
+        </details>
+      </div>
+    </nav>
+  </div>
+</header>

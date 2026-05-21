@@ -1,0 +1,54 @@
+---
+import { site } from '../config/site';
+import StatusDot from './StatusDot.astro';
+
+interface Props {
+  variant?: 'inline' | 'card' | 'bold' | 'bar';
+}
+
+const { variant = 'card' } = Astro.props;
+---
+
+{
+  variant === 'inline' && (
+    <p class="font-mono text-sm leading-relaxed text-off-white/80 md:text-base">
+      <span class="font-medium text-amber-bright">status:</span>
+      <span class="ml-2">{site.availability}</span>
+    </p>
+  )
+}
+
+{
+  variant === 'card' && (
+    <div class="rounded-xl border border-amber-accent/15 bg-charcoal-card/70 px-5 py-4 backdrop-blur-sm">
+      <div class="flex items-start gap-3">
+        <StatusDot color="blue" />
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-amber-accent">status</p>
+          <p class="mt-1.5 text-sm leading-relaxed text-off-white md:text-[15px]">{site.availability}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+{
+  variant === 'bold' && (
+    <div>
+      <p class="font-mono text-xs font-medium uppercase tracking-[0.25em] text-amber-bright">status</p>
+      <p class="mt-2 text-base font-medium leading-snug text-off-white md:text-lg">{site.availability}</p>
+    </div>
+  )
+}
+
+{
+  variant === 'bar' && (
+    <div class="inline-flex max-w-full items-center gap-4 rounded-full border border-amber-accent/20 bg-charcoal-card/80 px-5 py-3.5 backdrop-blur-sm">
+      <StatusDot color="blue" />
+      <p class="font-mono text-sm leading-snug text-off-white md:text-[15px]">
+        <span class="font-medium text-amber-bright">status:</span>
+        <span class="ml-2 text-off-white/90">{site.availability}</span>
+      </p>
+    </div>
+  )
+}

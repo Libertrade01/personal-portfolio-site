@@ -1,0 +1,31 @@
+---
+import Layout from '../../components/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getPublishedProjects } from '../../utils/content';
+
+const projects = await getPublishedProjects();
+const products = projects.filter((p) => p.data.type === 'product');
+const workflows = projects.filter((p) => p.data.type === 'workflow');
+---
+
+<Layout title="Projects — Michael Low" description="Systems, products, and AI workflows built by Michael Low.">
+  <PageHeader
+    label="Portfolio"
+    title="Systems I've built"
+    subtitle="Operating systems, web apps, and AI workflows — not a generic CV."
+  />
+  <section class="section-padding">
+    <div class="container-main">
+      <h2 class="section-label mb-8">Products</h2>
+      <div class="grid gap-8 md:grid-cols-2">
+        {products.map((p, i) => <ProjectCard project={p} index={i} />)}
+      </div>
+
+      <h2 class="section-label mb-8 mt-20">Workflows</h2>
+      <div class="grid gap-8 md:grid-cols-2">
+        {workflows.map((p, i) => <ProjectCard project={p} index={products.length + i} />)}
+      </div>
+    </div>
+  </section>
+</Layout>

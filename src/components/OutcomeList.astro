@@ -1,0 +1,22 @@
+---
+interface Props {
+  outcomes: string[];
+  title?: string;
+}
+
+const { outcomes, title = 'Outcomes' } = Astro.props;
+---
+
+<div class="my-8 card-surface p-6 md:p-8">
+  <p class="section-label">{title}</p>
+  <ul class="mt-6 space-y-3">
+    {
+      outcomes.map((outcome) => (
+        <li class="flex gap-4 text-sm leading-relaxed text-muted">
+          <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-accent" aria-hidden="true"></span>
+          <span>{outcome}</span>
+        </li>
+      ))
+    }
+  </ul>
+</div>

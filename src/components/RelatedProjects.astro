@@ -1,0 +1,23 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import type { ProjectEntry } from '../utils/content';
+
+interface Props {
+  projects: ProjectEntry[];
+  currentSlug: string;
+}
+
+const { projects, currentSlug } = Astro.props;
+const related = projects.filter((p) => p.slug !== currentSlug).slice(0, 2);
+---
+
+{
+  related.length > 0 && (
+    <section class="mt-16 border-t border-border pt-12">
+      <h2 class="mb-6 font-serif text-2xl text-off-white">Related systems</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        {related.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,17 @@
+---
+import { site } from '../config/site';
+---
+
+<div class="card-surface relative overflow-hidden p-8 text-center md:p-12 glow-amber">
+  <div
+    class="pointer-events-none absolute inset-0 opacity-40"
+    style="background: radial-gradient(ellipse at center, rgba(var(--accent-rgb),0.12), transparent 70%);"
+    aria-hidden="true"
+  >
+  </div>
+  <p class="relative text-base text-muted md:text-lg">{site.availability}</p>
+  <a href="/contact" class="btn-primary relative mt-8">
+    Get in touch
+    <span aria-hidden="true">→</span>
+  </a>
+</div>

@@ -1,0 +1,59 @@
+---
+import Layout from '../components/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import AvailabilityBanner from '../components/AvailabilityBanner.astro';
+import { site } from '../config/site';
+---
+
+<Layout title={`Contact — ${site.name}`} description="Get in touch about AI workflows, automation, or remote opportunities.">
+  <PageHeader title="Contact" subtitle="Interested in AI workflows, automation, or joining a team? I'd like to hear from you." />
+
+  <section class="section-padding">
+    <div class="container-main max-w-2xl">
+      <div class="grid gap-6">
+        <a
+          href={`mailto:${site.email}`}
+          class="card-surface flex items-center justify-between p-6 transition hover:border-amber-accent/30"
+        >
+          <div>
+            <p class="text-xs uppercase tracking-wider text-muted">Email</p>
+            <p class="mt-1 text-off-white">{site.email}</p>
+          </div>
+          <span class="text-amber-accent">→</span>
+        </a>
+        <a
+          href={site.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="card-surface flex items-center justify-between p-6 transition hover:border-amber-accent/30"
+        >
+          <div>
+            <p class="text-xs uppercase tracking-wider text-muted">LinkedIn</p>
+            <p class="mt-1 text-off-white">Connect on LinkedIn</p>
+          </div>
+          <span class="text-amber-accent">→</span>
+        </a>
+        <a
+          href={site.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="card-surface flex items-center justify-between p-6 transition hover:border-amber-accent/30"
+        >
+          <div>
+            <p class="text-xs uppercase tracking-wider text-muted">GitHub</p>
+            <p class="mt-1 text-off-white">View projects & code</p>
+          </div>
+          <span class="text-amber-accent">→</span>
+        </a>
+      </div>
+
+      <div class="mt-12">
+        <AvailabilityBanner />
+      </div>
+
+      <p class="mt-8 text-center text-sm text-muted">
+        Prefer a call? Mention availability for a 20-minute discovery call in your email.
+      </p>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  index?: number;
+}
+
+const { title, description, index = 0 } = Astro.props;
+---
+
+<div class="card-surface group p-6 md:p-8">
+  <span class="font-mono text-[10px] text-amber-accent/50">{String(index + 1).padStart(2, '0')}</span>
+  <h3 class="mt-4 font-serif text-xl text-off-white transition group-hover:text-amber-bright md:text-2xl">{title}</h3>
+  <p class="mt-3 text-sm leading-relaxed text-muted">{description}</p>
+</div>

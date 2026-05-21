@@ -1,0 +1,63 @@
+---
+title: Trading Desk — Schema Awareness Framework
+description: Trading psychology intervention system for identifying and interrupting recurring execution patterns.
+date: 2026-02-01
+status: Built
+category: Trading Systems
+type: product
+stack: [Next.js, React, Supabase]
+featured: true
+order: 4
+role: Solo builder — systems design, UI, content architecture
+outcomes:
+  - Documented schema intervention flow with state checks
+  - Pattern registry linked to trader profile model
+  - Review loop integrated with Knowledge Base workflow
+  - Dark operator UI designed for live session reference
+audience: [employer, personal]
+coverImage: /images/projects/trading-desk/cover.svg
+---
+
+import WorkflowDiagram from '../../components/WorkflowDiagram.astro';
+import FeatureGrid from '../../components/FeatureGrid.astro';
+import Callout from '../../components/Callout.astro';
+
+## Problem
+
+Recurring execution patterns (scratch cycles, bias lock, early breakeven stops) were identified in reviews but not **interrupted in session**. Notes alone don't change behaviour — you need an operating system at the point of decision.
+
+## Goal
+
+Build a process framework — not a signal service — that helps detect schema activation, run state checks, and apply documented interventions before damage compounds.
+
+## System
+
+<WorkflowDiagram
+  steps={['Trigger detected', 'Schema identified', 'State check', 'Intervention', 'Rule or pause', 'Session review']}
+/>
+
+<Callout type="info">
+  This is framed as a **process operating system**, not trading advice or performance marketing. No P&L claims, no signals.
+</Callout>
+
+## Key features
+
+<FeatureGrid
+  features={[
+    { title: 'Schema registry', description: 'Named patterns with triggers, severity, and active defenses.' },
+    { title: 'State intervention cards', description: 'Step-by-step checks before the next trade.' },
+    { title: 'Trader profile model', description: 'Stable behavioural model separate from daily logs.' },
+    { title: 'Review integration', description: 'Weekly synthesis updates the profile when the model shifts.' },
+  ]}
+/>
+
+## Result
+
+Proves systems thinking applied to high-stakes personal operations — the same skills transfer to business process design, compliance workflows, and team operating protocols.
+
+## What I'd improve next
+
+- Tighter HUD integration for in-session capture
+- Automated pattern detection from journal entries
+- Mobile-optimized quick-reference mode
+- Exportable weekly review PDF

@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  label?: string;
+}
+
+const { title, subtitle, label = 'Page' } = Astro.props;
+---
+
+<header class="relative overflow-hidden border-b border-border py-20 md:py-28">
+  <div
+    class="pointer-events-none absolute inset-0 opacity-60"
+    style="background: radial-gradient(ellipse 70% 80% at 50% -30%, rgba(var(--accent-rgb),0.1), transparent);"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="container-main relative">
+    <span class="section-label">{label}</span>
+    <h1 class="mt-5 font-sans text-4xl font-medium tracking-tight text-off-white md:text-5xl md:leading-tight">
+      {title}
+    </h1>
+    {subtitle && (
+      <p class="mt-5 max-w-2xl font-mono text-sm leading-relaxed text-muted md:text-base">{subtitle}</p>
+    )}
+  </div>
+</header>

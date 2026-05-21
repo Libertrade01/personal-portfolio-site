@@ -1,0 +1,45 @@
+---
+const tools = [
+  'Astro',
+  'Next.js',
+  'TypeScript',
+  'Supabase',
+  'Sanity',
+  'Claude',
+  'Python',
+  'MDX',
+  'Tailwind',
+  'Vercel',
+  'Obsidian',
+  'n8n',
+];
+const doubled = [...tools, ...tools];
+---
+
+<div class="relative overflow-hidden border-y border-border bg-charcoal-light/50 py-5">
+  <div class="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-charcoal-light to-transparent"></div>
+  <div class="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-charcoal-light to-transparent"></div>
+  <div class="flex animate-[marquee_40s_linear_infinite] gap-12 whitespace-nowrap">
+    {
+      doubled.map((tool) => (
+        <span class="font-mono text-xs uppercase tracking-[0.2em] text-muted/60">{tool}</span>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-\[marquee_40s_linear_infinite\] {
+      animation: none;
+    }
+  }
+</style>

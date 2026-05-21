@@ -1,0 +1,108 @@
+---
+import Layout from '../components/Layout.astro';
+import Hero from '../components/Hero.astro';
+import StackMarquee from '../components/StackMarquee.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import BuildLogCard from '../components/BuildLogCard.astro';
+import DualAudienceCards from '../components/DualAudienceCards.astro';
+import WorkflowDiagram from '../components/WorkflowDiagram.astro';
+import AvailabilityBanner from '../components/AvailabilityBanner.astro';
+import { workflowPattern } from '../config/site';
+import { getFeaturedProjects, getPublishedBuildLogs } from '../utils/content';
+
+const featured = await getFeaturedProjects();
+const buildLogs = (await getPublishedBuildLogs()).slice(0, 3);
+---
+
+<Layout>
+  <Hero />
+  <StackMarquee />
+
+  <section class="section-padding">
+    <div class="container-main">
+      <SectionHeader
+        label="Audience"
+        title="I work with…"
+        subtitle="Same systems — different goals. Whether you're hiring or need a workflow built."
+      />
+      <DualAudienceCards />
+    </div>
+  </section>
+
+  <section class="section-padding relative">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-50"
+      style="background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(var(--accent-rgb),0.06), transparent);"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="container-main relative">
+      <SectionHeader
+        label="Portfolio"
+        title="Systems I've built"
+        subtitle="Products and workflows that turn messy inputs into structured, reusable output."
+      />
+      <div class="grid gap-8 md:grid-cols-2">
+        {featured.map((project, i) => <ProjectCard project={project} index={i} />)}
+      </div>
+      <a href="/projects" class="link-arrow mt-12">
+        All projects
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="how-i-work" class="section-padding border-t border-border/80">
+    <div class="container-main">
+      <SectionHeader
+        label="Process"
+        title={workflowPattern.title}
+        subtitle="A repeatable pattern across trading, content, research, and operations."
+      />
+      <WorkflowDiagram steps={workflowPattern.steps} />
+      <div class="mt-12 grid gap-4 sm:grid-cols-2">
+        {
+          workflowPattern.examples.map((ex) => (
+            <div class="card-surface p-5 md:p-6">
+              <p class="section-label !text-[10px]">Pipeline</p>
+              <p class="mt-3 text-sm leading-relaxed">
+                <span class="text-off-white">{ex.input}</span>
+                <span class="mx-2 text-amber-accent/60">→</span>
+                <span class="text-muted">{ex.output}</span>
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding border-t border-border/80">
+    <div class="container-main">
+      <SectionHeader
+        label="Journal"
+        title="Build log"
+        subtitle="What I'm building and learning — updated as I ship."
+      />
+      <div class="grid gap-6 md:grid-cols-3">
+        {buildLogs.map((post) => <BuildLogCard post={post} />)}
+      </div>
+      <a href="/build-log" class="link-arrow mt-12">
+        Read build log
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container-main max-w-3xl">
+      <SectionHeader
+        label="Contact"
+        title="Interested in working together?"
+        subtitle="AI workflows, automation systems, research pipelines, or content operations."
+      />
+      <AvailabilityBanner />
+    </div>
+  </section>
+</Layout>

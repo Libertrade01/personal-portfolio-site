@@ -1,0 +1,37 @@
+---
+title: Starting the Astro portfolio with MDX
+description: Scaffolding the Michael Low portfolio site — Astro, Tailwind, content collections, and deployment setup.
+date: 2026-05-21
+tags: [astro, portfolio, mdx]
+draft: false
+---
+
+## What we're building
+
+A content-first portfolio that showcases systems, workflows, and shipped projects — not a generic CV. The site itself becomes proof: Astro + MDX + Content Collections, deployed to Vercel.
+
+## Stack choices
+
+- **Astro 5** — fast static output, MDX support, minimal JS
+- **Tailwind 4** — dark operator aesthetic with design tokens
+- **Content Collections** — Zod schemas for projects, build-log, blog, now
+- **No CMS for V1** — all content in git, version-controlled
+
+## Structure
+
+```
+src/content/projects/     → case studies
+src/content/build-log/    → short build notes
+src/content/now/          → current focus
+src/components/           → WorkflowDiagram, DeviceMockup, etc.
+```
+
+## Result
+
+Foundation is live: homepage with dual-audience section, project index, `/work` page, RSS feed for build log, and five project case studies drafted.
+
+## Next
+
+- Replace placeholder SVGs with real screenshots
+- Record Raíz demo video
+- Run Lighthouse pass and fix any accessibility gaps

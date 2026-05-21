@@ -1,0 +1,319 @@
+---
+import Layout from '../components/Layout.astro';
+
+const palettes = [
+  {
+    id: 'ice',
+    name: 'Silver / Ice',
+    desc: 'Cool gray highlights. Calm, editorial, easiest on the eyes.',
+    accent: '#b8c0cc',
+    bright: '#e2e8f0',
+    dim: '#8891a0',
+    rgb: '184, 192, 204',
+  },
+  {
+    id: 'warm',
+    name: 'Warm Neutral',
+    desc: 'Cream and stone. Human, soft, still very clean.',
+    accent: '#c9c4bb',
+    bright: '#ebe6df',
+    dim: '#9a948a',
+    rgb: '201, 196, 187',
+  },
+  {
+    id: 'champagne',
+    name: 'Muted Champagne',
+    desc: 'Desaturated gold. Warm premium without loud yellow.',
+    accent: '#c4b49a',
+    bright: '#e0d4c4',
+    dim: '#9e8f78',
+    rgb: '196, 180, 154',
+  },
+];
+
+const accentModes = [
+  {
+    id: 'a',
+    name: 'A — Almost none',
+    desc: 'White/gray everywhere. Color only for online dot + one button.',
+  },
+  {
+    id: 'b',
+    name: 'B — Subtle warm neutral',
+    desc: 'Cream highlights on labels, links, hover. Headlines stay white.',
+  },
+  {
+    id: 'c',
+    name: 'C — Cool accent on interaction',
+    desc: 'Silver/ice on links, status, cursor. Headlines always white.',
+  },
+];
+---
+
+<Layout title="Design Lab — Michael Low" description="Visual comparison of color and typography options.">
+  <header class="border-b border-border py-12">
+    <div class="container-main">
+      <p class="section-label">Internal preview</p>
+      <h1 class="mt-4 font-serif text-4xl text-off-white md:text-5xl">Design lab</h1>
+      <p class="mt-4 max-w-2xl text-muted">
+        Compare color directions and hero typography side by side. Pick what feels right, then we lock it into the live site.
+      </p>
+      <a href="/" class="link-arrow mt-6">← Back to site</a>
+    </div>
+  </header>
+
+  <!-- ═══ COLOR PALETTES ═══ -->
+  <section class="section-padding border-t border-border">
+    <div class="container-main">
+      <h2 class="font-serif text-3xl text-off-white">1. Color direction</h2>
+      <p class="mt-3 max-w-2xl text-muted">Mini hero mockup per palette. Notice how line 1 stays clean; accent only touches small UI.</p>
+
+      <div class="mt-12 grid gap-8 lg:grid-cols-3">
+        {
+          palettes.map((p) => (
+            <div class="card-surface overflow-hidden" style={`--lab-accent: ${p.accent}; --lab-bright: ${p.bright}; --lab-dim: ${p.dim}; --lab-rgb: ${p.rgb};`}>
+              <div class="lab-panel border-b border-border p-6">
+                <div class="flex gap-3">
+                  <div class="h-10 w-10 rounded-lg border border-white/10" style={`background: ${p.accent}`} />
+                  <div class="h-10 w-10 rounded-lg border border-white/10" style={`background: ${p.bright}`} />
+                  <div class="h-10 w-10 rounded-lg border border-white/10" style={`background: ${p.dim}`} />
+                </div>
+                <h3 class="mt-5 font-serif text-xl text-off-white">{p.name}</h3>
+                <p class="mt-2 text-sm text-muted">{p.desc}</p>
+                <p class="mt-3 font-mono text-[10px] text-muted-dim">
+                  {p.accent} · {p.bright} · {p.dim}
+                </p>
+              </div>
+
+              <div class="lab-panel p-6" style={`background: radial-gradient(ellipse at top, rgba(${p.rgb},0.08), transparent 60%);`}>
+                <div class="flex items-center gap-2">
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  <span class="font-mono text-[9px] uppercase tracking-widest" style={`color: ${p.accent}`}>
+                    AI Workflow Builder
+                  </span>
+                </div>
+
+                <p class="mt-5 font-sans text-2xl font-medium leading-tight tracking-tight text-off-white">
+                  Practical AI systems
+                </p>
+                <p class="lab-messy-subtle mt-1 font-serif text-xl italic text-off-white/75">
+                  for messy, real work.
+                </p>
+
+                <p class="mt-4 font-mono text-[10px]" style={`color: ${p.dim}`}>
+                  <span style={`color: ${p.accent}`}>status:</span> open to remote roles…
+                </p>
+
+                <div
+                  class="mt-4 rounded-lg border border-white/[0.06] bg-charcoal px-3 py-2 font-mono text-[10px] text-muted"
+                >
+                  <span class="text-emerald-500/80">→</span> input.normalize() → output.structured()
+                  <span
+                    class="ml-0.5 inline-block h-2.5 w-1 animate-[blink_1s_step-end_infinite]"
+                    style={`background: ${p.accent}`}
+                  />
+                </div>
+
+                <div class="mt-4 flex gap-2">
+                  <span
+                    class="rounded-full px-4 py-2 text-xs font-medium text-charcoal"
+                    style={`background: linear-gradient(135deg, ${p.bright}, ${p.dim})`}
+                  >
+                    View Projects
+                  </span>
+                  <span class="rounded-full border border-white/10 px-4 py-2 text-xs text-off-white">How I Work</span>
+                </div>
+              </div>
+
+              <div class="border-t border-border px-6 py-3">
+                <p class="font-mono text-[10px] uppercase tracking-wider text-muted-dim">
+                  Your pick: {p.id === 'ice' ? '★ you liked this' : 'option'}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ACCENT MODES A / B / C ═══ -->
+  <section class="section-padding border-t border-border bg-charcoal-light/50">
+    <div class="container-main">
+      <h2 class="font-serif text-3xl text-off-white">2. Accent mode (ice palette)</h2>
+      <p class="mt-3 max-w-2xl text-muted">How much color appears across the UI — not the headline.</p>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        <!-- Mode A -->
+        <div class="card-surface p-6">
+          <h3 class="font-serif text-lg text-off-white">{accentModes[0].name}</h3>
+          <p class="mt-2 text-sm text-muted">{accentModes[0].desc}</p>
+          <div class="mt-6 space-y-4 rounded-xl border border-border bg-charcoal p-5">
+            <p class="font-sans text-lg font-medium text-off-white">Practical AI systems</p>
+            <p class="font-mono text-[10px] text-muted">status: <span class="text-muted">open to remote…</span></p>
+            <p class="font-mono text-[10px] text-muted">section label</p>
+            <button class="w-full rounded-full bg-off-white py-2 text-xs font-medium text-charcoal">Primary — white</button>
+            <p class="text-xs text-muted hover:underline">Link — gray only</p>
+          </div>
+        </div>
+
+        <!-- Mode B -->
+        <div class="card-surface p-6">
+          <h3 class="font-serif text-lg text-off-white">{accentModes[1].name}</h3>
+          <p class="mt-2 text-sm text-muted">{accentModes[1].desc}</p>
+          <div class="mt-6 space-y-4 rounded-xl border border-border bg-charcoal p-5">
+            <p class="font-sans text-lg font-medium text-off-white">Practical AI systems</p>
+            <p class="font-mono text-[10px] text-[#c9c4bb]">
+              status: <span class="text-[#ebe6df]">open to remote…</span>
+            </p>
+            <p class="font-mono text-[10px] uppercase tracking-widest text-[#c9c4bb]">section label</p>
+            <button class="w-full rounded-full bg-[#ebe6df] py-2 text-xs font-medium text-charcoal">Primary — cream</button>
+            <p class="text-xs text-[#ebe6df] hover:underline">Link — cream</p>
+          </div>
+        </div>
+
+        <!-- Mode C -->
+        <div class="card-surface p-6">
+          <h3 class="font-serif text-lg text-off-white">{accentModes[2].name}</h3>
+          <p class="mt-2 text-sm text-muted">{accentModes[2].desc}</p>
+          <div class="mt-6 space-y-4 rounded-xl border border-border bg-charcoal p-5">
+            <p class="font-sans text-lg font-medium text-off-white">Practical AI systems</p>
+            <p class="font-mono text-[10px] text-[#8891a0]">
+              status: <span class="text-[#b8c0cc]">open to remote…</span>
+            </p>
+            <p class="font-mono text-[10px] uppercase tracking-widest text-[#b8c0cc]">section label</p>
+            <button class="w-full rounded-full bg-gradient-to-r from-[#e2e8f0] to-[#8891a0] py-2 text-xs font-medium text-charcoal">
+              Primary — ice
+            </button>
+            <p class="text-xs text-[#b8c0cc] hover:underline">Link — ice</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MESSY TYPOGRAPHY ═══ -->
+  <section class="section-padding border-t border-border">
+    <div class="container-main">
+      <h2 class="font-serif text-3xl text-off-white">3. “Messy” second line</h2>
+      <p class="mt-3 max-w-2xl text-muted">
+        Line 1 stays crisp sans. Line 2 shows the problem you solve — how obvious should “messy” look?
+      </p>
+
+      <div class="mt-12 grid gap-8 md:grid-cols-2">
+        <div class="card-surface p-8 md:p-10">
+          <p class="font-mono text-[10px] uppercase tracking-widest text-[#b8c0cc]">Subtle</p>
+          <p class="mt-8 font-sans text-3xl font-medium tracking-tight text-off-white md:text-4xl">
+            Practical AI systems
+          </p>
+          <p class="lab-messy-subtle mt-3 font-serif text-2xl italic text-off-white/70 md:text-3xl">
+            for messy, real work.
+          </p>
+          <p class="mt-6 text-sm text-muted">
+            Italic serif, softer opacity, slightly loose spacing. Professional — metaphor is there if you look.
+          </p>
+        </div>
+
+        <div class="card-surface p-8 md:p-10">
+          <p class="font-mono text-[10px] uppercase tracking-widest text-[#b8c0cc]">Obvious</p>
+          <p class="mt-8 font-sans text-3xl font-medium tracking-tight text-off-white md:text-4xl">
+            Practical AI systems
+          </p>
+          <p class="lab-messy-obvious mt-3 font-serif text-2xl italic text-off-white/80 md:text-3xl">
+            for messy, real work.
+          </p>
+          <p class="mt-6 text-sm text-muted">
+            Per-letter wobble + skew. Instantly reads “messy” — bolder, more memorable, slightly less corporate.
+          </p>
+        </div>
+      </div>
+
+      <!-- Side by side large -->
+      <div class="mt-12 card-surface p-10 md:p-14">
+        <p class="font-mono text-[10px] uppercase tracking-widest text-muted">Side by side — ice + mode C</p>
+        <div class="mt-10 grid gap-12 md:grid-cols-2">
+          <div>
+            <p class="mb-4 text-xs text-muted">Subtle</p>
+            <p class="font-sans text-4xl font-medium tracking-tight text-off-white lg:text-5xl">Practical AI systems</p>
+            <p class="lab-messy-subtle mt-2 font-serif text-3xl italic text-off-white/65 lg:text-4xl">
+              for messy, real work.
+            </p>
+          </div>
+          <div>
+            <p class="mb-4 text-xs text-muted">Obvious</p>
+            <p class="font-sans text-4xl font-medium tracking-tight text-off-white lg:text-5xl">Practical AI systems</p>
+            <p class="lab-messy-obvious mt-2 font-serif text-3xl italic text-off-white/75 lg:text-4xl">
+              for messy, real work.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ RECOMMENDED COMBO ═══ -->
+  <section class="section-padding border-t border-border bg-charcoal-light/50">
+    <div class="container-main max-w-3xl">
+      <h2 class="font-serif text-3xl text-off-white">Suggested starting point</h2>
+      <div class="mt-8 card-surface border-[#b8c0cc]/20 p-8 glow-amber">
+        <ul class="space-y-3 text-sm text-muted">
+          <li><strong class="text-off-white">Color:</strong> Silver / Ice</li>
+          <li><strong class="text-off-white">Accent mode:</strong> C (ice on interaction only) — or A if you want maximum calm</li>
+          <li><strong class="text-off-white">Messy line:</strong> Subtle for employer-facing; Obvious if freelance/creative weight matters more</li>
+        </ul>
+        <p class="mt-6 text-sm text-muted">
+          Tell me your picks (e.g. “ice + C + subtle”) and I’ll apply them to the live homepage.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .lab-messy-subtle {
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .lab-messy-obvious {
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+    display: inline-block;
+  }
+
+  .lab-messy-obvious :global(span) {
+    display: inline-block;
+  }
+
+  @keyframes blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  // Split "for messy, real work." into wobbly spans for obvious variant
+  document.querySelectorAll('.lab-messy-obvious').forEach((el) => {
+    if (el.dataset.split) return;
+    const text = el.textContent?.trim() ?? '';
+    el.dataset.split = 'true';
+    el.innerHTML = '';
+    [...text].forEach((char, i) => {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? '\u00a0' : char;
+      const rot = (i % 5) - 2;
+      const y = (i % 3) - 1;
+      span.style.display = 'inline-block';
+      span.style.transform = `rotate(${rot * 0.6}deg) translateY(${y * 1.5}px)`;
+      span.style.transformOrigin = 'center bottom';
+      if (char === ' ') span.style.width = '0.35em';
+      el.append(span);
+    });
+  });
+</script>

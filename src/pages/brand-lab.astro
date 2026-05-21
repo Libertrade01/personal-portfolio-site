@@ -1,0 +1,158 @@
+---
+import Layout from '../components/Layout.astro';
+import StatusLine from '../components/StatusLine.astro';
+import StatusDot from '../components/StatusDot.astro';
+import { site } from '../config/site';
+
+const nameStyles = [
+  {
+    id: 'sans',
+    name: '1 — Outfit Sans',
+    desc: 'Current. Clean, matches “Practical AI systems”. Modern operator.',
+    class: 'font-sans text-[15px] font-medium tracking-tight text-off-white',
+    active: false,
+  },
+  {
+    id: 'mono',
+    name: '2 — IBM Plex Mono',
+    desc: 'Technical, builder, terminal-adjacent. Pairs well with workflow.ts.',
+    class: 'font-mono text-sm tracking-tight text-off-white',
+    active: true,
+  },
+  {
+    id: 'serif',
+    name: '3 — Fraunces Serif',
+    desc: 'Editorial, warmer, more personal. Softer than the hero sans.',
+    class: 'font-serif text-lg text-off-white',
+  },
+  {
+    id: 'wide',
+    name: '4 — Outfit Wide',
+    desc: 'Logo-like, spaced caps. More brand mark, less sentence.',
+    class: 'font-sans text-xs font-medium uppercase tracking-[0.22em] text-off-white',
+  },
+];
+
+const statusVariants = [
+  { id: 'inline', name: 'Inline', desc: 'Light — easy to miss' },
+  { id: 'card', name: 'Card + dot', desc: 'Live on site now — contained, scannable' },
+  { id: 'bold', name: 'Bold stack', desc: 'Big STATUS label + larger line' },
+  { id: 'bar', name: 'Pill bar', desc: 'Single horizontal chip, very visible' },
+] as const;
+---
+
+<Layout title="Brand Lab — Michael Low" description="Compare name typography and status treatments.">
+  <header class="border-b border-border py-12">
+    <div class="container-main">
+      <p class="section-label">Preview board</p>
+      <h1 class="mt-4 font-serif text-4xl text-off-white md:text-5xl">Brand lab</h1>
+      <p class="mt-4 max-w-2xl text-muted">
+        Compare how <strong class="text-off-white">Michael Low</strong> reads in the nav, and how loud the
+        <strong class="text-off-white"> status </strong> line should be.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-4">
+        <a href="/" class="link-arrow">← Home</a>
+        <a href="/design-lab" class="font-mono text-xs uppercase tracking-wider text-muted hover:text-amber-accent">
+          Color lab →
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Michael Low name styles -->
+  <section class="section-padding border-t border-border">
+    <div class="container-main">
+      <h2 class="font-serif text-3xl text-off-white">Michael Low — name in nav</h2>
+      <p class="mt-3 max-w-2xl text-muted">Same ML monogram + warm neutral palette. Which name style feels right?</p>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {
+          nameStyles.map((style) => (
+            <div class="card-surface overflow-hidden">
+              <div class="flex h-14 items-center justify-between border-b border-border bg-charcoal-light/80 px-5">
+                <div class="flex items-center gap-3">
+                  <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-amber-accent/20 bg-amber-accent/5 font-mono text-xs text-amber-accent">
+                    ML
+                  </span>
+                  <span class={style.class}>{site.name}</span>
+                </div>
+                <span class="hidden rounded-full border border-border px-3 py-1 font-mono text-[10px] text-muted sm:inline">
+                  Contact
+                </span>
+              </div>
+              <div class="p-5">
+                <p class="font-serif text-lg text-off-white">{style.name}</p>
+                <p class="mt-2 text-sm text-muted">{style.desc}</p>
+                {style.active && (
+                  <p class="mt-3 font-mono text-[10px] uppercase tracking-wider text-amber-accent">★ live now</p>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Status variants -->
+  <section class="section-padding border-t border-border bg-charcoal-light/40">
+    <div class="container-main">
+      <h2 class="font-serif text-3xl text-off-white">Status line — visibility</h2>
+      <p class="mt-3 max-w-2xl text-muted">
+        Same copy: <span class="font-mono text-sm text-off-white/80">{site.availability}</span>
+      </p>
+
+      <div class="mt-12 grid gap-8 md:grid-cols-2">
+        {
+          statusVariants.map((v) => (
+            <div class="card-surface p-6 md:p-8">
+              <p class="font-mono text-[10px] uppercase tracking-widest text-amber-accent">{v.name}</p>
+              <p class="mt-1 text-sm text-muted">{v.desc}</p>
+              <div class="mt-6">
+                <StatusLine variant={v.id} />
+              </div>
+              {v.id === 'bar' && (
+                <p class="mt-4 font-mono text-[10px] text-amber-accent/80">★ live on homepage</p>
+              )}
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-12 card-surface p-6">
+        <p class="text-sm text-muted">
+          <strong class="text-off-white">Recommendation:</strong> Card or Pill bar for remote-work visibility.
+          Inline is too quiet; Bold stack can feel like a second headline.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mini hero context -->
+  <section class="section-padding border-t border-border">
+    <div class="container-main">
+      <h2 class="font-serif text-3xl text-off-white">In context — full nav strip</h2>
+      <p class="mt-3 text-muted">How the name sits beside real nav items.</p>
+
+      <div class="mt-10 overflow-hidden rounded-2xl border border-border">
+        {
+          nameStyles.map((style) => (
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-border bg-charcoal-light/60 px-6 py-4 last:border-0">
+              <div class="flex items-center gap-3">
+                <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-amber-accent/20 font-mono text-xs text-amber-accent">
+                  ML
+                </span>
+                <span class={style.class}>{site.name}</span>
+              </div>
+              <div class="flex items-center gap-6 font-mono text-[10px] uppercase tracking-wider text-muted">
+                <span>Projects</span>
+                <span>Work</span>
+                <span class="text-amber-accent">Contact</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

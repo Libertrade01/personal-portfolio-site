@@ -1,0 +1,368 @@
+@import "tailwindcss";
+
+@theme {
+  --color-charcoal: #08090c;
+  --color-charcoal-light: #0e1016;
+  --color-charcoal-card: #12151c;
+  --color-charcoal-elevated: #181c26;
+  --color-off-white: #f0eeeb;
+  --color-muted: #8b919e;
+  --color-muted-dim: #5c6370;
+  /* Accent tokens — overridden per theme via html[data-accent] */
+  --color-amber-accent: #c9c4bb;
+  --color-amber-bright: #ebe6df;
+  --color-amber-dim: #9a948a;
+  --accent-rgb: 201, 196, 187;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(var(--accent-rgb), 0.25);
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+/* ── Accent themes (set accentTheme in src/config/site.ts) ── */
+
+html[data-accent='gold'] {
+  --color-amber-accent: #e4b96a;
+  --color-amber-bright: #f5d08a;
+  --color-amber-dim: #c49a45;
+  --accent-rgb: 228, 185, 106;
+}
+
+html[data-accent='cyan'] {
+  --color-amber-accent: #2dd4bf;
+  --color-amber-bright: #5eead4;
+  --color-amber-dim: #14b8a6;
+  --accent-rgb: 45, 212, 191;
+}
+
+html[data-accent='silver'] {
+  --color-amber-accent: #b8c0cc;
+  --color-amber-bright: #e2e8f0;
+  --color-amber-dim: #8891a0;
+  --accent-rgb: 184, 192, 204;
+}
+
+html[data-accent='warm'] {
+  --color-amber-accent: #c9c4bb;
+  --color-amber-bright: #ebe6df;
+  --color-amber-dim: #9a948a;
+  --accent-rgb: 201, 196, 187;
+}
+
+html[data-accent='champagne'] {
+  --color-amber-accent: #c4b49a;
+  --color-amber-bright: #e0d4c4;
+  --color-amber-dim: #9e8f78;
+  --accent-rgb: 196, 180, 154;
+}
+
+html[data-accent='blue'] {
+  --color-amber-accent: #60a5fa;
+  --color-amber-bright: #93c5fd;
+  --color-amber-dim: #3b82f6;
+  --accent-rgb: 96, 165, 250;
+}
+
+html[data-accent='violet'] {
+  --color-amber-accent: #a78bfa;
+  --color-amber-bright: #c4b5fd;
+  --color-amber-dim: #8b5cf6;
+  --accent-rgb: 167, 139, 250;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply bg-charcoal text-off-white font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(var(--accent-rgb), 0.09), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(var(--accent-rgb), 0.04), transparent);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-amber-accent) 40%, transparent);
+    color: var(--color-off-white);
+  }
+
+  a {
+    @apply transition-colors duration-300;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif font-normal tracking-tight;
+  }
+}
+
+@layer utilities {
+  .section-padding {
+    @apply py-24 md:py-32;
+  }
+
+  .container-main {
+    @apply mx-auto max-w-6xl px-6 lg:px-8;
+  }
+
+  .section-label {
+    @apply font-mono text-[11px] uppercase tracking-[0.2em] text-amber-accent;
+  }
+
+  .text-gradient-amber {
+    background: linear-gradient(135deg, var(--color-amber-bright) 0%, var(--color-amber-dim) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glass card with gradient border */
+  .card-surface {
+    @apply relative overflow-hidden rounded-2xl;
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--color-charcoal-elevated) 90%, transparent),
+      color-mix(in srgb, var(--color-charcoal-card) 95%, transparent)
+    );
+    border: 1px solid var(--color-border);
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.4),
+      0 4px 24px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    transition:
+      border-color 0.4s ease,
+      box-shadow 0.4s ease,
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .card-surface::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(var(--accent-rgb), 0.15),
+      transparent 40%,
+      transparent 60%,
+      rgba(var(--accent-rgb), 0.05)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .card-surface:hover {
+    border-color: var(--color-border-hover);
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.4),
+      0 8px 40px rgba(0, 0, 0, 0.35),
+      0 0 60px rgba(var(--accent-rgb), 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+  }
+
+  .card-surface:hover::before {
+    opacity: 1;
+  }
+
+  .glow-amber {
+    box-shadow:
+      0 0 80px rgba(var(--accent-rgb), 0.08),
+      0 0 120px rgba(var(--accent-rgb), 0.04);
+  }
+
+  .accent-ring {
+    background: conic-gradient(
+      from 180deg at 50% 50%,
+      transparent,
+      rgba(var(--accent-rgb), 0.08),
+      transparent
+    );
+  }
+
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-md px-7 py-3.5 text-sm font-medium;
+    background: linear-gradient(135deg, var(--color-amber-bright) 0%, var(--color-amber-dim) 100%);
+    color: var(--color-charcoal);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.3),
+      0 0 24px rgba(var(--accent-rgb), 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transition:
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.35),
+      0 0 40px rgba(var(--accent-rgb), 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 60%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .btn-primary:hover::after {
+    transform: translateX(100%);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border px-7 py-3.5 text-sm font-medium;
+    border-color: rgba(255, 255, 255, 0.1);
+    background: var(--color-charcoal-card);
+    color: var(--color-off-white);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    transition:
+      border-color 0.3s ease,
+      background 0.3s ease,
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: var(--color-charcoal-elevated);
+    color: var(--color-off-white);
+    transform: translateY(-1px);
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-amber-accent;
+    transition: gap 0.3s ease;
+  }
+
+  .link-arrow:hover {
+    gap: 0.75rem;
+  }
+
+  .divider-glow {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(var(--accent-rgb), 0.3) 20%,
+      rgba(var(--accent-rgb), 0.3) 80%,
+      transparent
+    );
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-fade-up-delay-1 {
+    animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  }
+
+  .animate-fade-up-delay-2 {
+    animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+  }
+
+  .animate-fade-up-delay-3 {
+    animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+
+  .animate-fade-up-delay-4 {
+    animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+  }
+
+  .animate-pulse-slow {
+    animation: pulseSlow 4s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseSlow {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,40 @@
+---
+const audiences = [
+  {
+    title: 'Teams & operators',
+    icon: '◇',
+    description:
+      'I implement AI workflows, document the system, and hand off something your team can run — not a black box.',
+    points: ['Workflow audits & setup', 'Content & research pipelines', 'Internal KB & SOP systems'],
+  },
+  {
+    title: 'Hiring managers',
+    icon: '◆',
+    description:
+      'I ship technical projects end-to-end. Case studies, stack breadth, and build logs show how I think and execute.',
+    points: ['Shipped web apps & PWAs', 'CMS-backed production sites', 'Process systems & automation'],
+  },
+];
+---
+
+<div class="grid gap-6 md:grid-cols-2">
+  {
+    audiences.map((a, i) => (
+      <div class="card-surface group p-8 md:p-10">
+        <span class="font-mono text-2xl text-amber-accent/40 transition group-hover:text-amber-accent/70">
+          {a.icon}
+        </span>
+        <h3 class="mt-6 font-serif text-2xl text-off-white md:text-3xl">{a.title}</h3>
+        <p class="mt-4 text-sm leading-relaxed text-muted md:text-base">{a.description}</p>
+        <ul class="mt-8 space-y-3 border-t border-border pt-8">
+          {a.points.map((p) => (
+            <li class="flex items-start gap-3 text-sm text-muted">
+              <span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-accent"></span>
+              {p}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</div>

@@ -1,0 +1,61 @@
+---
+import StatusBadge from './StatusBadge.astro';
+import TechStack from './TechStack.astro';
+import type { ProjectEntry } from '../utils/content';
+
+interface Props {
+  project: ProjectEntry;
+}
+
+const { project } = Astro.props;
+const { title, description, status, stack, role, github, liveUrl, coverImage } = project.data;
+---
+
+<header class="relative overflow-hidden border-b border-border py-16 md:py-24">
+  <div
+    class="pointer-events-none absolute inset-0"
+    style="background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(var(--accent-rgb),0.12), transparent);"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="container-main relative">
+    <div class="flex flex-wrap items-center gap-3">
+      <StatusBadge status={status} />
+      <span class="font-mono text-[10px] uppercase tracking-widest text-muted">{role}</span>
+    </div>
+    <h1 class="mt-6 max-w-4xl font-serif text-4xl text-off-white md:text-6xl md:leading-tight">{title}</h1>
+    <p class="mt-5 max-w-2xl text-lg leading-relaxed text-muted">{description}</p>
+    <div class="mt-8">
+      <TechStack stack={stack} />
+    </div>
+    <div class="mt-8 flex flex-wrap gap-6">
+      {
+        liveUrl && (
+          <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="link-arrow">
+            Live demo
+            <span aria-hidden="true">→</span>
+          </a>
+        )
+      }
+      {
+        github && (
+          <a
+            href={github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-mono text-xs uppercase tracking-wider text-muted hover:text-amber-accent"
+          >
+            GitHub →
+          </a>
+        )
+      }
+    </div>
+    {
+      coverImage && (
+        <div class="mt-12 overflow-hidden rounded-2xl border border-border glow-amber">
+          <img src={coverImage} alt={`${title} cover`} class="w-full" />
+        </div>
+      )
+    }
+  </div>
+</header>

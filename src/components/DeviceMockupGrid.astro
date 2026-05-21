@@ -1,0 +1,19 @@
+---
+import DeviceMockup from './DeviceMockup.astro';
+
+interface Mockup {
+  image: string;
+  alt: string;
+  label?: string;
+}
+
+interface Props {
+  mockups: Mockup[];
+}
+
+const { mockups } = Astro.props;
+---
+
+<div class="my-8 flex flex-wrap justify-center gap-8 md:gap-6">
+  {mockups.map((m) => <DeviceMockup image={m.image} alt={m.alt} label={m.label} />)}
+</div>

@@ -1,0 +1,38 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../components/Layout.astro';
+import { formatDate, readingTime } from '../../utils/content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('build-log');
+  return posts
+    .filter((p) => !p.data.draft)
+    .map((post) => ({
+      params: { slug: post.slug },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, description, date } = post.data;
+const readTime = readingTime(post.body ?? '');
+---
+
+<Layout title={`${title} — Build Log`} description={description}>
+  <article class="section-padding">
+    <div class="container-main max-w-3xl">
+      <a href="/build-log" class="text-sm text-amber-accent hover:underline">← Build log</a>
+      <header class="mt-6 border-b border-border pb-8">
+        <time class="text-sm text-muted" datetime={date.toISOString()}>{formatDate(date)}</time>
+        <span class="mx-2 text-muted">·</span>
+        <span class="text-sm text-muted">{readTime}</span>
+        <h1 class="mt-4 font-serif text-4xl text-off-white">{title}</h1>
+        <p class="mt-4 text-lg text-muted">{description}</p>
+      </header>
+      <div class="prose-content mt-8 space-y-6 text-muted [&_h2]:mb-4 [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:text-off-white [&_a]:text-amber-accent [&_code]:rounded [&_code]:bg-charcoal-card [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-amber-accent [&_li]:ml-4 [&_li]:list-disc [&_p]:leading-relaxed">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Layout>

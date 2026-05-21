@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  id?: string;
+  label?: string;
+}
+
+const { title, subtitle, id, label = 'Section' } = Astro.props;
+---
+
+<div id={id} class="mb-14">
+  <div class="flex items-center gap-4">
+    <span class="section-label">{label}</span>
+    <div class="h-px flex-1 max-w-[120px] bg-gradient-to-r from-amber-accent/40 to-transparent"></div>
+  </div>
+  <h2 class="mt-5 font-sans text-3xl font-medium tracking-tight text-off-white md:text-4xl md:leading-tight">
+    {title}
+  </h2>
+  {subtitle && (
+    <p class="mt-4 max-w-2xl font-mono text-sm leading-relaxed text-muted md:text-base">{subtitle}</p>
+  )}
+</div>

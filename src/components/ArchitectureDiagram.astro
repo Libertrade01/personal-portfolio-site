@@ -1,0 +1,30 @@
+---
+interface Node {
+  label: string;
+  detail?: string;
+}
+
+interface Props {
+  nodes: Node[];
+  title?: string;
+}
+
+const { nodes, title } = Astro.props;
+---
+
+<div class="my-8">
+  {title && <p class="mb-4 text-sm text-amber-accent">{title}</p>}
+  <div class="flex flex-col items-center gap-2">
+    {
+      nodes.map((node, i) => (
+        <>
+          <div class="card-surface w-full max-w-md p-4 text-center">
+            <p class="text-sm font-medium text-off-white">{node.label}</p>
+            {node.detail && <p class="mt-1 text-xs text-muted">{node.detail}</p>}
+          </div>
+          {i < nodes.length - 1 && <span class="text-amber-accent/50" aria-hidden="true">↓</span>}
+        </>
+      ))
+    }
+  </div>
+</div>

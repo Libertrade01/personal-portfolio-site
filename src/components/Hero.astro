@@ -1,0 +1,56 @@
+---
+import { hero, site } from '../config/site';
+import MessyWord from './MessyWord.astro';
+import StatusLine from './StatusLine.astro';
+import TerminalPanel from './TerminalPanel.astro';
+
+const { title, punchline } = hero;
+---
+
+<section class="relative flex min-h-[88vh] items-center overflow-hidden py-16 md:py-20">
+  <div class="container-main relative z-10 w-full">
+    <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
+      <!-- Copy -->
+      <div class="max-w-xl">
+        <p class="animate-fade-up section-label">{hero.role}</p>
+
+        <h1 class="animate-fade-up-delay-1 mt-8">
+          <span
+            class="block font-sans text-4xl font-medium leading-[1.08] tracking-tight text-off-white md:text-5xl lg:text-6xl"
+          >
+            {title}
+          </span>
+          <span
+            class="mt-4 block font-serif text-2xl leading-snug text-off-white/90 md:text-3xl lg:text-4xl"
+          >
+            {punchline.before}
+            <MessyWord word={punchline.messyWord} />
+            {punchline.after}
+          </span>
+        </h1>
+
+        <div class="animate-fade-up-delay-3 mt-10">
+          <StatusLine variant="bar" />
+        </div>
+
+        <div class="animate-fade-up-delay-3 mt-10 flex flex-wrap gap-4">
+          <a href="/projects" class="btn-primary">
+            View Projects
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="/contact" class="btn-secondary">Contact</a>
+        </div>
+      </div>
+
+      <!-- Terminal — hero feature -->
+      <div class="animate-fade-up-delay-2 relative w-full">
+        <TerminalPanel large filename={hero.terminal.filename} />
+        <p class="mt-6 text-center font-mono text-xs uppercase tracking-[0.2em] text-muted-dim lg:text-left">
+          Messy input in · Clean operating system out
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-charcoal to-transparent"></div>
+</section>

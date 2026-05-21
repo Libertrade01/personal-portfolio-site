@@ -1,0 +1,40 @@
+---
+title: Designing the content system for case studies
+description: Extended frontmatter schema, workflow vs product types, and MDX component architecture.
+date: 2026-05-20
+tags: [astro, content, architecture]
+draft: false
+---
+
+## Problem
+
+A portfolio needs more than `title` and `description`. Case studies need status, outcomes, audience tags, and reusable visual components — without a CMS.
+
+## Solution
+
+Extended Zod schema on the projects collection:
+
+- `type: product | workflow` — separates shipped apps from AI pipelines
+- `outcomes: string[]` — concrete proof bullets
+- `audience: smb | employer | personal` — for future filtering
+- `order` — manual sort on index page
+- `draft: boolean` — hide unfinished entries
+
+## MDX components
+
+Built reusable Astro components callable from MDX:
+
+- `WorkflowDiagram` — horizontal pipeline cards
+- `BeforeAfter` — workflow transformation proof
+- `OutcomeList` — checkmark proof block
+- `DeviceMockupGrid` — mobile screenshots
+
+## Lesson
+
+Design the content model **before** writing case studies. The schema forces consistency — every project answers the same questions.
+
+## What I'd improve next
+
+- Add `relatedProjects` frontmatter for manual cross-linking
+- Pagefind search when project count exceeds 8
+- Auto-generate OG images from project title + cover

@@ -1,0 +1,80 @@
+---
+title: Raíz Life Journal
+description: Mobile-first journaling PWA with Google OAuth, Supabase persistence, and light/dark themes.
+date: 2025-11-01
+status: Built
+category: Built Products
+type: product
+stack: [Next.js, Supabase, Google OAuth, PWA, Vercel]
+featured: true
+order: 1
+role: Solo builder — design, implementation, deployment
+outcomes:
+  - Google OAuth login flow working end-to-end
+  - Journal entries persisted in Supabase
+  - PWA installable on mobile with offline-capable shell
+  - Light and dark mode with theme persistence
+  - Deployed to Vercel with environment-based config
+audience: [employer, smb]
+coverImage: /images/projects/raiz/cover.svg
+liveUrl: https://raiz-app.vercel.app
+---
+
+import WorkflowDiagram from '../../components/WorkflowDiagram.astro';
+import ArchitectureDiagram from '../../components/ArchitectureDiagram.astro';
+import FeatureGrid from '../../components/FeatureGrid.astro';
+import DeviceMockupGrid from '../../components/DeviceMockupGrid.astro';
+
+## Problem
+
+I needed a calm, mobile-first space to capture daily reflections and breathwork sessions — something faster than a notes app but more structured than scattered text files. The input was messy (quick thoughts, mood, session context); the output needed to be searchable, persistent, and always available on phone.
+
+## Goal
+
+Build a installable PWA that feels native on mobile, authenticates users securely, and stores journal history in a real database — not localStorage.
+
+## System
+
+<WorkflowDiagram steps={['Open PWA', 'Google OAuth', 'Create entry', 'Save to Supabase', 'Review history']} />
+
+<ArchitectureDiagram
+  title="Architecture"
+  nodes={[
+    { label: 'Next.js PWA', detail: 'React UI + service worker' },
+    { label: 'Supabase Auth', detail: 'Google OAuth provider' },
+    { label: 'Supabase DB', detail: 'Journal entries table' },
+    { label: 'Vercel', detail: 'Edge deployment' },
+  ]}
+/>
+
+## Key features
+
+<FeatureGrid
+  features={[
+    { title: 'Mobile-first UI', description: 'Designed for thumb reach and single-hand use on phone.' },
+    { title: 'Google OAuth', description: 'Frictionless sign-in without managing passwords.' },
+    { title: 'Theme switching', description: 'Light/dark modes with persisted preference.' },
+    { title: 'PWA behaviour', description: 'Install prompt, manifest, and app-like shell.' },
+  ]}
+/>
+
+## Visual proof
+
+<DeviceMockupGrid
+  mockups={[
+    { image: '/images/projects/raiz/dashboard.svg', alt: 'Raíz dashboard', label: 'Dashboard' },
+    { image: '/images/projects/raiz/entry.svg', alt: 'Journal entry screen', label: 'New entry' },
+    { image: '/images/projects/raiz/history.svg', alt: 'Entry history dark mode', label: 'History' },
+  ]}
+/>
+
+## Result
+
+Raíz proves I can ship a full-stack mobile product solo: auth, database, deployment, and UX polish. It's a real app people can install — not a prototype mockup.
+
+## What I'd improve next
+
+- Push notifications for daily journal reminders
+- Rich text / markdown in entries
+- Export to PDF or Obsidian
+- Improved offline sync conflict handling

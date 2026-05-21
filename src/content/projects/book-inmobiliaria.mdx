@@ -1,0 +1,83 @@
+---
+title: Book Inmobiliaria
+description: CMS-backed real estate platform with dynamic property pages, i18n, SEO, and contact/newsletter flows.
+date: 2026-01-20
+status: In Progress
+category: Built Products
+type: product
+stack: [Next.js, Sanity CMS, TypeScript, Tailwind, Resend, next-intl]
+featured: true
+order: 3
+role: Solo builder — frontend, CMS schema, API routes, deployment
+outcomes:
+  - Sanity Studio with property content model
+  - Dynamic property listing and detail pages
+  - Contact form API with email delivery
+  - Newsletter subscription endpoint
+  - Spanish/English i18n structure in place
+audience: [employer, smb]
+coverImage: /images/projects/book-inmobiliaria/cover.svg
+---
+
+import WorkflowDiagram from '../../components/WorkflowDiagram.astro';
+import ArchitectureDiagram from '../../components/ArchitectureDiagram.astro';
+import ScreenshotGrid from '../../components/ScreenshotGrid.astro';
+
+## Problem
+
+A real estate business needed a professional web presence with manageable property listings, education content, and lead capture — without developer involvement for every listing update.
+
+## Goal
+
+Build a production-grade site where non-technical staff edit content in Sanity, and the Next.js frontend handles SEO, i18n, and enquiry flows.
+
+## Shipped vs remaining
+
+**Shipped today:**
+- Property schema and Sanity Studio
+- Homepage, listings, property detail routes
+- Contact API + Resend integration
+- Newsletter API endpoint
+- i18n routing structure
+
+**Remaining:**
+- Content population and launch polish
+- SEO metadata refinement per property
+- Performance audit and image optimization pass
+
+## System
+
+<ArchitectureDiagram
+  nodes={[
+    { label: 'Sanity CMS', detail: 'Property & blog content' },
+    { label: 'Next.js 14', detail: 'SSR pages + API routes' },
+    { label: 'Property pages', detail: 'Dynamic [slug] routes' },
+    { label: 'Contact + Newsletter', detail: 'Resend email APIs' },
+    { label: 'Vercel', detail: 'Production deployment' },
+  ]}
+/>
+
+## Why Next.js (not Astro)
+
+This is a **client production site** — it needs Sanity preview, dynamic listings, and ongoing content edits. The portfolio site (Astro) is a separate concern: static, fast, MDX-driven. Using the right tool per job matters.
+
+## Visual proof
+
+<ScreenshotGrid
+  screenshots={[
+    { src: '/images/projects/book-inmobiliaria/home.svg', alt: 'Homepage', caption: 'Homepage' },
+    { src: '/images/projects/book-inmobiliaria/listings.svg', alt: 'Property listings', caption: 'Listings' },
+    { src: '/images/projects/book-inmobiliaria/detail.svg', alt: 'Property detail', caption: 'Detail page' },
+  ]}
+/>
+
+## Result
+
+Demonstrates CMS-backed production website ability — schema design, dynamic routes, API integrations, and multi-language structure. Honest **In Progress** status shows product thinking, not overselling.
+
+## What I'd improve next
+
+- Complete content migration and go-live
+- Add property search/filter
+- Sanity webhook revalidation tuning
+- Lighthouse performance pass on image-heavy pages

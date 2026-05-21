@@ -1,0 +1,63 @@
+---
+import Layout from '../components/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { site } from '../config/site';
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: 'AI Workflow Builder & Systems Operator',
+  url: site.url,
+  sameAs: [site.github, site.linkedin],
+  description: site.description,
+};
+---
+
+<Layout title={`About — ${site.name}`} description="Background, approach, and what Michael Low builds.">
+  <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+  <PageHeader title="About" subtitle="Builder, systems operator, and practical AI implementer." />
+
+  <section class="section-padding">
+    <div class="container-main max-w-3xl">
+      <div class="flex flex-col gap-10 md:flex-row md:items-start">
+        <div class="shrink-0">
+          <div class="h-32 w-32 overflow-hidden rounded-2xl border border-border bg-charcoal-card md:h-40 md:w-40">
+            <img
+              src="/images/headshot-placeholder.svg"
+              alt="Michael Low"
+              class="h-full w-full object-cover"
+            />
+          </div>
+        </div>
+        <div class="space-y-6 text-muted">
+          <p>
+            I'm <strong class="text-off-white">Michael Low</strong> — an AI workflow builder and systems
+            operator. I design and build tools, automations, journals, dashboards, and content systems
+            that turn raw inputs into structured outputs.
+          </p>
+          <p>
+            My work spans trading review systems, mobile PWAs, CMS-backed websites, voice journals,
+            research pipelines, and personal operating systems. I'm not interested in abstract AI hype —
+            I care about <strong class="text-off-white">useful implementation</strong> that people actually run.
+          </p>
+          <p>
+            {site.tagline}
+          </p>
+          <p>
+            I'm open to <strong class="text-off-white">remote roles</strong> and select{' '}
+            <strong class="text-off-white">workflow implementation projects</strong> for small teams and
+            independent operators.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-16 card-surface p-6">
+        <h2 class="font-serif text-xl text-off-white">Core value</h2>
+        <p class="mt-3 font-mono text-sm text-amber-accent">
+          Raw inputs → AI-assisted workflow → structured output → reusable system
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,57 @@
+---
+import { nav, site } from '../config/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="relative border-t border-border section-padding">
+  <div class="divider-glow mb-16"></div>
+  <div class="container-main">
+    <div class="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
+      <div>
+        <a href="/" class="group inline-flex items-center gap-3">
+          <span
+            class="flex h-9 w-9 items-center justify-center rounded-lg border border-amber-accent/20 bg-amber-accent/5 font-mono text-xs text-amber-accent"
+          >
+            ML
+          </span>
+          <span class="font-mono text-sm tracking-tight text-off-white group-hover:text-amber-bright">
+            {site.name}
+          </span>
+        </a>
+        <p class="mt-4 max-w-xs font-serif text-sm italic text-muted">{site.tagline}</p>
+      </div>
+      <div class="flex gap-16">
+        <ul class="space-y-3">
+          {
+            nav.map((item) => (
+              <li>
+                <a href={item.href} class="font-mono text-xs uppercase tracking-wider text-muted hover:text-amber-accent">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <ul class="space-y-3">
+          <li>
+            <a href={site.github} class="font-mono text-xs uppercase tracking-wider text-muted hover:text-amber-accent" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </li>
+          <li>
+            <a href={site.linkedin} class="font-mono text-xs uppercase tracking-wider text-muted hover:text-amber-accent" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </li>
+          <li>
+            <a href={`mailto:${site.email}`} class="font-mono text-xs uppercase tracking-wider text-muted hover:text-amber-accent">{site.email}</a>
+          </li>
+          <li>
+            <a href="/now" class="font-mono text-xs uppercase tracking-wider text-muted hover:text-amber-accent">Now</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-16 font-mono text-[10px] uppercase tracking-widest text-muted-dim">
+      © {year} {site.name} · <a href="/design-lab" class="hover:text-amber-accent">Design lab</a>
+      · <a href="/brand-lab" class="hover:text-amber-accent">Brand lab</a>
+      · <a href="/ui-lab" class="hover:text-amber-accent">UI lab</a>
+    </p>
+  </div>
+</footer>

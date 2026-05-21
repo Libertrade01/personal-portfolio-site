@@ -1,0 +1,35 @@
+---
+interface Props {
+  word?: string;
+  class?: string;
+}
+
+const { word = 'messy', class: className = '' } = Astro.props;
+---
+
+<span class:list={['messy-word inline-block font-serif italic', className]} data-word={word}>
+  {word}
+</span>
+
+<script>
+  function wobbleWord(el: HTMLElement) {
+    if (el.dataset.ready) return;
+    const word = el.dataset.word ?? el.textContent?.trim() ?? '';
+    el.dataset.ready = 'true';
+    el.setAttribute('aria-label', word);
+    el.innerHTML = '';
+    [...word].forEach((char, i) => {
+      const span = document.createElement('span');
+      span.textContent = char;
+      span.style.display = 'inline-block';
+      span.style.transform = `rotate(${(i % 5) - 2} * 0.7}deg) translateY(${(i % 3) - 1} * 1.2}px)`;
+      span.style.transformOrigin = 'center bottom';
+      el.append(span);
+    });
+  }
+
+  document.querySelectorAll('.messy-word').forEach((el) => wobbleWord(el as HTMLElement));
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('.messy-word').forEach((el) => wobbleWord(el as HTMLElement));
+  });
+</script>

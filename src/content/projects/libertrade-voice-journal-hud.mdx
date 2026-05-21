@@ -1,0 +1,64 @@
+---
+title: Libertrade Voice Journal HUD
+description: Always-on-top desktop trading journal with voice capture, emotion tags, and Supabase archive.
+date: 2025-09-15
+status: Built
+category: Trading Systems
+type: product
+stack: [Python, PyQt6, Supabase, Anthropic API]
+featured: false
+order: 5
+role: Solo builder — desktop app, database, AI coaching integration
+outcomes:
+  - Always-on-top overlay usable during live market sessions
+  - Voice and keyboard journal capture with timestamps
+  - Emotion tagging on each entry
+  - Entries archived to Supabase for review
+  - AI coaching layer for session debrief
+audience: [personal, employer]
+coverImage: /images/projects/voice-hud/cover.svg
+---
+
+import WorkflowDiagram from '../../components/WorkflowDiagram.astro';
+import ScreenshotGrid from '../../components/ScreenshotGrid.astro';
+
+## Problem
+
+During live futures sessions, switching to a browser or notes app breaks focus. I needed capture **at the point of experience** — without leaving the trading environment.
+
+## Goal
+
+Build a desktop HUD that stays on top, accepts voice or keyboard input fast, tags emotional state, and syncs to a durable archive for later review.
+
+## System
+
+<WorkflowDiagram
+  steps={[
+    'Live market session',
+    'Voice or keyboard capture',
+    'Emotion tag',
+    'Timestamped entry',
+    'Supabase archive',
+    'Review loop',
+  ]}
+/>
+
+## Visual proof
+
+<ScreenshotGrid
+  screenshots={[
+    { src: '/images/projects/voice-hud/overlay.svg', alt: 'HUD overlay on desktop', caption: 'Always-on-top journal overlay' },
+  ]}
+  columns={1}
+/>
+
+## Result
+
+Shows I build tools for **real operating environments** — not just marketing pages. Desktop-native, performance-conscious, integrated with existing review systems.
+
+## What I'd improve next
+
+- Cross-platform packaging (currently Windows-focused)
+- Offline queue with sync on reconnect
+- Deeper Trade Desk schema integration
+- Hotkey customization per instrument/session type

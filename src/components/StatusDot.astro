@@ -1,0 +1,15 @@
+---
+interface Props {
+  color?: 'blue' | 'green';
+}
+
+const { color = 'blue' } = Astro.props;
+
+const ping = color === 'blue' ? 'bg-blue-400' : 'bg-emerald-400';
+const dot = color === 'blue' ? 'bg-blue-500' : 'bg-emerald-500';
+---
+
+<span class="relative flex h-2 w-2">
+  <span class:list={['absolute inline-flex h-full w-full animate-ping rounded-full opacity-60', ping]}></span>
+  <span class:list={['relative inline-flex h-2 w-2 rounded-full', dot]}></span>
+</span>

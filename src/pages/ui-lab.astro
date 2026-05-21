@@ -1,0 +1,230 @@
+---
+import Layout from '../components/Layout.astro';
+
+const sectionTypeStyles = [
+  {
+    id: 'current',
+    name: 'A — Current (mixed)',
+    desc: 'Section labels in mono cream. Titles in Fraunces serif — editorial, different from nav.',
+    labelClass: 'font-mono text-[11px] uppercase tracking-[0.2em] text-amber-accent',
+    titleClass: 'font-serif text-3xl text-off-white md:text-4xl',
+    subtitleClass: 'text-base text-muted',
+    live: false,
+  },
+  {
+    id: 'mono',
+    name: 'B — All mono',
+    desc: 'Everything like Michael Low + workflow.ts. Very terminal — can feel cold on big headings.',
+    labelClass: 'font-mono text-[11px] uppercase tracking-[0.2em] text-amber-accent',
+    titleClass: 'font-mono text-2xl font-medium tracking-tight text-off-white md:text-3xl',
+    subtitleClass: 'font-mono text-sm text-muted',
+  },
+  {
+    id: 'sans',
+    name: 'C — Sans titles',
+    desc: 'Matches “Practical AI systems”. Clean operator — not as technical as nav name.',
+    labelClass: 'font-mono text-[11px] uppercase tracking-[0.2em] text-amber-accent',
+    titleClass: 'font-sans text-3xl font-medium tracking-tight text-off-white md:text-4xl',
+    subtitleClass: 'text-base text-muted',
+  },
+  {
+    id: 'hybrid',
+    name: 'D — Hybrid (recommended)',
+    desc: 'Mono labels + sans titles. Nav/terminal stay mono; sections stay readable at scale.',
+    labelClass: 'font-mono text-[11px] uppercase tracking-[0.2em] text-amber-accent',
+    titleClass: 'font-sans text-3xl font-medium tracking-tight text-off-white md:text-4xl',
+    subtitleClass: 'font-mono text-sm text-muted',
+    live: true,
+  },
+];
+
+const buttonStyles = [
+  {
+    id: 'pill',
+    name: '1 — Pill (current)',
+    radius: 'rounded-full',
+    desc: 'Fully circular ends — soft, friendly, startup-adjacent.',
+    live: false,
+  },
+  {
+    id: 'soft',
+    name: '2 — Soft',
+    radius: 'rounded-xl',
+    desc: '12px radius — still rounded but noticeably sharper.',
+  },
+  {
+    id: 'sharp',
+    name: '3 — Sharp',
+    radius: 'rounded-lg',
+    desc: '8px radius — operator UI, closer to dashboard panels.',
+  },
+  {
+    id: 'operator',
+    name: '4 — Operator',
+    radius: 'rounded-md',
+    desc: '6px radius — technical, matches terminal window corners.',
+    live: true,
+  },
+  {
+    id: 'square',
+    name: '5 — Square',
+    radius: 'rounded-sm',
+    desc: '2px radius — hardest edge, most “systems” feel.',
+  },
+];
+
+const sampleSections = [
+  { label: 'Audience', title: "I work with…", subtitle: 'Same systems — different goals.' },
+  { label: 'Portfolio', title: "Systems I've built", subtitle: 'Products and workflows that turn messy inputs into structured output.' },
+];
+---
+
+<Layout title="UI Lab — Michael Low" description="Section typography and button shape options.">
+  <header class="border-b border-border py-12">
+    <div class="container-main">
+      <p class="section-label">Preview board</p>
+      <h1 class="mt-4 font-serif text-4xl text-off-white md:text-5xl">UI lab</h1>
+      <p class="mt-4 max-w-2xl text-muted">
+        Should section headings match <strong class="font-mono text-sm text-off-white">Michael Low</strong> mono?
+        How sharp should <strong class="text-off-white">View Projects</strong> / <strong class="text-off-white">Contact</strong> be?
+        Pick here — nothing below changes the live site until you say so.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-4">
+        <a href="/" class="link-arrow">← Home</a>
+        <a href="/brand-lab" class="font-mono text-xs uppercase tracking-wider text-muted hover:text-amber-accent">
+          Brand lab →
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Section typography -->
+  <section class="section-padding border-t border-border">
+    <div class="container-main">
+      <h2 class="font-mono text-sm font-medium uppercase tracking-widest text-amber-accent">Section headings</h2>
+      <p class="mt-4 max-w-2xl font-sans text-3xl font-medium text-off-white md:text-4xl">
+        Does “Systems I've built” need to be mono?
+      </p>
+      <p class="mt-4 max-w-xl text-muted">
+        Your nav + terminal are mono. Hero title is sans. Section titles are serif today — that mix can feel
+        inconsistent, but going <em>all</em> mono is not always better at large sizes.
+      </p>
+
+      <div class="mt-14 grid gap-8 lg:grid-cols-2">
+        {
+          sectionTypeStyles.map((style) => (
+            <div class="card-surface p-6 md:p-8">
+              <p class="font-mono text-[10px] uppercase tracking-widest text-amber-accent">{style.name}</p>
+              <p class="mt-2 text-sm text-muted">{style.desc}</p>
+              {style.live && <p class="mt-2 font-mono text-[10px] text-amber-accent/90">★ live on site</p>}
+
+              <div class="mt-8 space-y-10 border-t border-border pt-8">
+                {sampleSections.map((s) => (
+                  <div>
+                    <div class="flex items-center gap-4">
+                      <span class={style.labelClass}>{s.label}</span>
+                      <div class="h-px flex-1 max-w-[80px] bg-gradient-to-r from-amber-accent/40 to-transparent" />
+                    </div>
+                    <h3 class:list={['mt-4', style.titleClass]}>{s.title}</h3>
+                    <p class:list={['mt-3 max-w-md', style.subtitleClass]}>{s.subtitle}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-10 card-surface p-6">
+        <p class="text-sm text-muted">
+          <strong class="text-off-white">Recommendation:</strong> <strong class="text-off-white">D — Hybrid</strong>
+          — keep mono for labels, nav, status, terminal; use <strong class="text-off-white">sans</strong> for big
+          section titles (same family as “Practical AI systems”). Reserve serif for the messy punchline only.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Buttons -->
+  <section class="section-padding border-t border-border bg-charcoal-light/40">
+    <div class="container-main">
+      <h2 class="font-mono text-sm font-medium uppercase tracking-widest text-amber-accent">Homepage buttons</h2>
+      <p class="mt-4 max-w-2xl text-muted">
+        “View Projects” + “Contact” as they appear in the hero. Less pill = sharper operator feel.
+      </p>
+
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          buttonStyles.map((btn) => (
+            <div class="card-surface p-6">
+              <p class="font-mono text-[10px] uppercase tracking-widest text-amber-accent">{btn.name}</p>
+              <p class="mt-2 text-sm text-muted">{btn.desc}</p>
+              {btn.live && <p class="mt-2 font-mono text-[10px] text-amber-accent/90">★ live on site</p>}
+
+              <div class="mt-8 flex flex-wrap gap-3">
+                <span
+                  class:list={[
+                    'inline-flex items-center gap-2 px-7 py-3.5 text-sm font-medium text-charcoal',
+                    btn.radius,
+                  ]}
+                  style="background: linear-gradient(135deg, var(--color-amber-bright), var(--color-amber-dim)); box-shadow: 0 0 20px rgba(var(--accent-rgb),0.2);"
+                >
+                  View Projects <span>→</span>
+                </span>
+                <span
+                  class:list={[
+                    'inline-flex items-center gap-2 border border-border bg-charcoal/50 px-7 py-3.5 text-sm font-medium text-off-white backdrop-blur-sm',
+                    btn.radius,
+                  ]}
+                >
+                  Contact
+                </span>
+              </div>
+
+              <p class="mt-4 font-mono text-[10px] text-muted-dim">{btn.radius}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-10 card-surface p-6">
+        <p class="text-sm text-muted">
+          <strong class="text-off-white">Recommendation:</strong> <strong class="text-off-white">3 Sharp</strong> or{' '}
+          <strong class="text-off-white">4 Operator</strong> — aligns with terminal panel corners without going brutalist.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Combined mock -->
+  <section class="section-padding border-t border-border">
+    <div class="container-main">
+      <h2 class="font-serif text-2xl text-off-white">Combo preview — D + Operator</h2>
+      <p class="mt-2 text-sm text-muted">If you chose hybrid headings + operator buttons, it would feel like this:</p>
+
+      <div class="mt-10 card-surface p-8 md:p-10">
+        <div class="flex flex-wrap gap-3">
+          <span
+            class="inline-flex items-center gap-2 rounded-md px-7 py-3.5 text-sm font-medium text-charcoal"
+            style="background: linear-gradient(135deg, var(--color-amber-bright), var(--color-amber-dim));"
+          >
+            View Projects →
+          </span>
+          <span class="inline-flex items-center gap-2 rounded-md border border-border px-7 py-3.5 text-sm font-medium text-off-white">
+            Contact
+          </span>
+        </div>
+
+        <div class="mt-12">
+          <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-amber-accent">Portfolio</span>
+          <h3 class="mt-4 font-sans text-3xl font-medium tracking-tight text-off-white">Systems I've built</h3>
+          <p class="mt-3 font-mono text-sm text-muted">Products and workflows that turn messy inputs into structured output.</p>
+        </div>
+      </div>
+
+      <p class="mt-6 text-sm text-muted">
+        Reply e.g. <span class="font-mono text-off-white">D + 4</span> or <span class="font-mono text-off-white">B + 3</span> to apply.
+      </p>
+    </div>
+  </section>
+</Layout>

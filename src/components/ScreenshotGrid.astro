@@ -1,0 +1,28 @@
+---
+interface Screenshot {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  screenshots: Screenshot[];
+  columns?: 2 | 3;
+}
+
+const { screenshots, columns = 2 } = Astro.props;
+const gridClass = columns === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2';
+---
+
+<div class:list={['my-8 grid gap-4', gridClass]}>
+  {
+    screenshots.map((s) => (
+      <figure class="overflow-hidden rounded-xl border border-border">
+        <img src={s.src} alt={s.alt} class="w-full" loading="lazy" />
+        {s.caption && (
+          <figcaption class="border-t border-border px-3 py-2 text-xs text-muted">{s.caption}</figcaption>
+        )}
+      </figure>
+    ))
+  }
+</div>

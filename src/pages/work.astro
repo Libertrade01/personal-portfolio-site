@@ -1,0 +1,67 @@
+---
+import Layout from '../components/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import AvailabilityBanner from '../components/AvailabilityBanner.astro';
+import { services, engagementProcess, notOffered } from '../config/site';
+---
+
+<Layout
+  title="Work With Me — Michael Low"
+  description="AI workflow setup, content pipelines, knowledge systems, and small web apps for teams and operators."
+>
+  <PageHeader
+    title="Work with me"
+    subtitle="Practical AI implementation — not hype decks. I build systems your team can run."
+  />
+
+  <section class="section-padding">
+    <div class="container-main">
+      <h2 class="mb-6 font-serif text-2xl text-off-white">What I help with</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s, i) => <ServiceCard title={s.title} description={s.description} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding border-t border-border bg-charcoal-light">
+    <div class="container-main max-w-3xl">
+      <h2 class="mb-6 font-serif text-2xl text-off-white">Typical engagement</h2>
+      <div class="space-y-6">
+        {
+          engagementProcess.map((step, i) => (
+            <div class="flex gap-4">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-amber-accent/40 text-sm text-amber-accent">
+                {i + 1}
+              </span>
+              <div>
+                <h3 class="font-medium text-off-white">{step.step}</h3>
+                <p class="mt-1 text-sm text-muted">{step.detail}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding border-t border-border">
+    <div class="container-main max-w-3xl">
+      <h2 class="mb-4 font-serif text-2xl text-off-white">What I don't do</h2>
+      <ul class="space-y-2">
+        {notOffered.map((item) => (
+          <li class="flex gap-2 text-sm text-muted">
+            <span class="text-red-400/80">×</span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-padding border-t border-border">
+    <div class="container-main max-w-2xl">
+      <AvailabilityBanner />
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  image: string;
+  alt: string;
+  label?: string;
+}
+
+const { image, alt, label } = Astro.props;
+---
+
+<figure class="flex flex-col items-center">
+  <div class="relative w-[220px] rounded-[2rem] border-4 border-white/10 bg-charcoal p-2 shadow-2xl">
+    <div class="absolute left-1/2 top-3 h-1 w-16 -translate-x-1/2 rounded-full bg-white/10"></div>
+    <div class="mt-4 overflow-hidden rounded-[1.5rem] border border-border">
+      <img src={image} alt={alt} class="w-full" loading="lazy" />
+    </div>
+  </div>
+  {label && <figcaption class="mt-3 text-xs text-muted">{label}</figcaption>}
+</figure>

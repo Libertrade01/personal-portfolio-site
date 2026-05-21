@@ -1,0 +1,72 @@
+---
+title: Podcast → Knowledge Workflow
+description: AI-assisted pipeline turning podcasts and YouTube transcripts into structured, reusable knowledge base entries.
+date: 2026-03-15
+status: Built
+category: AI Workflows
+type: workflow
+stack: [Claude, Obsidian, Markdown, Git, Whisper]
+featured: true
+order: 2
+role: Solo builder — workflow design, prompt engineering, documentation
+outcomes:
+  - Repeatable transcript → summary → tagged KB entry pipeline
+  - Outputs land in version-controlled Obsidian vault
+  - Reduced time from 2+ hours manual notes to ~20 minutes review
+  - Structured format with key insights, quotes, and action items
+audience: [smb, employer]
+coverImage: /images/projects/podcast-workflow/cover.svg
+---
+
+import WorkflowDiagram from '../../components/WorkflowDiagram.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import Callout from '../../components/Callout.astro';
+
+## Problem
+
+Podcasts and long-form YouTube content contained valuable insights, but notes were scattered, inconsistent, and never retrieved. Listening was easy; **knowledge reuse** was nearly impossible.
+
+## Goal
+
+Design a repeatable workflow: any audio/video source becomes a structured, searchable knowledge base entry with minimal manual effort.
+
+## Before / After
+
+<BeforeAfter
+  before="Scattered podcast notes in random files, no tags, no retrieval, 2+ hours per episode"
+  after="Transcript → AI summary → tagged Obsidian entry with insights, quotes, and links — ~20 min review"
+/>
+
+## System
+
+<WorkflowDiagram
+  steps={[
+    'Podcast / YouTube URL',
+    'Transcript extraction',
+    'AI structured summary',
+    'Key insights + quotes',
+    'Obsidian Knowledge Base',
+  ]}
+/>
+
+## How it works
+
+1. **Capture** — Save URL or audio; run through Whisper or existing transcript API.
+2. **Structure** — Claude prompt extracts: main thesis, key insights, notable quotes, action items, tags.
+3. **Store** — Output saved as markdown in git-backed Obsidian vault (`Knowledge Base`).
+4. **Reuse** — Entries link to trading reviews, macro research, and weekly planning.
+
+<Callout type="tip">
+  The prompt template is version-controlled. Each run produces consistent frontmatter: `source`, `date`, `tags`, `summary`, `insights`.
+</Callout>
+
+## Result
+
+This workflow is the most marketable proof of AI implementation skill: it shows I don't just use AI — I **design systems** that produce durable, structured output teams can actually use.
+
+## What I'd improve next
+
+- Automated ingestion via RSS + webhook
+- Semantic search across the knowledge base
+- n8n orchestration for fully hands-off runs
+- Quality scoring before auto-publish

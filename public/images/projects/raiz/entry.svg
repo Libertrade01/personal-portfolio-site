@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+  <rect width="390" height="844" rx="40" fill="#161a22"/>
+  <text x="195" y="80" text-anchor="middle" fill="#e8e6e3" font-family="system-ui" font-size="16">New Entry</text>
+  <rect x="30" y="120" width="330" height="400" rx="8" fill="#1a1f28" stroke="#ffffff10"/>
+  <rect x="30" y="560" width="150" height="44" rx="22" fill="#d4a853"/>
+</svg>
