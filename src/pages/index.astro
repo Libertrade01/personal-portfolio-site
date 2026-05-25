@@ -25,9 +25,9 @@ const featured = await getFeaturedProjects();
   <section id="help" class="section-viewport section-flow">
     <div class="container-main w-full">
       <div class="flex flex-col gap-8 md:gap-10 lg:gap-12">
-        <div class="help-ways-section-label">
+        <div class="section-label-row">
           <span class="section-label section-label--large">{homeHelpLabel}</span>
-          <div class="h-px flex-1 max-w-[120px] bg-gradient-to-r from-amber-accent/40 to-transparent"></div>
+          <div class="section-label-rule"></div>
         </div>
 
         <div class="help-who-block">
@@ -70,7 +70,7 @@ const featured = await getFeaturedProjects();
     </div>
   </section>
 
-  <section class="section-padding-home section-flow">
+  <section class="section-padding-home section-flow home-contact-closing">
     <div class="container-main max-w-3xl">
       <SectionHeader
         label="Contact"

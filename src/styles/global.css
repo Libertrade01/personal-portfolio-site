@@ -161,9 +161,13 @@ html[data-accent='linen'] .section-band-sand {
   background: #f0ebe3;
 }
 
+html[data-accent='linen'] .section-closing {
+  background: #f7f6f1;
+}
+
 html[data-accent='linen'] .site-footer {
-  background: #ebe6dc;
-  border-top-color: #d8d4ca;
+  background: #f7f6f1;
+  border-top-color: rgba(31, 52, 74, 0.04);
 }
 
 html[data-accent='linen'] .terminal-panel {
@@ -375,6 +379,10 @@ html[data-accent='linen'] .section-subtitle-strong {
     background: #f0ebe3;
   }
 
+  .section-closing {
+    background: #f7f6f1;
+  }
+
   .section-padding {
     @apply py-24 md:py-32;
   }
@@ -391,9 +399,21 @@ html[data-accent='linen'] .section-subtitle-strong {
     @apply py-20 md:py-28;
   }
 
+  .home-contact-closing {
+    @apply pb-14 md:pb-16;
+  }
+
   .container-main,
   .container-hero {
     @apply mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10 xl:max-w-[82rem] xl:px-12;
+  }
+
+  .section-label-row {
+    @apply flex items-center gap-4;
+  }
+
+  .section-label-rule {
+    @apply h-px flex-1 max-w-[120px] bg-gradient-to-r from-amber-accent/40 to-transparent;
   }
 
   .section-label {

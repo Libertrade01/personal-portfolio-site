@@ -19,7 +19,10 @@ const { title, subtitle, label = 'Page', compact = false, tightSubtitle = false 
   ]}
 >
   <div class="container-main">
-    <span class="section-label">{label}</span>
+    <div class="section-label-row">
+      <span class="section-label section-label--large">{label}</span>
+      <div class="section-label-rule"></div>
+    </div>
     <h1 class="mt-5 font-sans text-4xl font-medium tracking-tight text-off-white md:text-5xl md:leading-tight">
       {title}
     </h1>

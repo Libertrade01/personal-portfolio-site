@@ -6,7 +6,7 @@ interface Props {
   id?: string;
   label?: string;
   compact?: boolean;
-  /** Larger compact typography — homepage #help section only */
+  /** Larger compact title typography — homepage #help section only */
   large?: boolean;
 }
 
@@ -15,9 +15,9 @@ const { title, subtitle, subtitleClass, id, label = 'Section', compact = false, 
 ---
 
 <div id={id} class:list={[compact ? 'mb-8 md:mb-10' : 'mb-14']}>
-  <div class="flex items-center gap-4">
-    <span class:list={['section-label', large && 'section-label--large']}>{label}</span>
-    <div class="h-px flex-1 max-w-[120px] bg-gradient-to-r from-amber-accent/40 to-transparent"></div>
+  <div class="section-label-row">
+    <span class="section-label section-label--large">{label}</span>
+    <div class="section-label-rule"></div>
   </div>
   <h2
     class:list={[
