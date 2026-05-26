@@ -1,0 +1,877 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../components/Layout.astro';
+
+const project = await getEntry('projects', 'libertrade-journal-analytics');
+
+if (!project) {
+  throw new Error('Libertrade Journal Analytics project content was not found.');
+}
+
+const { title, description, descriptionExtra, stack, role, liveUrl } = project.data;
+const projectPath = '/projects/libertrade-journal-analytics';
+
+const problemSources = [
+  'Broker CSVs had the numbers.',
+  'Journal notes had the psychology.',
+  'Whoop had the readiness.',
+  'Weekly reflections lived somewhere else.',
+];
+
+const goalQuestions = [
+  'Did I follow the plan?',
+  'Where does my edge actually show up?',
+  'Which sessions leak money?',
+  'Does readiness affect execution?',
+  'What emotional patterns keep repeating?',
+  "What should next week's focus be?",
+];
+
+const watchFeatures = [
+  {
+    title: 'Session analytics',
+    description: 'Time-of-day buckets, instrument mix, setup performance, expectancy-style views.',
+    signal: 'Trades by session, setup, instrument, timing',
+  },
+  {
+    title: 'Readiness gate',
+    description: 'Sleep, recovery, daily gate, and P&L in one strip.',
+    signal: 'Sleep, recovery, gate, P&L',
+  },
+  {
+    title: 'Discipline and rules',
+    description: 'Daily rule compliance tied to trading days. A green day with broken process still gets marked.',
+    signal: 'Rule compliance by trading day',
+  },
+  {
+    title: 'Journal integration',
+    description: 'Intraday notes and emotion tags connected to the same calendar and time as trades.',
+    signal: 'Notes, tags, lessons, outcomes',
+  },
+  {
+    title: 'AI weekly reports',
+    description: 'A weekly debrief across Performance and Psychology: edge quality, timing, emotional leaks, rule breaks, and next-week focus.',
+    signal: 'Performance and psychology review',
+  },
+];
+
+const systemPhases = [
+  {
+    title: 'Capture',
+    description: 'Import trades, sync journal notes, log daily readiness and rule compliance.',
+  },
+  {
+    title: 'Diagnose',
+    description: 'Break the week down by session, setup, instrument, timing, tags, and rule behaviour.',
+  },
+  {
+    title: 'Synthesize',
+    description: 'Generate weekly Performance and Psychology reviews that turn raw trades into a clean operating focus.',
+  },
+  {
+    title: 'Act',
+    description: 'Leave the week with specific changes: size rules, time windows, hold-quality targets, emotional gates, or setup filters.',
+  },
+];
+
+const differenceQuestions = [
+  'Did you follow the process?',
+  'Was your state clean?',
+  'Did you trade the setup or your P&L?',
+  'Did low recovery change your execution?',
+  'Did you get paid for your best trades?',
+  'Which rule needs to become mechanical next week?',
+];
+
+const specRows = [
+  {
+    signal: 'Broker CSVs',
+    decision: 'Where does edge actually show up?',
+    output: 'Session, setup, instrument, and timing views',
+    loop: 'Stop guessing where the edge lives',
+  },
+  {
+    signal: 'Readiness data',
+    decision: 'Was state clean enough to trade?',
+    output: 'Sleep, recovery, daily gate, and P&L strip',
+    loop: 'Spot execution changes under low recovery',
+  },
+  {
+    signal: 'Rule compliance',
+    decision: 'Was the process followed?',
+    output: 'Daily compliance tied to trading days',
+    loop: 'Mark green days with broken process',
+  },
+  {
+    signal: 'Journal notes',
+    decision: 'What emotional patterns repeat?',
+    output: 'Notes and emotion tags on the trade calendar',
+    loop: 'Carry lessons into the next session',
+  },
+  {
+    signal: 'Weekly review',
+    decision: 'What should change next week?',
+    output: 'Performance and Psychology debrief',
+    loop: 'Turn raw trades into operating focus',
+  },
+];
+---
+
+<Layout title="Project Case Study Layout Lab — Michael Low" description="Preview board for redesigning the Libertrade Journal Analytics case study page.">
+  <main class="case-lab-page">
+    <section class="case-lab-hero">
+      <div class="container-main">
+        <div class="case-lab-topnote">
+          <span>Preview only — live project page unchanged</span>
+          <a href={projectPath}>Back to current case study</a>
+        </div>
+
+        <div class="case-lab-hero-grid">
+          <div>
+            <p class="case-lab-label">Project case study layout lab</p>
+            <h1>{title}</h1>
+            <p class="case-lab-lede">{description}</p>
+            {descriptionExtra && <p class="case-lab-sublede">{descriptionExtra}</p>}
+          </div>
+
+          <aside class="case-lab-project-card" aria-label="Project details">
+            <p class="case-lab-card-eyebrow">Source page</p>
+            <p>{role}</p>
+            <div class="case-lab-stack" aria-label="Technology stack">
+              {stack.map((item) => <span>{item}</span>)}
+            </div>
+            <a href={liveUrl} target="_blank" rel="noopener noreferrer">Referenced live demo</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-lab-option case-lab-option-a">
+      <div class="container-main">
+        <div class="case-lab-option-header">
+          <p class="case-lab-label">A — Editorial Brief</p>
+          <h2>Large brief cards first, scannable system rows after.</h2>
+          <p>Best when the page should feel like an editorial case study instead of documentation.</p>
+        </div>
+
+        <div class="case-lab-brief-grid">
+          <article class="case-lab-brief-card">
+            <span>Problem</span>
+            <p class="case-lab-pullquote">“My trading review was split across too many places.”</p>
+            <p>The real problem was not a lack of data. It was a lack of one place where the data could challenge the story I was telling myself.</p>
+          </article>
+
+          <article class="case-lab-brief-card case-lab-brief-card-strong">
+            <span>Goal</span>
+            <p class="case-lab-pullquote">Build a single operator dashboard for trade review.</p>
+            <p>The aim was process clarity, not a focus on P&amp;L.</p>
+          </article>
+        </div>
+
+        <div class="case-lab-editorial-rows">
+          {systemPhases.map((phase, index) => (
+            <article>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{phase.title}</h3>
+              <p>{phase.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="case-lab-option case-lab-option-b">
+      <div class="container-main">
+        <div class="case-lab-option-header">
+          <p class="case-lab-label">B — System Map / Dashboard</p>
+          <h2>Turn “what the system watches” into signal cards.</h2>
+          <p>Dashboard structure makes the watch layer feel useful and readable without going full SaaS.</p>
+        </div>
+
+        <div class="case-lab-dashboard">
+          <div class="case-lab-dashboard-header">
+            <div>
+              <p class="case-lab-card-eyebrow">What the system watches</p>
+              <h3>Five signals feeding one review loop</h3>
+            </div>
+            <p>No motivational fluff. Just the useful truth.</p>
+          </div>
+
+          <div class="case-lab-signal-grid">
+            {watchFeatures.map((feature, index) => (
+              <article class="case-lab-signal-card">
+                <div class="case-lab-signal-number">{String(index + 1).padStart(2, '0')}</div>
+                <p class="case-lab-card-eyebrow">{feature.signal}</p>
+                <h4>{feature.title}</h4>
+                <p>{feature.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-lab-option case-lab-option-c">
+      <div class="container-main">
+        <div class="case-lab-option-header">
+          <p class="case-lab-label">C — Before / After / Outcome</p>
+          <h2>A story flow before the detail sections.</h2>
+          <p>Useful if the current page needs a clearer arc before readers get into the system parts.</p>
+        </div>
+
+        <div class="case-lab-story-flow">
+          <article>
+            <span>Before</span>
+            <h3>Scattered review</h3>
+            <p>Numbers, psychology, readiness, and weekly reflections lived in different places.</p>
+          </article>
+          <article>
+            <span>Build</span>
+            <h3>Operator dashboard</h3>
+            <p>Trades, readiness, rules, journal entries, and weekly AI review became one review loop.</p>
+          </article>
+          <article>
+            <span>Result</span>
+            <h3>Process clarity</h3>
+            <p>The page shifts attention from “was the week green?” to “was the process clean?”</p>
+          </article>
+        </div>
+
+        <div class="case-lab-outcome-grid">
+          {goalQuestions.slice(0, 3).map((question) => (
+            <p>{question}</p>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="case-lab-option case-lab-option-d">
+      <div class="container-main">
+        <div class="case-lab-option-header">
+          <p class="case-lab-label">D — Technical Spec Sheet</p>
+          <h2>Spec-table rows for signals, decisions, outputs, and loops.</h2>
+          <p>Strongest when the page needs to communicate system thinking quickly to technical readers.</p>
+        </div>
+
+        <div class="case-lab-spec-sheet">
+          <div class="case-lab-spec-header" aria-hidden="true">
+            <span>Signal</span>
+            <span>Decision</span>
+            <span>Output</span>
+            <span>Review loop</span>
+          </div>
+          {specRows.map((row) => (
+            <article class="case-lab-spec-row">
+              <div>
+                <span>Signal</span>
+                <p>{row.signal}</p>
+              </div>
+              <div>
+                <span>Decision</span>
+                <p>{row.decision}</p>
+              </div>
+              <div>
+                <span>Output</span>
+                <p>{row.output}</p>
+              </div>
+              <div>
+                <span>Review loop</span>
+                <p>{row.loop}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="case-lab-option case-lab-option-e">
+      <div class="container-main">
+        <div class="case-lab-option-header">
+          <p class="case-lab-label">E — Narrative + Side Rail</p>
+          <h2>Main story on the left, useful context pinned on the right.</h2>
+          <p>Closest to a polished live case-study page: readable prose with a persistent system summary.</p>
+        </div>
+
+        <div class="case-lab-narrative-layout">
+          <article class="case-lab-narrative-copy">
+            <section>
+              <p class="case-lab-label">Problem</p>
+              <h3>One honest picture of the week was too hard to assemble.</h3>
+              <p>I could see the pieces individually, but making one honest picture of the week meant manual stitching, memory, and guesswork.</p>
+              <ul>
+                {problemSources.map((source) => <li>{source}</li>)}
+              </ul>
+            </section>
+
+            <section>
+              <p class="case-lab-label">What makes it different</p>
+              <h3>It asks whether the process was followed.</h3>
+              <p>Most trading dashboards ask: “Did you make money?” Libertrade asks whether state, setup, rules, and review quality held under pressure.</p>
+              <div class="case-lab-question-list">
+                {differenceQuestions.slice(0, 4).map((question) => <p>{question}</p>)}
+              </div>
+            </section>
+          </article>
+
+          <aside class="case-lab-side-rail">
+            <p class="case-lab-card-eyebrow">Operating loop</p>
+            {systemPhases.map((phase) => (
+              <div>
+                <span>{phase.title}</span>
+                <p>{phase.description}</p>
+              </div>
+            ))}
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .case-lab-page {
+    --case-lab-navy: #1f344a;
+    --case-lab-navy-deep: #162a3d;
+    --case-lab-ink: var(--color-off-white);
+    --case-lab-muted: var(--color-muted);
+    --case-lab-line: var(--color-border);
+    --case-lab-paper: #f7f6f1;
+    --case-lab-sand: #f0ebe3;
+    --case-lab-card: rgba(255, 255, 255, 0.62);
+    --case-lab-card-strong: rgba(255, 255, 255, 0.82);
+    color: var(--case-lab-ink);
+  }
+
+  .case-lab-page :global(.container-main) {
+    max-width: 1180px;
+  }
+
+  .case-lab-hero {
+    border-bottom: 1px solid var(--case-lab-line);
+    background:
+      linear-gradient(180deg, rgba(240, 235, 227, 0.92), rgba(247, 246, 241, 0.98)),
+      radial-gradient(circle at 82% 12%, rgba(31, 52, 74, 0.12), transparent 34%);
+    padding: 4rem 0 3.5rem;
+  }
+
+  .case-lab-topnote {
+    align-items: center;
+    border: 1px solid var(--case-lab-line);
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .case-lab-topnote span,
+  .case-lab-topnote a,
+  .case-lab-label,
+  .case-lab-card-eyebrow,
+  .case-lab-stack span,
+  .case-lab-spec-header span,
+  .case-lab-spec-row span {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .case-lab-topnote span {
+    color: var(--case-lab-muted);
+  }
+
+  .case-lab-topnote a,
+  .case-lab-project-card a {
+    color: var(--case-lab-navy);
+    font-weight: 500;
+  }
+
+  .case-lab-hero-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    align-items: end;
+  }
+
+  .case-lab-label,
+  .case-lab-card-eyebrow {
+    color: var(--case-lab-navy);
+    margin: 0;
+  }
+
+  .case-lab-hero h1 {
+    color: var(--case-lab-ink);
+    font-size: clamp(2.75rem, 6vw, 5.75rem);
+    line-height: 0.94;
+    margin: 1rem 0 0;
+    max-width: 920px;
+  }
+
+  .case-lab-lede {
+    color: var(--case-lab-ink);
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    line-height: 1.55;
+    margin: 1.5rem 0 0;
+    max-width: 820px;
+  }
+
+  .case-lab-sublede {
+    color: var(--case-lab-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 1rem 0 0;
+    max-width: 820px;
+  }
+
+  .case-lab-project-card {
+    background: var(--case-lab-card-strong);
+    border: 1px solid var(--case-lab-line);
+    box-shadow: 0 18px 50px rgba(31, 52, 74, 0.08);
+    padding: 1.35rem;
+  }
+
+  .case-lab-project-card > p:not(.case-lab-card-eyebrow) {
+    color: var(--case-lab-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0.6rem 0 0;
+  }
+
+  .case-lab-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.2rem 0;
+  }
+
+  .case-lab-stack span {
+    border: 1px solid rgba(31, 52, 74, 0.18);
+    color: var(--case-lab-navy);
+    padding: 0.35rem 0.5rem;
+  }
+
+  .case-lab-option {
+    border-bottom: 1px solid var(--case-lab-line);
+    padding: 4.75rem 0;
+  }
+
+  .case-lab-option:nth-of-type(odd) {
+    background: var(--case-lab-sand);
+  }
+
+  .case-lab-option-header {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(160px, 0.7fr) minmax(0, 1.35fr) minmax(240px, 0.95fr);
+    margin-bottom: 2rem;
+    align-items: start;
+  }
+
+  .case-lab-option-header h2 {
+    color: var(--case-lab-ink);
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    line-height: 1;
+    margin: 0;
+  }
+
+  .case-lab-option-header > p:last-child {
+    color: var(--case-lab-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .case-lab-brief-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .case-lab-brief-card,
+  .case-lab-dashboard,
+  .case-lab-story-flow,
+  .case-lab-spec-sheet,
+  .case-lab-narrative-copy,
+  .case-lab-side-rail {
+    background: var(--case-lab-card);
+    border: 1px solid var(--case-lab-line);
+    box-shadow: 0 14px 44px rgba(31, 52, 74, 0.06);
+  }
+
+  .case-lab-brief-card {
+    min-height: 360px;
+    padding: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .case-lab-brief-card span,
+  .case-lab-story-flow span,
+  .case-lab-side-rail span {
+    color: var(--case-lab-navy);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .case-lab-brief-card-strong {
+    background: var(--case-lab-navy);
+    color: #f7f6f1;
+  }
+
+  .case-lab-brief-card-strong span,
+  .case-lab-brief-card-strong p {
+    color: #f7f6f1;
+  }
+
+  .case-lab-pullquote {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 0.98;
+    margin: 1.5rem 0;
+  }
+
+  .case-lab-brief-card > p:last-child {
+    color: var(--case-lab-muted);
+    line-height: 1.65;
+    max-width: 560px;
+  }
+
+  .case-lab-editorial-rows {
+    border-top: 1px solid var(--case-lab-line);
+    margin-top: 1rem;
+  }
+
+  .case-lab-editorial-rows article {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 60px 200px minmax(0, 1fr);
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--case-lab-line);
+  }
+
+  .case-lab-editorial-rows span {
+    color: rgba(31, 52, 74, 0.38);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .case-lab-editorial-rows h3,
+  .case-lab-editorial-rows p {
+    margin: 0;
+  }
+
+  .case-lab-editorial-rows p {
+    color: var(--case-lab-muted);
+    line-height: 1.65;
+  }
+
+  .case-lab-dashboard {
+    background: var(--case-lab-navy);
+    color: #f7f6f1;
+    padding: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .case-lab-dashboard-header {
+    align-items: end;
+    border-bottom: 1px solid rgba(247, 246, 241, 0.18);
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    padding-bottom: 1.25rem;
+  }
+
+  .case-lab-dashboard .case-lab-card-eyebrow {
+    color: #d7d0c3;
+  }
+
+  .case-lab-dashboard h3,
+  .case-lab-dashboard p {
+    margin: 0;
+  }
+
+  .case-lab-dashboard h3 {
+    color: #fffaf2;
+    font-size: clamp(1.6rem, 3vw, 2.8rem);
+    margin-top: 0.5rem;
+  }
+
+  .case-lab-dashboard-header > p {
+    color: rgba(247, 246, 241, 0.74);
+    line-height: 1.55;
+    max-width: 260px;
+  }
+
+  .case-lab-signal-grid {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin-top: 1.25rem;
+  }
+
+  .case-lab-signal-card {
+    background:
+      linear-gradient(180deg, rgba(247, 246, 241, 0.1), rgba(247, 246, 241, 0.045)),
+      var(--case-lab-navy-deep);
+    min-height: 260px;
+    padding: 1.15rem;
+  }
+
+  .case-lab-signal-number {
+    color: rgba(247, 246, 241, 0.28);
+    font-family: var(--font-serif);
+    font-size: 3.8rem;
+    line-height: 0.9;
+  }
+
+  .case-lab-signal-card h4 {
+    color: #fffaf2;
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    line-height: 1.05;
+    margin: 1.1rem 0 0.7rem;
+  }
+
+  .case-lab-signal-card > p:last-child {
+    color: rgba(247, 246, 241, 0.72);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .case-lab-story-flow {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: hidden;
+  }
+
+  .case-lab-story-flow article {
+    min-height: 300px;
+    padding: clamp(1.4rem, 3vw, 2.5rem);
+    position: relative;
+  }
+
+  .case-lab-story-flow article + article {
+    border-left: 1px solid var(--case-lab-line);
+  }
+
+  .case-lab-story-flow article::after {
+    color: rgba(31, 52, 74, 0.24);
+    content: '→';
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.2rem;
+  }
+
+  .case-lab-story-flow article:last-child::after {
+    content: '';
+  }
+
+  .case-lab-story-flow h3 {
+    font-size: clamp(1.8rem, 3vw, 3.2rem);
+    line-height: 0.98;
+    margin: 4.5rem 0 1rem;
+  }
+
+  .case-lab-story-flow p {
+    color: var(--case-lab-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .case-lab-outcome-grid {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 1px;
+  }
+
+  .case-lab-outcome-grid p {
+    background: var(--case-lab-navy);
+    color: #f7f6f1;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    line-height: 1.15;
+    margin: 0;
+    min-height: 150px;
+    padding: 1.5rem;
+  }
+
+  .case-lab-spec-sheet {
+    overflow: hidden;
+  }
+
+  .case-lab-spec-header,
+  .case-lab-spec-row {
+    display: grid;
+    grid-template-columns: 0.8fr 1.1fr 1.2fr 1.2fr;
+  }
+
+  .case-lab-spec-header {
+    background: var(--case-lab-navy);
+    color: #f7f6f1;
+  }
+
+  .case-lab-spec-header span {
+    padding: 0.85rem 1rem;
+  }
+
+  .case-lab-spec-row {
+    border-top: 1px solid var(--case-lab-line);
+  }
+
+  .case-lab-spec-row div {
+    min-height: 112px;
+    padding: 1rem;
+  }
+
+  .case-lab-spec-row div + div {
+    border-left: 1px solid var(--case-lab-line);
+  }
+
+  .case-lab-spec-row span {
+    color: var(--case-lab-navy);
+    display: none;
+  }
+
+  .case-lab-spec-row p {
+    color: var(--case-lab-muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .case-lab-spec-row div:first-child p,
+  .case-lab-spec-row div:nth-child(2) p {
+    color: var(--case-lab-ink);
+  }
+
+  .case-lab-narrative-layout {
+    align-items: start;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr) 360px;
+  }
+
+  .case-lab-narrative-copy {
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  .case-lab-narrative-copy section + section {
+    border-top: 1px solid var(--case-lab-line);
+    margin-top: 3rem;
+    padding-top: 3rem;
+  }
+
+  .case-lab-narrative-copy h3 {
+    font-size: clamp(2rem, 4vw, 4.2rem);
+    line-height: 0.98;
+    margin: 1rem 0;
+    max-width: 720px;
+  }
+
+  .case-lab-narrative-copy p:not(.case-lab-label),
+  .case-lab-narrative-copy li {
+    color: var(--case-lab-muted);
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+
+  .case-lab-narrative-copy ul {
+    border-left: 1px solid rgba(31, 52, 74, 0.22);
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0 0 0 1.2rem;
+  }
+
+  .case-lab-question-list {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 2rem;
+  }
+
+  .case-lab-question-list p {
+    border-top: 1px solid var(--case-lab-line);
+    color: var(--case-lab-ink);
+    margin: 0;
+    padding-top: 0.75rem;
+  }
+
+  .case-lab-side-rail {
+    position: sticky;
+    top: 6rem;
+    padding: 1.25rem;
+  }
+
+  .case-lab-side-rail > div {
+    border-top: 1px solid var(--case-lab-line);
+    padding: 1rem 0;
+  }
+
+  .case-lab-side-rail p {
+    color: var(--case-lab-muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin: 0.35rem 0 0;
+  }
+
+  @media (max-width: 980px) {
+    .case-lab-hero-grid,
+    .case-lab-option-header,
+    .case-lab-brief-grid,
+    .case-lab-story-flow,
+    .case-lab-narrative-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .case-lab-signal-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .case-lab-story-flow article + article {
+      border-left: 0;
+      border-top: 1px solid var(--case-lab-line);
+    }
+
+    .case-lab-side-rail {
+      position: static;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .case-lab-hero,
+    .case-lab-option {
+      padding: 3rem 0;
+    }
+
+    .case-lab-editorial-rows article,
+    .case-lab-outcome-grid,
+    .case-lab-signal-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .case-lab-spec-header {
+      display: none;
+    }
+
+    .case-lab-spec-row {
+      grid-template-columns: 1fr;
+    }
+
+    .case-lab-spec-row div + div {
+      border-left: 0;
+      border-top: 1px solid var(--case-lab-line);
+    }
+
+    .case-lab-spec-row span {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .case-lab-question-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

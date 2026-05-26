@@ -1,0 +1,86 @@
+---
+interface FlowItem {
+  label: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  items: FlowItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="case-study-flow-strip" aria-label="Case study flow">
+  {
+    items.map((item) => (
+      <article>
+        <span>{item.label}</span>
+        <h3 class="case-study-flow-strip__title">{item.title}</h3>
+        <p class="case-study-flow-strip__text">{item.description}</p>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .case-study-flow-strip {
+    --case-study-navy: #1f344a;
+    --case-study-ink: #111827;
+    --case-study-muted: #4b5563;
+    --case-study-line: #d8d4ca;
+    background: rgba(255, 255, 255, 0.54);
+    border: 1px solid var(--case-study-line);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    margin: 0.5rem 0 3.5rem 50%;
+    overflow: hidden;
+    transform: translateX(-50%);
+    width: min(100vw - 3rem, 68rem);
+  }
+
+  .case-study-flow-strip article {
+    padding: 1.1rem 1.2rem 1.25rem;
+  }
+
+  .case-study-flow-strip article + article {
+    border-top: 1px solid var(--case-study-line);
+  }
+
+  .case-study-flow-strip span {
+    color: var(--case-study-navy);
+    display: block;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.65rem;
+    text-transform: uppercase;
+  }
+
+  .case-study-flow-strip .case-study-flow-strip__title {
+    color: var(--case-study-ink);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
+    line-height: 1.08;
+    margin: 0;
+  }
+
+  .case-study-flow-strip .case-study-flow-strip__text {
+    color: var(--case-study-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin: 0.65rem 0 0;
+  }
+
+  @media (min-width: 820px) {
+    .case-study-flow-strip {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .case-study-flow-strip article + article {
+      border-left: 1px solid var(--case-study-line);
+      border-top: 0;
+    }
+  }
+</style>

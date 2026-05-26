@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../../components/Layout.astro';
 import ProjectHero from '../../components/ProjectHero.astro';
+import CaseStudyHero from '../../components/case-study/CaseStudyHero.astro';
 import OutcomeList from '../../components/OutcomeList.astro';
 import RelatedProjects from '../../components/RelatedProjects.astro';
 import { getPublishedProjects } from '../../utils/content';
@@ -20,11 +21,12 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 const allProjects = await getPublishedProjects();
 const { title, description, outcomes } = project.data;
+const isLibertradeJournalCaseStudy = project.slug === 'libertrade-journal-analytics';
 ---
 
 <Layout title={`${title} — Michael Low`} description={description} ogImage={project.data.coverImage}>
-  <ProjectHero project={project} />
-  <article class="pb-24 pt-8 md:pb-32 md:pt-12">
+  {isLibertradeJournalCaseStudy ? <CaseStudyHero project={project} /> : <ProjectHero project={project} />}
+  <article class:list={['pb-24 md:pb-32', isLibertradeJournalCaseStudy ? 'pt-0' : 'pt-8 md:pt-12']}>
     <div class="container-main max-w-4xl">
       {outcomes.length > 0 && <OutcomeList outcomes={outcomes} />}
       <div

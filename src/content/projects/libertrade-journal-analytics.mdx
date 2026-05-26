@@ -17,54 +17,47 @@ coverPosition: top
 liveUrl: https://libertrade-journal-analystics-demo-eight.vercel.app/
 ---
 
-import SystemTimeline from '../../components/SystemTimeline.astro';
-import FeatureList from '../../components/FeatureList.astro';
-import ScreenshotGallery from '../../components/ScreenshotGallery.astro';
-import SplitSources from '../../components/SplitSources.astro';
-import CaseStudyQuestions from '../../components/CaseStudyQuestions.astro';
+import ProblemGoalSplit from '../../components/case-study/ProblemGoalSplit.astro';
+import SnapshotCarousel from '../../components/case-study/SnapshotCarousel.astro';
+import SystemWatchGrid from '../../components/case-study/SystemWatchGrid.astro';
+import SystemStoryFlow from '../../components/case-study/SystemStoryFlow.astro';
 
-## Problem
-
-My trading review was split across too many places.
-
-<SplitSources
-  sources={[
-    'Broker CSVs had the numbers.',
-    'Journal notes had the psychology.',
-    'Whoop had the readiness.',
-    'Weekly reflections lived somewhere else.',
-  ]}
+<ProblemGoalSplit
+  problem={{
+    title: 'Problem',
+    lead: 'My trading review was split across too many places.',
+    items: [
+      'Broker CSVs had the numbers.',
+      'Journal notes had the psychology.',
+      'Whoop had the readiness.',
+      'Weekly reflections lived somewhere else.',
+    ],
+    body: [
+      'The information was there, connecting the dots was the hard part.',
+      'I could see the pieces individually but making one honest picture of the week meant manual stitching, memory, and guesswork.',
+      'The real problem was not a lack of data. It was a lack of one place where the data could challenge the story I was telling myself.',
+    ],
+  }}
+  goal={{
+    title: 'Goal',
+    lead: 'Build a single operator dashboard for trade review.',
+    leadStrong: 'operator dashboard',
+    intro: 'The system needed to answer:',
+    items: [
+      'Did I follow the plan?',
+      'Where does my edge actually show up?',
+      'Which sessions leak money?',
+      'Does readiness affect execution?',
+      'What emotional patterns keep repeating?',
+      "What should next week's focus be?",
+    ],
+    body: ['The aim was process clarity, not a focus on P&L.'],
+  }}
 />
 
-The information was there, connecting the dots was the hard part.
-
-I could see the pieces individually but making one honest picture of the week meant manual stitching, memory, and guesswork.
-
-The real problem was not a lack of data. It was a lack of one place where the data could challenge the story I was telling myself.
-
-## Goal
-
-Build a single **operator dashboard** for trade review.
-
-The system needed to answer:
-
-<CaseStudyQuestions
-  questions={[
-    'Did I follow the plan?',
-    'Where does my edge actually show up?',
-    'Which sessions leak money?',
-    'Does readiness affect execution?',
-    'What emotional patterns keep repeating?',
-    "What should next week's focus be?",
-  ]}
-/>
-
-The aim was process clarity, not a focus on P&L.
-
-## What the system watches
-
-<FeatureList
-  features={[
+<SystemWatchGrid
+  heading="Features"
+  items={[
     { title: 'Session analytics', description: 'Time-of-day buckets, instrument mix, setup performance, expectancy-style views. The point is to stop guessing where the edge lives.' },
     { title: 'Readiness gate', description: 'Sleep, recovery, daily gate, and P&L in one strip.' },
     { title: 'Discipline and rules', description: 'Daily rule compliance tied to trading days. A green day with broken process still gets marked.' },
@@ -73,61 +66,30 @@ The aim was process clarity, not a focus on P&L.
   ]}
 />
 
-<p>No motivational fluff. Just the useful truth.</p>
-
-## System
-
-<SystemTimeline
-  phases={[
+<SystemStoryFlow
+  heading="System"
+  cards={[
     {
       title: 'Capture',
-      steps: [
-        'Import trades, sync journal notes, log daily readiness and rule compliance.',
-      ],
+      description: 'Import trades, sync journal notes, log daily readiness and rule compliance.',
     },
     {
       title: 'Diagnose',
-      steps: [
-        'Break the week down by session, setup, instrument, timing, tags, and rule behaviour.',
-      ],
+      description: 'Break the week down by session, setup, instrument, timing, tags, and rule behaviour.',
     },
     {
       title: 'Synthesize',
-      steps: [
-        'Generate weekly Performance and Psychology reviews that turn raw trades into a clean operating focus.',
-      ],
+      description: 'Generate weekly Performance and Psychology reviews that turn raw trades into a clean operating focus.',
     },
     {
       title: 'Act',
-      steps: [
-        'Leave the week with a small number of specific changes: size rules, time windows, hold-quality targets, emotional gates, or setup filters.',
-      ],
+      description: 'Leave the week with a small number of specific changes: size rules, time windows, hold-quality targets, emotional gates, or setup filters.',
     },
   ]}
 />
 
-## What makes it different
-
-Most trading dashboards ask: "Did you make money?"
-
-Libertrade asks:
-
-<CaseStudyQuestions
-  questions={[
-    'Did you follow the process?',
-    'Was your state clean?',
-    'Did you trade the setup or your P&L?',
-    'Did low recovery change your execution?',
-    'Did you get paid for your best trades?',
-    'Which rule needs to become mechanical next week?',
-  ]}
-/>
-
-<p>That is the difference between a journal and an operating system.</p>
-
-## Snapshots
-
-<ScreenshotGallery
+<SnapshotCarousel
+  heading="Snapshots"
   shots={[
     {
       image: '/images/projects/libertrade-analytics/discipline-journal.png',

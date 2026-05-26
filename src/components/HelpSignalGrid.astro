@@ -1,0 +1,19 @@
+---
+import { homeHelpAreas } from '../config/site';
+
+const pad = (i: number) => String(i + 1).padStart(2, '0');
+---
+
+<ol class="home-signal-grid" role="list" aria-label="Ways to work together">
+  {
+    homeHelpAreas.map((area, i) => (
+      <li class="home-signal-grid__card">
+        <span class="home-signal-grid__index" aria-hidden="true">
+          [{pad(i)}]
+        </span>
+        <h3 class="home-signal-grid__title">{area.title}</h3>
+        <p class="home-signal-grid__desc">{area.description}</p>
+      </li>
+    ))
+  }
+</ol>

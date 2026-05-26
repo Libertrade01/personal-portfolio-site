@@ -1,0 +1,831 @@
+---
+import Layout from '../components/Layout.astro';
+import TerminalPanel from '../components/TerminalPanel.astro';
+import {
+  hero,
+  homeHelpAreas,
+  homeHelpCta,
+  homeHelpIntro,
+  homeHelpLabel,
+  homeHelpTitle,
+  homeWhoIntro,
+  homeWhoPains,
+  homeWhoTitle,
+} from '../config/site';
+
+const helpPreview = homeHelpAreas;
+const compactHelpPreview = homeHelpAreas.slice(0, 3);
+const painPreview = homeWhoPains.slice(0, 4);
+const projectPreview = ['Systems I\'ve built', 'Products and workflows', 'AI workflows, automation systems'];
+---
+
+<Layout
+  title="Homepage style lab — more editorial depth"
+  description="Preview board for adding more Libertrade case-study depth to the homepage without changing the live homepage."
+>
+  <main class="home-style-lab-page">
+    <header class="home-style-lab-hero">
+      <div class="container-main">
+        <div class="home-style-lab-topnote">
+          <span>Preview only — live homepage unchanged</span>
+          <a href="/">Back to homepage</a>
+        </div>
+
+        <p class="home-style-lab-kicker">Homepage style lab</p>
+        <h1>More editorial depth, same homepage system.</h1>
+        <p class="home-style-lab-lede">
+          Five visual directions that borrow the warm sand panels, navy contrast, editorial type,
+          numbered signal grids, and subtle depth from the Libertrade case study while keeping the
+          homepage content, terminal feel, and general layout intact.
+        </p>
+      </div>
+    </header>
+
+    <section class="home-style-lab-option home-style-lab-option--a">
+      <div class="container-main">
+        <div class="home-style-lab-option-head">
+          <p class="home-style-lab-kicker">Option A — Editorial panels</p>
+          <h2>Warm hero band with rounded content and terminal panels.</h2>
+          <p>Best if you want the homepage to feel closer to the case study without adding a strong dark section.</p>
+        </div>
+
+        <div class="home-style-lab-frame">
+          <div class="home-style-lab-a-hero">
+            <div class="home-style-lab-copy">
+              <p class="home-style-lab-label">{hero.role}</p>
+              <h3>{hero.title}</h3>
+              <p>{hero.intro}</p>
+            </div>
+            <div class="home-style-lab-terminal-shell">
+              <TerminalPanel variant="hero" filename={hero.terminal.filename} />
+            </div>
+          </div>
+
+          <div class="home-style-lab-a-help">
+            <article>
+              <span>Who this is for</span>
+              <h4>{homeWhoTitle}</h4>
+              <p>{homeWhoIntro}</p>
+              <ul role="list">
+                {painPreview.map((pain) => <li>{pain}</li>)}
+              </ul>
+            </article>
+            <article>
+              <span>{homeHelpLabel}</span>
+              <h4>{homeHelpTitle}</h4>
+              <p>{homeHelpIntro}</p>
+              <div class="home-style-lab-mini-list">
+                {compactHelpPreview.map((area, index) => (
+                  <p><strong>{String(index + 1).padStart(2, '0')}</strong>{area.title}</p>
+                ))}
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-style-lab-option home-style-lab-option--b">
+      <div class="container-main">
+        <div class="home-style-lab-option-head">
+          <p class="home-style-lab-kicker">Option B — Navy contrast feature</p>
+          <h2>One navy anchor around the terminal and action layer.</h2>
+          <p>Best if you want a memorable focal point while keeping most of the page light and calm.</p>
+        </div>
+
+        <div class="home-style-lab-frame">
+          <div class="home-style-lab-b-hero">
+            <div class="home-style-lab-copy">
+              <p class="home-style-lab-label">{hero.role}</p>
+              <h3>{hero.title}</h3>
+              <p>{hero.intro}</p>
+              <a href={hero.cta.href}>{hero.cta.label} <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <aside class="home-style-lab-navy-card">
+              <p class="home-style-lab-label">Goal panel</p>
+              <h4>{hero.tagline}</h4>
+              <TerminalPanel filename={hero.terminal.filename} />
+              <div class="home-style-lab-status-strip">
+                <span>{hero.statusLabel}</span>
+                <strong>{hero.statusPill}</strong>
+              </div>
+            </aside>
+          </div>
+
+          <div class="home-style-lab-b-help">
+            {compactHelpPreview.map((area, index) => (
+              <article>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h4>{area.title}</h4>
+                <p>{area.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-style-lab-option home-style-lab-option--c">
+      <div class="container-main">
+        <div class="home-style-lab-option-head">
+          <p class="home-style-lab-kicker">Option C — Signal grid homepage</p>
+          <h2>Keep the hero clean, make the offerings feel like a system grid.</h2>
+          <p>Best if you want the clearest connection to the Libertrade signal-card language.</p>
+        </div>
+
+        <div class="home-style-lab-frame">
+          <div class="home-style-lab-c-hero">
+            <div>
+              <p class="home-style-lab-label">{hero.role}</p>
+              <h3>{hero.title}</h3>
+              <p>{hero.intro}</p>
+            </div>
+            <TerminalPanel filename={hero.terminal.filename} />
+          </div>
+
+          <div class="home-style-lab-signal-section">
+            <div class="home-style-lab-signal-head">
+              <p class="home-style-lab-label">{homeHelpLabel}</p>
+              <h4>{homeHelpTitle}</h4>
+              <p>{homeHelpIntro}</p>
+            </div>
+            <div class="home-style-lab-signal-grid">
+              {helpPreview.map((area, index) => (
+                <article>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <h5>{area.title}</h5>
+                  <p>{area.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-style-lab-option home-style-lab-option--d">
+      <div class="container-main">
+        <div class="home-style-lab-option-head">
+          <p class="home-style-lab-kicker">Option D — Layered linen bands</p>
+          <h2>More surface changes between existing homepage sections.</h2>
+          <p>Best if you want the same layout to feel more designed without making individual cards louder.</p>
+        </div>
+
+        <div class="home-style-lab-frame home-style-lab-d-preview">
+          <section class="home-style-lab-band home-style-lab-band--hero">
+            <div class="home-style-lab-copy">
+              <p class="home-style-lab-label">{hero.role}</p>
+              <h3>{hero.title}</h3>
+              <p>{hero.intro}</p>
+            </div>
+            <TerminalPanel filename={hero.terminal.filename} />
+          </section>
+
+          <section class="home-style-lab-band home-style-lab-band--sand">
+            <div>
+              <p class="home-style-lab-label">Who</p>
+              <h4>{homeWhoTitle}</h4>
+              <p>{homeWhoIntro}</p>
+            </div>
+            <ul role="list">
+              {painPreview.map((pain) => <li>{pain}</li>)}
+            </ul>
+          </section>
+
+          <section class="home-style-lab-band home-style-lab-band--paper">
+            <div>
+              <p class="home-style-lab-label">{homeHelpLabel}</p>
+              <h4>{homeHelpTitle}</h4>
+              <p>{homeHelpIntro}</p>
+            </div>
+            <div class="home-style-lab-pill-row">
+              {compactHelpPreview.map((area) => <span>{area.title}</span>)}
+            </div>
+          </section>
+
+          <section class="home-style-lab-band home-style-lab-band--closing">
+            {projectPreview.map((item) => <span>{item}</span>)}
+            <a href="/contact">{homeHelpCta.label} <span aria-hidden="true">&rarr;</span></a>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-style-lab-option home-style-lab-option--e">
+      <div class="container-main">
+        <div class="home-style-lab-option-head">
+          <p class="home-style-lab-kicker">Option E — Terminal operating system</p>
+          <h2>Extend the terminal motif into section labels and modules.</h2>
+          <p>Best if you want more structure while staying minimal, technical, and close to the current homepage identity.</p>
+        </div>
+
+        <div class="home-style-lab-frame home-style-lab-e-preview">
+          <div class="home-style-lab-e-hero">
+            <div>
+              <p class="home-style-lab-code-label">~/homepage/hero</p>
+              <h3>{hero.title}</h3>
+              <p>{hero.intro}</p>
+            </div>
+            <TerminalPanel variant="hero" filename={hero.terminal.filename} />
+          </div>
+
+          <div class="home-style-lab-console-row">
+            <span>capture.inputs</span>
+            <span>organise.workflow</span>
+            <span>ship.system</span>
+          </div>
+
+          <div class="home-style-lab-e-modules">
+            <article>
+              <p class="home-style-lab-code-label">module.who</p>
+              <h4>{homeWhoTitle}</h4>
+              <ul role="list">
+                {painPreview.map((pain) => <li><span>&gt;</span>{pain}</li>)}
+              </ul>
+            </article>
+            <article>
+              <p class="home-style-lab-code-label">module.offers</p>
+              <h4>{homeHelpTitle}</h4>
+              {compactHelpPreview.map((area) => (
+                <p class="home-style-lab-command"><span>run</span>{area.title}</p>
+              ))}
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .home-style-lab-page {
+    --lab-paper: #f7f6f1;
+    --lab-linen: #faf9f5;
+    --lab-sand: #f6f2eb;
+    --lab-sand-strong: #f3eee5;
+    --lab-line: #d8d4ca;
+    --lab-line-strong: #c5c0b6;
+    --lab-navy: #1f344a;
+    --lab-navy-deep: #162a3d;
+    --lab-ink: #111827;
+    --lab-muted: #4b5563;
+    background: var(--lab-paper);
+    color: var(--lab-ink);
+  }
+
+  .home-style-lab-page :global(.container-main) {
+    max-width: 1180px;
+  }
+
+  .home-style-lab-hero {
+    background:
+      radial-gradient(circle at 82% 12%, rgba(31, 52, 74, 0.09), transparent 28%),
+      linear-gradient(180deg, var(--lab-sand) 0%, var(--lab-paper) 100%);
+    border-bottom: 1px solid rgba(216, 212, 202, 0.76);
+    padding: clamp(3.5rem, 7vw, 6rem) 0 clamp(2rem, 4vw, 3rem);
+  }
+
+  .home-style-lab-topnote {
+    align-items: center;
+    border: 1px solid var(--lab-line);
+    border-radius: 999px;
+    color: var(--lab-muted);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.72rem;
+    gap: 0.75rem 1rem;
+    justify-content: space-between;
+    letter-spacing: 0.08em;
+    margin-bottom: 2.5rem;
+    padding: 0.7rem 0.95rem;
+    text-transform: uppercase;
+  }
+
+  .home-style-lab-topnote a,
+  .home-style-lab-copy a,
+  .home-style-lab-band a {
+    color: var(--lab-navy);
+    font-weight: 600;
+  }
+
+  .home-style-lab-kicker,
+  .home-style-lab-label,
+  .home-style-lab-code-label {
+    color: var(--lab-navy);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.45;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .home-style-lab-hero h1 {
+    color: var(--lab-ink);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    letter-spacing: -0.06em;
+    line-height: 0.92;
+    margin: 1rem 0 0;
+    max-width: 920px;
+  }
+
+  .home-style-lab-lede {
+    color: var(--lab-muted);
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    line-height: 1.65;
+    margin: 1.5rem 0 0;
+    max-width: 820px;
+  }
+
+  .home-style-lab-option {
+    border-bottom: 1px solid rgba(216, 212, 202, 0.76);
+    padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+  }
+
+  .home-style-lab-option--b,
+  .home-style-lab-option--d {
+    background: #f0ebe3;
+  }
+
+  .home-style-lab-option-head {
+    margin-bottom: 1.5rem;
+    max-width: 760px;
+  }
+
+  .home-style-lab-option-head h2 {
+    color: var(--lab-ink);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin: 0.75rem 0 0;
+  }
+
+  .home-style-lab-option-head p:last-child {
+    color: var(--lab-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0.8rem 0 0;
+  }
+
+  .home-style-lab-frame {
+    background: var(--lab-linen);
+    border: 1px solid var(--lab-line);
+    border-radius: 1.5rem;
+    box-shadow:
+      0 16px 46px rgba(31, 52, 74, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    overflow: hidden;
+    padding: clamp(1rem, 3vw, 2rem);
+  }
+
+  .home-style-lab-frame :global(.terminal-panel) {
+    box-shadow:
+      0 0 0 1px rgba(197, 192, 182, 0.75),
+      0 18px 38px rgba(31, 52, 74, 0.1);
+  }
+
+  .home-style-lab-copy h3,
+  .home-style-lab-c-hero h3,
+  .home-style-lab-e-hero h3 {
+    color: var(--lab-ink);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(2.3rem, 5vw, 4.8rem);
+    letter-spacing: -0.055em;
+    line-height: 0.95;
+    margin: 0.85rem 0 0;
+  }
+
+  .home-style-lab-copy p:not(.home-style-lab-label),
+  .home-style-lab-c-hero p:not(.home-style-lab-label),
+  .home-style-lab-e-hero p:not(.home-style-lab-code-label) {
+    color: var(--lab-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 1rem 0 0;
+    max-width: 38rem;
+  }
+
+  .home-style-lab-a-hero,
+  .home-style-lab-b-hero,
+  .home-style-lab-c-hero,
+  .home-style-lab-e-hero {
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-style-lab-a-hero {
+    background: linear-gradient(180deg, var(--lab-sand) 0%, var(--lab-sand-strong) 100%);
+    border: 1px solid #d7d0c3;
+    border-radius: 1.25rem;
+    padding: clamp(1.25rem, 4vw, 2.4rem);
+  }
+
+  .home-style-lab-terminal-shell {
+    align-self: center;
+  }
+
+  .home-style-lab-a-help {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 1rem;
+  }
+
+  .home-style-lab-a-help article {
+    background: #fffaf2;
+    border: 1px solid #d7d0c3;
+    border-radius: 1.1rem;
+    padding: 1.35rem;
+  }
+
+  .home-style-lab-a-help article:last-child {
+    background: var(--lab-navy);
+    border-color: rgba(31, 52, 74, 0.3);
+    color: var(--lab-paper);
+  }
+
+  .home-style-lab-a-help span,
+  .home-style-lab-a-help strong {
+    color: var(--lab-navy);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .home-style-lab-a-help article:last-child span,
+  .home-style-lab-a-help article:last-child strong {
+    color: #d7d0c3;
+  }
+
+  .home-style-lab-a-help h4,
+  .home-style-lab-signal-head h4,
+  .home-style-lab-band h4,
+  .home-style-lab-e-modules h4 {
+    color: inherit;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+    margin: 0.7rem 0 0;
+  }
+
+  .home-style-lab-a-help p,
+  .home-style-lab-a-help li {
+    color: var(--lab-muted);
+    line-height: 1.6;
+  }
+
+  .home-style-lab-a-help article:last-child p,
+  .home-style-lab-a-help article:last-child li {
+    color: rgba(247, 246, 241, 0.78);
+  }
+
+  .home-style-lab-a-help ul,
+  .home-style-lab-band ul,
+  .home-style-lab-e-modules ul {
+    display: grid;
+    gap: 0.45rem;
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+  }
+
+  .home-style-lab-mini-list {
+    border-top: 1px solid rgba(247, 246, 241, 0.16);
+    display: grid;
+    gap: 0.65rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+
+  .home-style-lab-mini-list p {
+    display: flex;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .home-style-lab-b-hero {
+    align-items: center;
+  }
+
+  .home-style-lab-copy a {
+    display: inline-flex;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.8rem;
+    gap: 0.4rem;
+    letter-spacing: 0.1em;
+    margin-top: 1.35rem;
+    text-transform: uppercase;
+  }
+
+  .home-style-lab-navy-card {
+    background:
+      linear-gradient(180deg, rgba(247, 246, 241, 0.08), rgba(247, 246, 241, 0.03)),
+      var(--lab-navy);
+    border: 1px solid rgba(31, 52, 74, 0.28);
+    border-radius: 1.35rem;
+    box-shadow: 0 20px 52px rgba(31, 52, 74, 0.2);
+    color: var(--lab-paper);
+    padding: clamp(1.2rem, 3vw, 1.8rem);
+  }
+
+  .home-style-lab-navy-card .home-style-lab-label {
+    color: #d7d0c3;
+  }
+
+  .home-style-lab-navy-card h4 {
+    color: #fffaf2;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    letter-spacing: -0.045em;
+    line-height: 1;
+    margin: 0.75rem 0 1.25rem;
+  }
+
+  .home-style-lab-status-strip {
+    align-items: center;
+    border-top: 1px solid rgba(247, 246, 241, 0.14);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.72rem;
+    gap: 0.4rem 0.75rem;
+    letter-spacing: 0.08em;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    text-transform: uppercase;
+  }
+
+  .home-style-lab-status-strip span {
+    color: rgba(247, 246, 241, 0.56);
+  }
+
+  .home-style-lab-status-strip strong {
+    color: #fffaf2;
+    font-weight: 600;
+  }
+
+  .home-style-lab-b-help {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 1.2rem;
+  }
+
+  .home-style-lab-b-help article,
+  .home-style-lab-signal-grid article {
+    background: linear-gradient(180deg, var(--lab-sand) 0%, var(--lab-sand-strong) 100%);
+    border: 1px solid #d7d0c3;
+    min-height: 13rem;
+    padding: 1.2rem;
+  }
+
+  .home-style-lab-b-help span,
+  .home-style-lab-signal-grid span {
+    color: rgba(31, 52, 74, 0.38);
+    display: block;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 2.75rem;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    margin-bottom: 1rem;
+  }
+
+  .home-style-lab-b-help h4,
+  .home-style-lab-signal-grid h5 {
+    color: var(--lab-navy);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 1.35rem;
+    line-height: 1.08;
+    margin: 0;
+  }
+
+  .home-style-lab-b-help p,
+  .home-style-lab-signal-grid p,
+  .home-style-lab-signal-head p,
+  .home-style-lab-band p {
+    color: var(--lab-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0.7rem 0 0;
+  }
+
+  .home-style-lab-c-hero {
+    align-items: center;
+    border-bottom: 1px solid var(--lab-line);
+    padding: clamp(1rem, 3vw, 1.75rem) 0 clamp(1.75rem, 4vw, 2.5rem);
+  }
+
+  .home-style-lab-signal-section {
+    background: #f0ebe3;
+    border-radius: 1.15rem;
+    margin-top: 1.25rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .home-style-lab-signal-head {
+    max-width: 620px;
+    padding-bottom: 1.25rem;
+  }
+
+  .home-style-lab-signal-grid {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-style-lab-d-preview {
+    background: var(--lab-paper);
+    padding: 0;
+  }
+
+  .home-style-lab-band {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: minmax(0, 1fr);
+    padding: clamp(1.25rem, 4vw, 2.25rem);
+  }
+
+  .home-style-lab-band--hero {
+    align-items: center;
+    background: var(--lab-linen);
+  }
+
+  .home-style-lab-band--sand {
+    background: var(--lab-sand);
+    border-bottom: 1px solid var(--lab-line);
+    border-top: 1px solid var(--lab-line);
+  }
+
+  .home-style-lab-band--paper {
+    background: #fffaf2;
+  }
+
+  .home-style-lab-band--closing {
+    align-items: center;
+    background: var(--lab-navy);
+    color: var(--lab-paper);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: space-between;
+  }
+
+  .home-style-lab-band li {
+    border-top: 1px solid rgba(31, 52, 74, 0.13);
+    color: var(--lab-muted);
+    padding-top: 0.5rem;
+  }
+
+  .home-style-lab-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .home-style-lab-pill-row span,
+  .home-style-lab-band--closing span {
+    border: 1px solid var(--lab-line);
+    border-radius: 999px;
+    color: var(--lab-muted);
+    font-size: 0.84rem;
+    line-height: 1.3;
+    padding: 0.55rem 0.75rem;
+  }
+
+  .home-style-lab-band--closing span {
+    border-color: rgba(247, 246, 241, 0.18);
+    color: rgba(247, 246, 241, 0.78);
+  }
+
+  .home-style-lab-band--closing a {
+    color: #fffaf2;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .home-style-lab-e-preview {
+    background: #0f1720;
+    border-color: rgba(31, 52, 74, 0.35);
+    color: #f7f6f1;
+  }
+
+  .home-style-lab-e-hero {
+    align-items: center;
+  }
+
+  .home-style-lab-e-hero h3,
+  .home-style-lab-e-modules h4 {
+    color: #fffaf2;
+  }
+
+  .home-style-lab-e-hero p:not(.home-style-lab-code-label) {
+    color: rgba(247, 246, 241, 0.68);
+  }
+
+  .home-style-lab-code-label {
+    color: #c9c4bb;
+    text-transform: none;
+  }
+
+  .home-style-lab-console-row {
+    border-bottom: 1px solid rgba(247, 246, 241, 0.1);
+    border-top: 1px solid rgba(247, 246, 241, 0.1);
+    color: rgba(247, 246, 241, 0.58);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.75rem;
+    gap: 0.75rem 1rem;
+    justify-content: space-between;
+    letter-spacing: 0.08em;
+    margin: 1.5rem 0;
+    padding: 0.85rem 0;
+  }
+
+  .home-style-lab-e-modules {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-style-lab-e-modules article {
+    background: rgba(247, 246, 241, 0.055);
+    border: 1px solid rgba(247, 246, 241, 0.1);
+    border-radius: 1rem;
+    padding: 1.2rem;
+  }
+
+  .home-style-lab-e-modules li {
+    color: rgba(247, 246, 241, 0.72);
+    display: flex;
+    gap: 0.55rem;
+    line-height: 1.55;
+  }
+
+  .home-style-lab-e-modules li span,
+  .home-style-lab-command span {
+    color: #c9c4bb;
+    font-family: var(--font-mono, ui-monospace, monospace);
+  }
+
+  .home-style-lab-command {
+    align-items: baseline;
+    border-top: 1px solid rgba(247, 246, 241, 0.1);
+    color: rgba(247, 246, 241, 0.72);
+    display: flex;
+    gap: 0.7rem;
+    line-height: 1.5;
+    margin: 0.85rem 0 0;
+    padding-top: 0.85rem;
+  }
+
+  @media (min-width: 760px) {
+    .home-style-lab-a-help,
+    .home-style-lab-e-modules {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-style-lab-b-help,
+    .home-style-lab-signal-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 940px) {
+    .home-style-lab-a-hero,
+    .home-style-lab-b-hero,
+    .home-style-lab-c-hero,
+    .home-style-lab-e-hero,
+    .home-style-lab-band--hero,
+    .home-style-lab-band--sand,
+    .home-style-lab-band--paper {
+      grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.86fr);
+    }
+
+    .home-style-lab-signal-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .home-style-lab-b-help {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 520px) {
+    .home-style-lab-topnote {
+      border-radius: 1rem;
+    }
+
+    .home-style-lab-frame {
+      border-radius: 1rem;
+    }
+  }
+</style>

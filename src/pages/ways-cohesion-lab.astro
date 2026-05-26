@@ -1,0 +1,566 @@
+---
+import Layout from '../components/Layout.astro';
+import {
+  homeHelpAreas,
+  homeHelpCta,
+  homeHelpIntro,
+  homeHelpLabel,
+  homeHelpTitle,
+  homeWhoIntro,
+  homeWhoPains,
+  homeWhoTitle,
+} from '../config/site';
+
+const options = [
+  {
+    eyebrow: 'Option 1',
+    title: 'Shared outer shell',
+    note: 'Both panels sit inside one quiet rounded boundary, so the sequence reads as a single composed module while the inner panels stay intact.',
+    className: 'ways-cohesion-lab-option--shell',
+  },
+  {
+    eyebrow: 'Option 2',
+    title: 'Connector line',
+    note: 'A small navy-to-sand vertical connector creates a deliberate handoff between the Who panel and the Ways grid.',
+    className: 'ways-cohesion-lab-option--connector',
+  },
+  {
+    eyebrow: 'Option 3',
+    title: 'Shared header rail',
+    note: 'The section label gains a faint left rail that continues through the stacked panels and ties the whole block to one axis.',
+    className: 'ways-cohesion-lab-option--rail',
+  },
+  {
+    eyebrow: 'Option 4',
+    title: 'Overlapping seam',
+    note: 'The Ways panel tucks slightly under the navy panel, giving the pair a subtle physical relationship without changing content order.',
+    className: 'ways-cohesion-lab-option--overlap',
+  },
+  {
+    eyebrow: 'Option 5',
+    title: 'Unified depth system',
+    note: 'No visible connector: just matched radius, shadow, padding rhythm, and panel width so the two pieces feel designed together.',
+    className: 'ways-cohesion-lab-option--depth',
+  },
+] as const;
+
+const pad = (i: number) => String(i + 1).padStart(2, '0');
+---
+
+<Layout
+  title="Ways cohesion lab - Michael Low"
+  description="Preview subtle finishing-touch options for connecting the homepage Who panel and Ways grid."
+>
+  <header class="ways-cohesion-lab-hero">
+    <div class="container-main">
+      <p class="ways-cohesion-lab-note">
+        Preview only - live homepage unchanged.
+        <a href="/">Back to homepage</a>
+      </p>
+      <p class="ways-cohesion-lab-kicker">Preview board</p>
+      <h1 class="ways-cohesion-lab-title">Ways cohesion finishing touches</h1>
+      <p class="ways-cohesion-lab-subtitle">
+        Five subtle ways to make the navy <em>{homeWhoTitle}</em> panel and warm <em>{homeHelpTitle}</em> grid feel more connected without changing the content, colors, or main layout.
+      </p>
+    </div>
+  </header>
+
+  <div class="ways-cohesion-lab-page">
+    {
+      options.map((option) => (
+        <section class="ways-cohesion-lab-section">
+          <div class="container-main">
+            <article class="ways-cohesion-lab-frame">
+              <header class="ways-cohesion-lab-frame__meta">
+                <p class="ways-cohesion-lab-frame__eyebrow">{option.eyebrow}</p>
+                <h2 class="ways-cohesion-lab-frame__title">{option.title}</h2>
+                <p class="ways-cohesion-lab-frame__note">{option.note}</p>
+              </header>
+
+              <div class:list={['ways-cohesion-lab-preview', option.className]}>
+                <div class="ways-cohesion-lab-preview__inner">
+                  <div class="ways-cohesion-lab-label-row">
+                    <span class="ways-cohesion-lab-label">{homeHelpLabel}</span>
+                    <div class="ways-cohesion-lab-label-rule" />
+                  </div>
+
+                  <div class="ways-cohesion-lab-panels">
+                    <article class="ways-cohesion-lab-who" aria-labelledby={`${option.className}-who`}>
+                      <h3 id={`${option.className}-who`} class="ways-cohesion-lab-who__title">
+                        {homeWhoTitle}
+                      </h3>
+                      <p class="ways-cohesion-lab-who__intro">{homeWhoIntro}</p>
+                      <ul class="ways-cohesion-lab-pain-list" role="list">
+                        {homeWhoPains.map((pain) => (
+                          <li class="ways-cohesion-lab-pain-list__item">
+                            <span class="ways-cohesion-lab-pain-list__prefix" aria-hidden="true">
+                              -
+                            </span>
+                            <span>{pain}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </article>
+
+                    <div class="ways-cohesion-lab-seam" aria-hidden="true" />
+
+                    <section class="ways-cohesion-lab-ways" aria-labelledby={`${option.className}-ways`}>
+                      <div class="ways-cohesion-lab-ways__head">
+                        <h3 id={`${option.className}-ways`} class="ways-cohesion-lab-ways__title">
+                          {homeHelpTitle}
+                        </h3>
+                        <p class="ways-cohesion-lab-ways__intro">{homeHelpIntro}</p>
+                      </div>
+
+                      <ol class="ways-cohesion-lab-grid" role="list" aria-label="Ways to work together">
+                        {homeHelpAreas.map((area, i) => (
+                          <li class="ways-cohesion-lab-grid__card">
+                            <span class="ways-cohesion-lab-grid__index" aria-hidden="true">
+                              [{pad(i)}]
+                            </span>
+                            <h4 class="ways-cohesion-lab-grid__title">{area.title}</h4>
+                            <p class="ways-cohesion-lab-grid__desc">{area.description}</p>
+                          </li>
+                        ))}
+                      </ol>
+                    </section>
+                  </div>
+
+                  <p class="ways-cohesion-lab-cta">
+                    <a href={homeHelpCta.href} class="hero-cta-link">
+                      {homeHelpCta.label}
+                      <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</Layout>
+
+<style>
+  .ways-cohesion-lab-hero {
+    border-bottom: 1px solid #d8d4ca;
+    background: linear-gradient(180deg, #f7f6f1 0%, #f3f1ea 100%);
+    padding: clamp(3rem, 7vw, 5rem) 0;
+  }
+
+  .ways-cohesion-lab-note {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0 0 1.75rem;
+    border: 1px solid #d8d4ca;
+    border-radius: 999px;
+    background: #f0ebe3;
+    color: #4b5563;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    padding: 0.55rem 0.8rem;
+  }
+
+  .ways-cohesion-lab-note a {
+    color: #1f344a;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .ways-cohesion-lab-kicker,
+  .ways-cohesion-lab-frame__eyebrow,
+  .ways-cohesion-lab-label,
+  .ways-cohesion-lab-grid__index {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .ways-cohesion-lab-kicker {
+    margin: 0;
+    color: rgba(31, 52, 74, 0.58);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+  }
+
+  .ways-cohesion-lab-title {
+    max-width: 48rem;
+    margin: 0.85rem 0 0;
+    color: #111827;
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    font-weight: 600;
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+  }
+
+  .ways-cohesion-lab-subtitle {
+    max-width: 46rem;
+    margin: 1.25rem 0 0;
+    color: #4b5563;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.65;
+  }
+
+  .ways-cohesion-lab-page {
+    background: #f7f6f1;
+  }
+
+  .ways-cohesion-lab-section {
+    border-bottom: 1px solid #d8d4ca;
+    padding: clamp(3rem, 7vw, 5.5rem) 0;
+  }
+
+  .ways-cohesion-lab-section:last-child {
+    border-bottom: 0;
+  }
+
+  .ways-cohesion-lab-frame {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .ways-cohesion-lab-frame__meta {
+    max-width: 45rem;
+  }
+
+  .ways-cohesion-lab-frame__eyebrow {
+    margin: 0;
+    color: rgba(31, 52, 74, 0.58);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+  }
+
+  .ways-cohesion-lab-frame__title {
+    margin: 0.45rem 0 0;
+    color: #111827;
+    font-size: clamp(1.7rem, 3vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+  }
+
+  .ways-cohesion-lab-frame__note {
+    margin: 0.8rem 0 0;
+    color: #4b5563;
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .ways-cohesion-lab-preview {
+    border: 1px solid #d8d4ca;
+    border-radius: 1.35rem;
+    background: linear-gradient(180deg, #f7f6f1 0%, #f3f1ea 52%, #f7f6f1 100%);
+    box-shadow: 0 18px 48px rgba(31, 52, 74, 0.06);
+    overflow: hidden;
+    padding: clamp(1rem, 3vw, 1.4rem);
+  }
+
+  .ways-cohesion-lab-preview__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .ways-cohesion-lab-label-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .ways-cohesion-lab-label {
+    color: rgba(31, 52, 74, 0.58);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+  }
+
+  .ways-cohesion-lab-label-rule {
+    height: 1px;
+    flex: 1;
+    max-width: 120px;
+    background: linear-gradient(90deg, rgba(31, 52, 74, 0.4), transparent);
+  }
+
+  .ways-cohesion-lab-panels {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.35rem, 3vw, 1.8rem);
+  }
+
+  .ways-cohesion-lab-who {
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.25rem;
+    background:
+      radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.08), transparent 34%),
+      linear-gradient(145deg, #29415b 0%, #1f344a 58%, #192b3f 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 24px 50px rgba(31, 52, 74, 0.18);
+    color: #f7f6f1;
+    padding: clamp(1.35rem, 4vw, 2.45rem);
+  }
+
+  .ways-cohesion-lab-who__title {
+    max-width: 46rem;
+    margin: 0;
+    color: #fffaf2;
+    font-size: clamp(2rem, 4vw, 2.65rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+  }
+
+  .ways-cohesion-lab-who__intro {
+    max-width: 42rem;
+    margin: 0.95rem 0 0;
+    color: rgba(247, 246, 241, 0.88);
+    font-size: 1.03rem;
+    line-height: 1.6;
+  }
+
+  .ways-cohesion-lab-pain-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin: 1.2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ways-cohesion-lab-pain-list__item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.625rem;
+    color: rgba(247, 246, 241, 0.88);
+    font-size: clamp(1rem, 1.7vw, 1.1rem);
+    line-height: 1.55;
+  }
+
+  .ways-cohesion-lab-pain-list__prefix {
+    flex-shrink: 0;
+    width: 0.875rem;
+    color: #d7d0c3;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.875rem;
+  }
+
+  .ways-cohesion-lab-seam {
+    display: none;
+  }
+
+  .ways-cohesion-lab-ways {
+    position: relative;
+    z-index: 0;
+    border: 1px solid #d8d4ca;
+    border-radius: 1.25rem;
+    background: #f0ebe3;
+    box-shadow:
+      0 16px 42px rgba(31, 52, 74, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    padding: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .ways-cohesion-lab-ways__head {
+    max-width: 42rem;
+  }
+
+  .ways-cohesion-lab-ways__title {
+    margin: 0;
+    color: #111827;
+    font-size: clamp(1.85rem, 3.3vw, 2.35rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .ways-cohesion-lab-ways__intro {
+    max-width: 42rem;
+    margin: 1rem 0 0;
+    color: #4b5563;
+    font-size: 1.03rem;
+    line-height: 1.6;
+  }
+
+  .ways-cohesion-lab-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1px;
+    margin: clamp(1.25rem, 3vw, 1.75rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ways-cohesion-lab-grid__card {
+    display: flex;
+    min-height: 12.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid #d7d0c3;
+    background: linear-gradient(180deg, #f6f2eb 0%, #f3eee5 100%);
+    box-shadow: 0 10px 30px rgba(31, 52, 74, 0.05);
+    padding: clamp(1rem, 2vw, 1.25rem);
+  }
+
+  .ways-cohesion-lab-grid__index {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 0.85rem;
+    border: 1px solid rgba(31, 52, 74, 0.12);
+    border-radius: 999px;
+    background: rgba(31, 52, 74, 0.045);
+    color: rgba(31, 52, 74, 0.58);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    padding: 0.32rem 0.5rem;
+  }
+
+  .ways-cohesion-lab-grid__title {
+    margin: 0;
+    color: #111827;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.06;
+  }
+
+  .ways-cohesion-lab-grid__desc {
+    margin: 0.85rem 0 0;
+    color: #4b5563;
+    font-size: 0.92rem;
+    line-height: 1.58;
+  }
+
+  .ways-cohesion-lab-cta {
+    margin: 0.15rem 0 0;
+    text-align: center;
+  }
+
+  .ways-cohesion-lab-option--shell {
+    padding: clamp(0.8rem, 2vw, 1rem);
+  }
+
+  .ways-cohesion-lab-option--shell .ways-cohesion-lab-preview__inner {
+    border: 1px solid rgba(31, 52, 74, 0.14);
+    border-radius: 1.65rem;
+    background:
+      linear-gradient(180deg, rgba(247, 246, 241, 0.65), rgba(240, 235, 227, 0.38)),
+      #f7f6f1;
+    box-shadow:
+      0 20px 58px rgba(31, 52, 74, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    padding: clamp(1rem, 3vw, 1.45rem);
+  }
+
+  .ways-cohesion-lab-option--connector .ways-cohesion-lab-panels {
+    gap: 0;
+  }
+
+  .ways-cohesion-lab-option--connector .ways-cohesion-lab-seam {
+    position: relative;
+    display: block;
+    width: 1px;
+    height: 2.35rem;
+    margin: -0.15rem auto;
+    background: linear-gradient(180deg, #1f344a 0%, #d8d4ca 100%);
+  }
+
+  .ways-cohesion-lab-option--connector .ways-cohesion-lab-seam::before,
+  .ways-cohesion-lab-option--connector .ways-cohesion-lab-seam::after {
+    position: absolute;
+    left: 50%;
+    width: 0.45rem;
+    height: 0.45rem;
+    border: 1px solid #d8d4ca;
+    border-radius: 999px;
+    background: #f0ebe3;
+    content: '';
+    transform: translateX(-50%);
+  }
+
+  .ways-cohesion-lab-option--connector .ways-cohesion-lab-seam::before {
+    top: -0.15rem;
+  }
+
+  .ways-cohesion-lab-option--connector .ways-cohesion-lab-seam::after {
+    bottom: -0.15rem;
+  }
+
+  .ways-cohesion-lab-option--rail .ways-cohesion-lab-preview__inner {
+    padding-left: clamp(1rem, 3vw, 1.45rem);
+  }
+
+  .ways-cohesion-lab-option--rail .ways-cohesion-lab-preview__inner::before {
+    position: absolute;
+    top: 0.5rem;
+    bottom: 3.1rem;
+    left: 0;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(31, 52, 74, 0.36), #d8d4ca 56%, transparent);
+    content: '';
+  }
+
+  .ways-cohesion-lab-option--rail .ways-cohesion-lab-label-row::before {
+    width: 0.45rem;
+    height: 0.45rem;
+    border: 1px solid rgba(31, 52, 74, 0.28);
+    border-radius: 999px;
+    background: #f0ebe3;
+    content: '';
+    margin-left: calc(clamp(1rem, 3vw, 1.45rem) * -1 - 0.225rem);
+  }
+
+  .ways-cohesion-lab-option--overlap .ways-cohesion-lab-panels {
+    gap: 0;
+  }
+
+  .ways-cohesion-lab-option--overlap .ways-cohesion-lab-who {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 26px 54px rgba(31, 52, 74, 0.2);
+  }
+
+  .ways-cohesion-lab-option--overlap .ways-cohesion-lab-ways {
+    margin-top: -0.95rem;
+    padding-top: clamp(1.85rem, 4vw, 2.35rem);
+  }
+
+  .ways-cohesion-lab-option--depth .ways-cohesion-lab-panels {
+    gap: clamp(1rem, 2.5vw, 1.25rem);
+  }
+
+  .ways-cohesion-lab-option--depth .ways-cohesion-lab-who,
+  .ways-cohesion-lab-option--depth .ways-cohesion-lab-ways {
+    border-radius: 1.35rem;
+    box-shadow:
+      0 20px 46px rgba(31, 52, 74, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    padding: clamp(1.35rem, 3.5vw, 2rem);
+  }
+
+  .ways-cohesion-lab-option--depth .ways-cohesion-lab-ways {
+    border-color: rgba(31, 52, 74, 0.14);
+    box-shadow:
+      0 20px 46px rgba(31, 52, 74, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  }
+
+  @media (min-width: 680px) {
+    .ways-cohesion-lab-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1120px) {
+    .ways-cohesion-lab-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+</style>

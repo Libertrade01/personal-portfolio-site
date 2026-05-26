@@ -3,52 +3,43 @@ import { nav, site } from '../config/site';
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer relative border-t border-border pb-20 pt-14 md:pb-24 md:pt-16">
-  <div class="container-main">
-    <div class="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
-      <div>
-        <a href="/" class="group inline-flex items-center gap-3">
-          <span
-            class="flex h-9 w-9 items-center justify-center rounded-lg border border-amber-accent/20 bg-amber-accent/5 font-mono text-xs text-amber-accent"
-          >
-            ML
-          </span>
-          <span class="font-mono text-sm tracking-tight text-off-white group-hover:text-amber-bright">
-            {site.name}
-          </span>
-        </a>
-        <p class="mt-4 max-w-xs font-serif text-sm italic text-muted">{site.tagline}</p>
-      </div>
-      <div class="flex gap-16">
-        <ul class="space-y-3">
+<footer class="site-footer relative border-t border-border/80 bg-charcoal/70">
+  <div class="container-main flex min-h-16 flex-wrap items-center gap-x-8 gap-y-4 py-4 md:min-h-20">
+    <a href="/" class="group inline-flex shrink-0 items-center gap-3">
+      <span
+        class="flex h-8 w-8 items-center justify-center rounded-lg border border-amber-accent/20 bg-amber-accent/5 font-mono text-xs text-amber-accent transition group-hover:border-amber-accent/40 group-hover:bg-amber-accent/10"
+      >
+        ML
+      </span>
+      <span class="font-mono text-sm tracking-tight text-off-white transition group-hover:text-amber-bright">
+        {site.name}
+      </span>
+    </a>
+
+    <div class="flex min-w-0 flex-1 basis-full flex-wrap items-center gap-x-6 gap-y-3 sm:basis-auto sm:justify-end">
+      <nav aria-label="Footer navigation">
+        <ul class="flex flex-wrap items-center gap-1">
           {
             nav.map((item) => (
               <li>
-                <a href={item.href} class="text-sm text-muted transition hover:text-amber-accent">
+                <a href={item.href} class="rounded-lg px-3 py-2 text-sm text-muted transition hover:bg-white/[0.03] hover:text-off-white">
                   {item.label}
                 </a>
               </li>
             ))
           }
-        </ul>
-        <ul class="space-y-3">
           <li>
-            <a href={site.github} class="text-sm text-muted transition hover:text-amber-accent" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href={site.github} class="rounded-lg px-3 py-2 text-sm text-muted transition hover:bg-white/[0.03] hover:text-off-white" target="_blank" rel="noopener noreferrer">GitHub</a>
           </li>
           <li>
-            <a href={site.linkedin} class="text-sm text-muted transition hover:text-amber-accent" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </li>
-          <li>
-            <a href={`mailto:${site.email}`} class="text-sm text-muted transition hover:text-amber-accent">{site.email}</a>
-          </li>
-          <li>
-            <a href="/now" class="text-sm text-muted transition hover:text-amber-accent">Now</a>
+            <a href={site.linkedin} class="rounded-lg px-3 py-2 text-sm text-muted transition hover:bg-white/[0.03] hover:text-off-white" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </li>
         </ul>
-      </div>
+      </nav>
+
+      <span class="shrink-0 font-mono text-[11px] text-muted-dim">
+        © {year} {site.name}
+      </span>
     </div>
-    <p class="mt-16 text-xs text-muted-dim">
-      © {year} {site.name}
-    </p>
   </div>
 </footer>

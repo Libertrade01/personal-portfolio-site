@@ -1,0 +1,760 @@
+---
+import Layout from '../components/Layout.astro';
+import { homeHelpAreas, homeHelpCta, site } from '../config/site';
+
+const auditOffer = homeHelpAreas[0];
+const buildOffer = homeHelpAreas[1];
+const knowledgeOffer = homeHelpAreas[2];
+const internalToolOffer = homeHelpAreas[3];
+
+const auditSteps = [
+  {
+    title: 'Send context',
+    detail: 'Share the messy workflow, notes, tools, or process that keeps stealing attention.',
+  },
+  {
+    title: 'Map workflow',
+    detail: 'Turn the current process into a clear input, decision, output, and review path.',
+  },
+  {
+    title: 'Pick starting point',
+    detail: 'Leave with the smallest useful build that can become a working system.',
+  },
+];
+
+const sendPrompts = [
+  'The workflow or process you want to improve',
+  'What currently happens manually or across too many tools',
+  'A rough example of the input and the output you want',
+];
+---
+
+<Layout
+  title="Contact section lab — Michael Low"
+  description="Preview board for redesigning the homepage contact section without changing the live homepage."
+>
+  <main class="contact-lab-page">
+    <header class="contact-lab-hero">
+      <div class="contact-lab-container">
+        <div class="contact-lab-topnote">
+          <span>Preview only — live homepage unchanged</span>
+          <a href="/">Back to homepage</a>
+        </div>
+
+        <p class="contact-lab-kicker">Contact section lab</p>
+        <h1>Five closing moments for the homepage contact section.</h1>
+        <p class="contact-lab-lede">
+          Each option uses real availability and service copy, then reframes the final homepage
+          section with the upgraded linen, sand, navy, and editorial system language.
+        </p>
+      </div>
+    </header>
+
+    <section class="contact-lab-option">
+      <div class="contact-lab-container">
+        <div class="contact-lab-option-head">
+          <p class="contact-lab-kicker">Option A — Navy closing panel</p>
+          <h2>A strong final panel that echoes the Who block.</h2>
+          <p>
+            Best when the homepage needs a clear closing moment after the lighter portfolio and
+            signal-grid sections.
+          </p>
+        </div>
+
+        <article class="contact-lab-frame contact-lab-a">
+          <div class="contact-lab-a-copy">
+            <span class="contact-lab-label">Contact</span>
+            <h3>Interested in working together?</h3>
+            <p>{site.availability}</p>
+          </div>
+          <div class="contact-lab-a-actions">
+            <a href="/contact" class="contact-lab-button contact-lab-button--light">
+              Start with a workflow call <span aria-hidden="true">&rarr;</span>
+            </a>
+            <a href={`mailto:${site.email}`} class="contact-lab-text-link contact-lab-text-link--light">
+              {site.email} <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact-lab-option contact-lab-option--sand">
+      <div class="contact-lab-container">
+        <div class="contact-lab-option-head">
+          <p class="contact-lab-kicker">Option B — Editorial split</p>
+          <h2>Contact copy on the left, fit prompts in a warm inset.</h2>
+          <p>
+            Best if the section should feel helpful and qualifying without becoming a full sales
+            module.
+          </p>
+        </div>
+
+        <article class="contact-lab-frame contact-lab-b">
+          <div class="contact-lab-section-copy">
+            <span class="contact-lab-label">Contact</span>
+            <h3>Interested in working together?</h3>
+            <p>
+              AI workflows, automation systems, research pipelines, or content operations. If the
+              work is scattered and repeated, we can turn it into a system your team can actually
+              run.
+            </p>
+            <a href="/contact" class="contact-lab-button">
+              Start with a workflow call <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+          <aside class="contact-lab-b-inset" aria-label="Project fit prompts">
+            <span class="contact-lab-small-label">Good fit if</span>
+            <ul class="contact-lab-check-list" role="list">
+              <li>{auditOffer.title}</li>
+              <li>{buildOffer.title}</li>
+              <li>{knowledgeOffer.title}</li>
+            </ul>
+            <p>{site.availability}</p>
+          </aside>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact-lab-option">
+      <div class="contact-lab-container">
+        <div class="contact-lab-option-head">
+          <p class="contact-lab-kicker">Option C — Audit CTA module</p>
+          <span class="contact-lab-badge">Recommended</span>
+          <h2>A focused workflow-audit offer with a simple process rhythm.</h2>
+          <p>
+            Best if the homepage should end with one specific next step instead of a generic contact
+            invitation.
+          </p>
+        </div>
+
+        <article class="contact-lab-frame contact-lab-c">
+          <div class="contact-lab-c-head">
+            <div>
+              <span class="contact-lab-label">Contact</span>
+              <h3>Interested in working together?</h3>
+              <p>{auditOffer.description}</p>
+            </div>
+            <a href={homeHelpCta.href} class="contact-lab-button">
+              {homeHelpCta.label} <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+          <ol class="contact-lab-process" role="list">
+            {
+              auditSteps.map((step, index) => (
+                <li>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <div>
+                    <h4>{step.title}</h4>
+                    <p>{step.detail}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact-lab-option contact-lab-option--sand">
+      <div class="contact-lab-container">
+        <div class="contact-lab-option-head">
+          <p class="contact-lab-kicker">Option D — Minimal contact manifest</p>
+          <h2>Thin-divider rows for an editorial, no-card close.</h2>
+          <p>
+            Best if the final section should stay restrained and feel more like a clean index than a
+            campaign CTA.
+          </p>
+        </div>
+
+        <article class="contact-lab-frame contact-lab-d">
+          <div class="contact-lab-d-intro">
+            <span class="contact-lab-label">Contact</span>
+            <h3>Interested in working together?</h3>
+            <p>{site.availability}</p>
+          </div>
+
+          <ol class="contact-lab-manifest" role="list">
+            <li>
+              <a href={`mailto:${site.email}`}>
+                <span>01</span>
+                <strong>Email</strong>
+                <small>{site.email}</small>
+                <em aria-hidden="true">&rarr;</em>
+              </a>
+            </li>
+            <li>
+              <a href="/contact">
+                <span>02</span>
+                <strong>Workflow audit</strong>
+                <small>{auditOffer.description}</small>
+                <em aria-hidden="true">&rarr;</em>
+              </a>
+            </li>
+            <li>
+              <a href="/projects">
+                <span>03</span>
+                <strong>Selected projects</strong>
+                <small>Review systems already built from messy inputs and repeated work.</small>
+                <em aria-hidden="true">&rarr;</em>
+              </a>
+            </li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact-lab-option">
+      <div class="contact-lab-container">
+        <div class="contact-lab-option-head">
+          <p class="contact-lab-kicker">Option E — Soft form-style card without form</p>
+          <h2>A warm action card that tells people exactly what to send.</h2>
+          <p>
+            Best if the contact section should feel practical and low-friction without introducing a
+            live form.
+          </p>
+        </div>
+
+        <article class="contact-lab-frame contact-lab-e">
+          <div class="contact-lab-section-copy">
+            <span class="contact-lab-label">Contact</span>
+            <h3>Interested in working together?</h3>
+            <p>
+              Send a little context and I will help shape it into a practical starting point for an
+              audit, build sprint, knowledge system, or small internal tool.
+            </p>
+          </div>
+
+          <div class="contact-lab-e-card">
+            <span class="contact-lab-small-label">What to send</span>
+            <ul class="contact-lab-prompt-list" role="list">
+              {sendPrompts.map((prompt) => <li>{prompt}</li>)}
+            </ul>
+            <div class="contact-lab-e-footer">
+              <p>{internalToolOffer.title}</p>
+              <a href="/contact" class="contact-lab-button">
+                Start the conversation <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .contact-lab-page {
+    --contact-lab-paper: #f7f6f1;
+    --contact-lab-linen: #faf9f5;
+    --contact-lab-sand: #f6f2eb;
+    --contact-lab-sand-strong: #f0ebe3;
+    --contact-lab-line: #d8d4ca;
+    --contact-lab-line-strong: #c5c0b6;
+    --contact-lab-navy: #1f344a;
+    --contact-lab-navy-deep: #162a3d;
+    --contact-lab-ink: #111827;
+    --contact-lab-muted: #4b5563;
+    background: var(--contact-lab-paper);
+    color: var(--contact-lab-ink);
+  }
+
+  .contact-lab-container {
+    margin-inline: auto;
+    max-width: 1180px;
+    padding-inline: clamp(1.5rem, 4vw, 3rem);
+    width: 100%;
+  }
+
+  .contact-lab-hero {
+    background:
+      radial-gradient(circle at 82% 12%, rgba(31, 52, 74, 0.09), transparent 28%),
+      linear-gradient(180deg, var(--contact-lab-sand) 0%, var(--contact-lab-paper) 100%);
+    border-bottom: 1px solid rgba(216, 212, 202, 0.76);
+    padding: clamp(3.5rem, 7vw, 6rem) 0 clamp(2rem, 4vw, 3rem);
+  }
+
+  .contact-lab-topnote {
+    align-items: center;
+    border: 1px solid var(--contact-lab-line);
+    border-radius: 999px;
+    color: var(--contact-lab-muted);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.72rem;
+    gap: 0.75rem 1rem;
+    justify-content: space-between;
+    letter-spacing: 0.08em;
+    margin-bottom: 2.5rem;
+    padding: 0.7rem 0.95rem;
+    text-transform: uppercase;
+  }
+
+  .contact-lab-topnote a,
+  .contact-lab-text-link,
+  .contact-lab-manifest a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .contact-lab-topnote a {
+    color: var(--contact-lab-navy);
+    font-weight: 600;
+  }
+
+  .contact-lab-kicker,
+  .contact-lab-label,
+  .contact-lab-small-label {
+    color: var(--contact-lab-navy);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.45;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .contact-lab-hero h1 {
+    color: var(--contact-lab-ink);
+    font-size: clamp(2.7rem, 7vw, 5.9rem);
+    letter-spacing: -0.06em;
+    line-height: 0.94;
+    margin: 1rem 0 0;
+    max-width: 950px;
+  }
+
+  .contact-lab-lede {
+    color: var(--contact-lab-muted);
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    line-height: 1.65;
+    margin: 1.5rem 0 0;
+    max-width: 790px;
+  }
+
+  .contact-lab-option {
+    border-bottom: 1px solid rgba(216, 212, 202, 0.76);
+    padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+  }
+
+  .contact-lab-option--sand {
+    background: var(--contact-lab-sand-strong);
+  }
+
+  .contact-lab-option-head {
+    margin-bottom: 1.5rem;
+    max-width: 780px;
+  }
+
+  .contact-lab-option-head h2 {
+    color: var(--contact-lab-ink);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.9rem, 4vw, 3.2rem);
+    letter-spacing: -0.04em;
+    line-height: 1.03;
+    margin: 0.75rem 0 0;
+  }
+
+  .contact-lab-option-head p:last-child {
+    color: var(--contact-lab-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0.8rem 0 0;
+  }
+
+  .contact-lab-badge {
+    background: var(--contact-lab-navy);
+    border-radius: 999px;
+    color: var(--contact-lab-paper);
+    display: inline-block;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+    padding: 0.35rem 0.65rem;
+    text-transform: uppercase;
+  }
+
+  .contact-lab-frame {
+    background: var(--contact-lab-linen);
+    border: 1px solid var(--contact-lab-line);
+    border-radius: 1.5rem;
+    box-shadow:
+      0 16px 46px rgba(31, 52, 74, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    overflow: hidden;
+  }
+
+  .contact-lab-section-copy h3,
+  .contact-lab-a h3,
+  .contact-lab-c h3,
+  .contact-lab-d h3 {
+    color: var(--contact-lab-ink);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(2.1rem, 5vw, 4rem);
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+    margin: 0.8rem 0 0;
+  }
+
+  .contact-lab-section-copy p,
+  .contact-lab-a p,
+  .contact-lab-c-head p,
+  .contact-lab-d-intro p {
+    color: var(--contact-lab-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 1rem 0 0;
+    max-width: 38rem;
+  }
+
+  .contact-lab-button {
+    align-items: center;
+    background: linear-gradient(135deg, #27435d 0%, var(--contact-lab-navy) 100%);
+    border: 1px solid var(--contact-lab-navy);
+    border-radius: 0.9rem;
+    box-shadow:
+      0 2px 8px rgba(31, 52, 74, 0.2),
+      0 12px 28px rgba(31, 52, 74, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    color: #fffaf2;
+    display: inline-flex;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.76rem;
+    font-weight: 600;
+    gap: 0.45rem;
+    letter-spacing: 0.1em;
+    line-height: 1.3;
+    margin-top: 1.35rem;
+    padding: 0.9rem 1.1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      background-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .contact-lab-button:hover {
+    background: var(--contact-lab-navy-deep);
+    box-shadow:
+      0 4px 12px rgba(31, 52, 74, 0.24),
+      0 16px 34px rgba(31, 52, 74, 0.18);
+    transform: translateY(-1px);
+  }
+
+  .contact-lab-button--light {
+    background: #fffaf2;
+    border-color: rgba(247, 246, 241, 0.2);
+    color: var(--contact-lab-navy);
+  }
+
+  .contact-lab-button--light:hover {
+    background: var(--contact-lab-paper);
+  }
+
+  .contact-lab-a {
+    align-items: end;
+    background:
+      radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.1), transparent 34%),
+      linear-gradient(145deg, #29415b 0%, var(--contact-lab-navy) 58%, #192b3f 100%);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 24px 50px rgba(31, 52, 74, 0.18);
+    color: var(--contact-lab-paper);
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1fr);
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+  }
+
+  .contact-lab-a .contact-lab-label,
+  .contact-lab-text-link--light {
+    color: #d7d0c3;
+  }
+
+  .contact-lab-a h3,
+  .contact-lab-a p {
+    color: #fffaf2;
+  }
+
+  .contact-lab-a p {
+    color: rgba(247, 246, 241, 0.82);
+  }
+
+  .contact-lab-a-actions {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .contact-lab-text-link {
+    align-items: center;
+    display: inline-flex;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.76rem;
+    font-weight: 600;
+    gap: 0.45rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .contact-lab-b,
+  .contact-lab-e {
+    display: grid;
+    gap: clamp(1.25rem, 4vw, 2rem);
+    grid-template-columns: minmax(0, 1fr);
+    padding: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .contact-lab-b-inset {
+    align-self: stretch;
+    background: linear-gradient(180deg, var(--contact-lab-sand) 0%, #f3eee5 100%);
+    border: 1px solid #d7d0c3;
+    border-radius: 1.15rem;
+    padding: clamp(1.2rem, 3vw, 1.6rem);
+  }
+
+  .contact-lab-check-list,
+  .contact-lab-prompt-list {
+    display: grid;
+    gap: 0.65rem;
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+  }
+
+  .contact-lab-check-list li,
+  .contact-lab-prompt-list li {
+    border-top: 1px solid rgba(31, 52, 74, 0.13);
+    color: var(--contact-lab-muted);
+    line-height: 1.55;
+    padding: 0.65rem 0 0 1rem;
+    position: relative;
+  }
+
+  .contact-lab-check-list li::before,
+  .contact-lab-prompt-list li::before {
+    color: var(--contact-lab-navy);
+    content: '-';
+    left: 0;
+    position: absolute;
+  }
+
+  .contact-lab-b-inset p {
+    border-top: 1px solid rgba(31, 52, 74, 0.13);
+    color: var(--contact-lab-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 1rem 0 0;
+    padding-top: 1rem;
+  }
+
+  .contact-lab-c {
+    background: var(--contact-lab-linen);
+    padding: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .contact-lab-c-head {
+    align-items: end;
+    border-bottom: 1px solid var(--contact-lab-line);
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: minmax(0, 1fr);
+    padding-bottom: 1.35rem;
+  }
+
+  .contact-lab-c-head .contact-lab-button {
+    justify-self: start;
+  }
+
+  .contact-lab-process {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: minmax(0, 1fr);
+    list-style: none;
+    margin: 1.35rem 0 0;
+    padding: 0;
+  }
+
+  .contact-lab-process li {
+    background: linear-gradient(180deg, var(--contact-lab-sand) 0%, #f3eee5 100%);
+    border: 1px solid #d7d0c3;
+    min-height: 13rem;
+    padding: 1.2rem;
+  }
+
+  .contact-lab-process span {
+    color: rgba(31, 52, 74, 0.38);
+    display: block;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 3rem;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    margin-bottom: 1rem;
+  }
+
+  .contact-lab-process h4 {
+    color: var(--contact-lab-navy);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 1.35rem;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    margin: 0;
+  }
+
+  .contact-lab-process p {
+    color: var(--contact-lab-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0.7rem 0 0;
+  }
+
+  .contact-lab-d {
+    background: var(--contact-lab-paper);
+    padding: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .contact-lab-d-intro {
+    border-bottom: 1px solid var(--contact-lab-line);
+    padding-bottom: 1.25rem;
+  }
+
+  .contact-lab-manifest {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .contact-lab-manifest li {
+    border-bottom: 1px solid var(--contact-lab-line);
+  }
+
+  .contact-lab-manifest li:last-child {
+    border-bottom: none;
+  }
+
+  .contact-lab-manifest a {
+    align-items: center;
+    display: grid;
+    gap: 0.75rem 1rem;
+    grid-template-columns: auto minmax(0, 0.45fr) minmax(0, 1fr) auto;
+    padding: 1.1rem 0.25rem;
+    transition: background 0.15s ease;
+  }
+
+  .contact-lab-manifest a:hover {
+    background: rgba(246, 242, 235, 0.65);
+  }
+
+  .contact-lab-manifest span {
+    color: rgba(31, 52, 74, 0.35);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 2rem;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    min-width: 2.5rem;
+  }
+
+  .contact-lab-manifest strong {
+    color: var(--contact-lab-ink);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  .contact-lab-manifest small {
+    color: var(--contact-lab-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .contact-lab-manifest em {
+    color: var(--contact-lab-navy);
+    font-style: normal;
+  }
+
+  .contact-lab-e {
+    background: linear-gradient(180deg, var(--contact-lab-sand) 0%, var(--contact-lab-sand-strong) 100%);
+  }
+
+  .contact-lab-e-card {
+    background: #fffaf2;
+    border: 1px solid #d7d0c3;
+    border-radius: 1.15rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    padding: clamp(1.2rem, 3vw, 1.6rem);
+  }
+
+  .contact-lab-e-footer {
+    align-items: center;
+    border-top: 1px solid rgba(31, 52, 74, 0.13);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    justify-content: space-between;
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+  }
+
+  .contact-lab-e-footer p {
+    color: var(--contact-lab-navy);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .contact-lab-e-footer .contact-lab-button {
+    margin-top: 0;
+  }
+
+  @media (min-width: 760px) {
+    .contact-lab-a,
+    .contact-lab-b,
+    .contact-lab-e {
+      grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.72fr);
+    }
+
+    .contact-lab-process {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 900px) {
+    .contact-lab-c-head {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .contact-lab-c-head .contact-lab-button {
+      justify-self: end;
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .contact-lab-topnote,
+    .contact-lab-frame {
+      border-radius: 1rem;
+    }
+
+    .contact-lab-manifest a {
+      align-items: start;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+    }
+
+    .contact-lab-manifest small {
+      grid-column: 2 / -1;
+    }
+  }
+</style>

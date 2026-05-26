@@ -1,0 +1,130 @@
+---
+interface WatchItem {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  heading?: string;
+  items: WatchItem[];
+}
+
+const { heading = 'Features', items } = Astro.props;
+const headingId = 'case-study-watch-grid-heading';
+---
+
+<section class="case-study-watch" aria-labelledby={headingId}>
+  <header class="case-study-watch__header">
+    <h2 id={headingId} class="case-study-watch__heading">{heading}</h2>
+  </header>
+
+  <div class="case-study-watch-grid" aria-label="System watch signals">
+    {
+      items.map((item, index) => (
+        <article class="case-study-watch-grid__card">
+          <span class="case-study-watch-grid__index" aria-hidden="true">
+            [{String(index + 1).padStart(2, '0')}]
+          </span>
+          <h3 class="case-study-watch-grid__title">{item.title}</h3>
+          <p class="case-study-watch-grid__text">{item.description}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .case-study-watch {
+    --case-study-ink: #111827;
+    margin: 5rem 0 1.75rem 50%;
+    transform: translateX(-50%);
+    width: min(100vw - 3rem, 72rem);
+  }
+
+  .case-study-watch__header {
+    margin-bottom: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .case-study-watch .case-study-watch__heading {
+    color: var(--case-study-ink);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(2.25rem, 5.2vw, 4.8rem);
+    font-weight: 400;
+    letter-spacing: -0.055em;
+    line-height: 0.95;
+    margin: 0;
+    max-width: 13ch;
+  }
+
+  .case-study-watch-grid {
+    --case-study-navy: #1f344a;
+    --case-study-muted: #4b5563;
+    --case-study-line: #d8d4ca;
+    --case-study-paper: #f7f6f1;
+    display: grid;
+    gap: 1px;
+    grid-template-columns: minmax(0, 1fr);
+    margin: 0 auto;
+    width: min(100%, 68rem);
+  }
+
+  .case-study-watch-grid__card {
+    background: linear-gradient(180deg, #f6f2eb 0%, #f3eee5 100%);
+    border: 1px solid #d7d0c3;
+    box-shadow: 0 10px 30px rgba(31, 52, 74, 0.05);
+    min-height: 15rem;
+    padding: clamp(1.1rem, 2vw, 1.35rem);
+  }
+
+  .case-study-watch-grid__index {
+    align-items: center;
+    background: rgba(31, 52, 74, 0.05);
+    border: 1px solid rgba(31, 52, 74, 0.14);
+    border-radius: 999px;
+    color: rgba(31, 52, 74, 0.58);
+    display: inline-flex;
+    font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    margin-bottom: 1rem;
+    padding: 0.275rem 0.5rem;
+  }
+
+  .case-study-watch-grid .case-study-watch-grid__title {
+    color: var(--case-study-navy);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.55rem, 2.7vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    margin: 0 0 0.85rem;
+  }
+
+  .case-study-watch-grid .case-study-watch-grid__text {
+    color: var(--case-study-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (min-width: 680px) {
+    .case-study-watch-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1080px) {
+    .case-study-watch-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 720px) {
+    .case-study-watch {
+      margin-top: 4rem;
+      width: min(100vw - 2rem, 72rem);
+    }
+  }
+</style>

@@ -1,0 +1,280 @@
+---
+interface StoryCard {
+  eyebrow?: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  label?: string;
+  heading: string;
+  note?: string;
+  cards: StoryCard[];
+  questions?: string[];
+}
+
+const { label, heading, note, cards, questions = [] } = Astro.props;
+const layout = cards.length > 3 ? 'rows' : 'cards';
+const hasQuestions = questions.length > 0;
+---
+
+<section class="case-study-system-flow" aria-labelledby="system-story-flow-heading">
+  <header class="case-study-system-flow__header">
+    <div>
+      {label && <p class="case-study-system-flow__label">{label}</p>}
+      <h2 id="system-story-flow-heading" class="case-study-system-flow__heading">{heading}</h2>
+    </div>
+
+    {note && <p class="case-study-system-flow__note">{note}</p>}
+  </header>
+
+  <div class="case-study-system-flow__cards" data-layout={layout} aria-label="System flow">
+    {
+      cards.map((card, index) => (
+        <article class="case-study-system-flow__card">
+          <span class="case-study-system-flow__card-index" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          {card.eyebrow && <p class="case-study-system-flow__eyebrow">{card.eyebrow}</p>}
+          <h3 class="case-study-system-flow__title">{card.title}</h3>
+          <p class="case-study-system-flow__description">{card.description}</p>
+        </article>
+      ))
+    }
+  </div>
+
+  {
+    hasQuestions && (
+      <div class="case-study-system-flow__question-band" aria-label="Key operating questions">
+        {questions.map((question) => (
+          <p class="case-study-system-flow__question">{question}</p>
+        ))}
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .case-study-system-flow {
+    --case-study-navy: #1f344a;
+    --case-study-navy-deep: #162a3d;
+    --case-study-paper: #f7f6f1;
+    --case-study-sand: #f0ebe3;
+    --case-study-ink: #111827;
+    --case-study-muted: #4b5563;
+    --case-study-line: #d8d4ca;
+    margin: 5rem 0 1.5rem 50%;
+    transform: translateX(-50%);
+    width: min(100vw - 3rem, 72rem);
+  }
+
+  .case-study-system-flow__header {
+    align-items: end;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1fr);
+    margin-bottom: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .case-study-system-flow .case-study-system-flow__label {
+    color: rgba(31, 52, 74, 0.62);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    line-height: 1.4;
+    margin: 0 0 0.85rem;
+    text-transform: uppercase;
+  }
+
+  .case-study-system-flow .case-study-system-flow__heading {
+    color: var(--case-study-ink);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(2.25rem, 5.2vw, 4.8rem);
+    font-weight: 400;
+    letter-spacing: -0.055em;
+    line-height: 0.95;
+    margin: 0;
+    max-width: 13ch;
+  }
+
+  .case-study-system-flow .case-study-system-flow__note {
+    border-left: 1px solid rgba(31, 52, 74, 0.2);
+    color: var(--case-study-muted);
+    font-size: clamp(0.92rem, 1.2vw, 1rem);
+    line-height: 1.65;
+    margin: 0;
+    max-width: 24rem;
+    padding-left: 1rem;
+  }
+
+  .case-study-system-flow__cards {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .case-study-system-flow__card {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(246, 242, 235, 0.88)),
+      var(--case-study-sand);
+    border: 1px solid #d7d0c3;
+    box-shadow: 0 12px 34px rgba(31, 52, 74, 0.055);
+    min-height: 18rem;
+    padding: clamp(1.25rem, 2.8vw, 1.8rem);
+  }
+
+  .case-study-system-flow__cards[data-layout='rows'] {
+    background: var(--case-study-sand);
+    border: 1px solid #d7d0c3;
+    border-radius: 1.35rem;
+    box-shadow: 0 12px 34px rgba(31, 52, 74, 0.055);
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .case-study-system-flow__cards[data-layout='rows'] .case-study-system-flow__card {
+    align-items: baseline;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(246, 242, 235, 0.86)),
+      var(--case-study-sand);
+    border: 0;
+    box-shadow: none;
+    display: grid;
+    gap: clamp(1rem, 2vw, 1.75rem);
+    grid-template-columns: 4.25rem minmax(9rem, 0.34fr) minmax(0, 1fr);
+    min-height: 0;
+    padding: clamp(1.05rem, 2.1vw, 1.55rem) clamp(1.15rem, 2.5vw, 1.55rem);
+  }
+
+  .case-study-system-flow__cards[data-layout='rows'] .case-study-system-flow__card + .case-study-system-flow__card {
+    border-top: 1px solid rgba(31, 52, 74, 0.16);
+  }
+
+  .case-study-system-flow__card:first-child {
+    border-top-left-radius: 1.35rem;
+    border-top-right-radius: 1.35rem;
+  }
+
+  .case-study-system-flow__card-index {
+    color: rgba(31, 52, 74, 0.26);
+    display: block;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    letter-spacing: -0.055em;
+    line-height: 0.9;
+    margin-bottom: clamp(2rem, 5vw, 3.25rem);
+  }
+
+  .case-study-system-flow__cards[data-layout='rows'] .case-study-system-flow__card-index {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.76rem;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .case-study-system-flow .case-study-system-flow__eyebrow {
+    color: rgba(31, 52, 74, 0.58);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+    margin: 0 0 0.7rem;
+    text-transform: uppercase;
+  }
+
+  .case-study-system-flow .case-study-system-flow__title {
+    color: var(--case-study-navy);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    letter-spacing: -0.035em;
+    line-height: 1.04;
+    margin: 0 0 0.85rem;
+  }
+
+  .case-study-system-flow .case-study-system-flow__description {
+    color: var(--case-study-muted);
+    font-size: clamp(0.94rem, 1.2vw, 1rem);
+    line-height: 1.62;
+    margin: 0;
+  }
+
+  .case-study-system-flow__question-band {
+    background:
+      linear-gradient(180deg, rgba(247, 246, 241, 0.08), rgba(247, 246, 241, 0.02)),
+      var(--case-study-navy);
+    border: 1px solid rgba(31, 52, 74, 0.24);
+    border-top: 0;
+    border-bottom-left-radius: 1.35rem;
+    border-bottom-right-radius: 1.35rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    overflow: hidden;
+  }
+
+  .case-study-system-flow .case-study-system-flow__question {
+    align-items: center;
+    color: #fffaf2;
+    display: flex;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.2rem, 2.1vw, 1.7rem);
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    margin: 0;
+    min-height: 8rem;
+    padding: clamp(1.2rem, 2.7vw, 1.7rem);
+  }
+
+  .case-study-system-flow__question + .case-study-system-flow__question {
+    border-top: 1px solid rgba(247, 246, 241, 0.16);
+  }
+
+  @media (min-width: 760px) {
+    .case-study-system-flow__cards,
+    .case-study-system-flow__question-band {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .case-study-system-flow__cards[data-layout='rows'] {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .case-study-system-flow__card:first-child {
+      border-top-right-radius: 0;
+    }
+
+    .case-study-system-flow__card:last-child {
+      border-top-right-radius: 1.35rem;
+    }
+
+    .case-study-system-flow__question + .case-study-system-flow__question {
+      border-left: 1px solid rgba(247, 246, 241, 0.16);
+      border-top: 0;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .case-study-system-flow__header {
+      grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.36fr);
+    }
+  }
+
+  @media (max-width: 720px) {
+    .case-study-system-flow {
+      margin-top: 4rem;
+      width: min(100vw - 2rem, 72rem);
+    }
+
+    .case-study-system-flow__cards[data-layout='rows'] .case-study-system-flow__card {
+      align-items: start;
+      gap: 0.4rem 1rem;
+      grid-template-columns: 3.5rem minmax(0, 1fr);
+    }
+
+    .case-study-system-flow__cards[data-layout='rows'] .case-study-system-flow__description {
+      grid-column: 2;
+    }
+  }
+</style>

@@ -1,0 +1,222 @@
+---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import type { ProjectEntry } from '../../utils/content';
+
+interface Props {
+  project: ProjectEntry;
+}
+
+const { project } = Astro.props;
+const {
+  title,
+  description,
+  descriptionExtra,
+  liveUrl,
+  coverImage,
+  coverFit,
+  coverPosition,
+} = project.data;
+
+const coverRetina = coverImage?.replace(/\.(png|jpe?g|webp)$/i, '@2x.$1');
+const hasRetinaCover =
+  Boolean(coverImage && coverRetina) &&
+  existsSync(join(process.cwd(), 'public', coverRetina!.replace(/^\//, '')));
+---
+
+<header class="case-study-hero">
+  <div class="container-main">
+    <div class="case-study-hero__copy">
+      <p class="case-study-hero__label">Project case study</p>
+      <h1>{title}</h1>
+      <p class="case-study-hero__lede">{description}</p>
+      {descriptionExtra && <p class="case-study-hero__intro">{descriptionExtra}</p>}
+
+      {
+        liveUrl && (
+          <div class="case-study-hero__actions">
+            <a class="case-study-hero__demo-cta" href={liveUrl} target="_blank" rel="noopener noreferrer">
+              <span>
+                Open live demo <span aria-hidden="true">&rarr;</span>
+              </span>
+              <small>Interactive analytics dashboard</small>
+            </a>
+          </div>
+        )
+      }
+    </div>
+
+    {
+      coverImage && (
+        <div class="case-study-hero__artifact">
+          {
+            hasRetinaCover ? (
+              <picture>
+                <source srcset={`${coverRetina} 2x`} type="image/png" />
+                <img
+                  src={coverImage}
+                  srcset={`${coverImage} 1x, ${coverRetina} 2x`}
+                  alt={`${title} cover`}
+                  loading="eager"
+                  decoding="async"
+                  sizes="(min-width: 1152px) 1152px, 100vw"
+                  style={`object-fit: ${coverFit ?? 'cover'}; object-position: ${coverPosition ?? 'center'};`}
+                />
+              </picture>
+            ) : (
+              <img
+                src={coverImage}
+                alt={`${title} cover`}
+                loading="eager"
+                decoding="async"
+                style={`object-fit: ${coverFit ?? 'cover'}; object-position: ${coverPosition ?? 'center'};`}
+              />
+            )
+          }
+        </div>
+      )
+    }
+  </div>
+</header>
+
+<style>
+  .case-study-hero {
+    --case-study-navy: #1f344a;
+    --case-study-navy-deep: #162a3d;
+    --case-study-paper: #f7f6f1;
+    --case-study-sand: #f0ebe3;
+    --case-study-ink: #111827;
+    --case-study-muted: #4b5563;
+    --case-study-line: #d8d4ca;
+    background:
+      linear-gradient(180deg, rgba(240, 235, 227, 0.98) 0%, rgba(247, 246, 241, 0.98) 100%),
+      radial-gradient(circle at 82% 18%, rgba(31, 52, 74, 0.1), transparent 32%);
+    border-bottom: 1px solid rgba(216, 212, 202, 0.72);
+    color: var(--case-study-ink);
+    padding: clamp(3.25rem, 7vw, 6rem) 0 2.25rem;
+  }
+
+  .case-study-hero :global(.container-main) {
+    max-width: 1180px;
+  }
+
+  .case-study-hero__label {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.68rem;
+    letter-spacing: 0.13em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .case-study-hero__label {
+    color: var(--case-study-navy);
+  }
+
+  .case-study-hero__label {
+    margin: 0;
+  }
+
+  .case-study-hero__copy {
+    max-width: 920px;
+  }
+
+  .case-study-hero h1 {
+    color: var(--case-study-ink);
+    font-size: clamp(2.8rem, 7vw, 6.4rem);
+    letter-spacing: -0.055em;
+    line-height: 0.93;
+    margin: 1rem 0 0;
+    max-width: 920px;
+  }
+
+  .case-study-hero__lede {
+    color: var(--case-study-ink);
+    font-size: clamp(1.1rem, 2vw, 1.42rem);
+    line-height: 1.55;
+    margin: 1.5rem 0 0;
+    max-width: 800px;
+  }
+
+  .case-study-hero__intro {
+    border-left: 1px solid rgba(31, 52, 74, 0.22);
+    color: var(--case-study-muted);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin: 1.25rem 0 0;
+    max-width: 780px;
+    padding-left: 1.15rem;
+  }
+
+  .case-study-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.6rem;
+  }
+
+  .case-study-hero__demo-cta {
+    align-items: center;
+    background: var(--case-study-navy);
+    border: 1px solid var(--case-study-navy);
+    border-radius: 0.95rem;
+    box-shadow: 0 16px 38px rgba(31, 52, 74, 0.16);
+    color: #fff;
+    display: inline-flex;
+    flex-direction: column;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    gap: 0.3rem;
+    letter-spacing: 0.12em;
+    padding: 0.95rem 1.2rem;
+    text-transform: uppercase;
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .case-study-hero__demo-cta:hover {
+    background: var(--case-study-navy-deep);
+    border-color: var(--case-study-navy-deep);
+    transform: translateY(-1px);
+  }
+
+  .case-study-hero__demo-cta span {
+    align-items: center;
+    display: inline-flex;
+    font-size: 0.78rem;
+    font-weight: 600;
+    gap: 0.45rem;
+  }
+
+  .case-study-hero__demo-cta small {
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+
+  .case-study-hero__artifact {
+    border-radius: 1.35rem;
+    margin: 1.5rem 0 0;
+    overflow: hidden;
+  }
+
+  .case-study-hero__artifact picture {
+    display: block;
+  }
+
+  .case-study-hero__artifact img {
+    display: block;
+    width: 100%;
+  }
+
+  @media (max-width: 640px) {
+    .case-study-hero {
+      padding-bottom: 1.5rem;
+    }
+
+    .case-study-hero__demo-cta {
+      width: 100%;
+    }
+  }
+</style>

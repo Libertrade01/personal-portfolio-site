@@ -1,0 +1,794 @@
+---
+import Layout from '../components/Layout.astro';
+import { getFeaturedProjects } from '../utils/content';
+
+const featured = await getFeaturedProjects();
+const [heroProject, ...supportingProjects] = featured;
+
+const sectionLabel = 'Portfolio';
+const sectionTitle = "Systems I've built";
+const sectionSubtitle =
+  'Products and workflows that turn messy inputs into structured, reusable output.';
+---
+
+<Layout
+  title="Portfolio section lab — Michael Low"
+  description="Preview three homepage portfolio layouts using real featured project data. Live homepage unchanged."
+>
+  <main class="portfolio-lab-page">
+    <header class="portfolio-lab-hero">
+      <div class="container-main">
+        <div class="portfolio-lab-topnote">
+          <span>Preview only — live homepage unchanged</span>
+          <a href="/">Back to homepage</a>
+        </div>
+
+        <p class="portfolio-lab-kicker">Portfolio section lab</p>
+        <h1>Three ways to show featured work on the homepage.</h1>
+        <p class="portfolio-lab-lede">
+          Each option uses real featured project data — cover images, categories, status, and case
+          study links — with linen, warm sand, and navy styling borrowed from the Libertrade case
+          study system.
+        </p>
+      </div>
+    </header>
+
+    <section class="portfolio-lab-option portfolio-lab-option--a">
+      <div class="container-main">
+        <div class="portfolio-lab-option-head">
+          <p class="portfolio-lab-kicker">Option A — Editorial project cards</p>
+          <h2>Large editorial cards with numbered covers and serif titles.</h2>
+          <p>
+            Best if you want each project to feel like a magazine spread — strong imagery, generous
+            type, and equal weight across the grid.
+          </p>
+        </div>
+
+        <div class="portfolio-lab-frame">
+          <div class="portfolio-lab-section-intro">
+            <span class="portfolio-lab-label">{sectionLabel}</span>
+            <h3>{sectionTitle}</h3>
+            <p>{sectionSubtitle}</p>
+          </div>
+
+          <div class="portfolio-lab-a-grid">
+            {featured.map((project, index) => {
+              const { title, description, category, status, coverImage } = project.data;
+              const num = String(index + 1).padStart(2, '0');
+              return (
+                <article class="portfolio-lab-a-card">
+                  <a href={`/projects/${project.slug}`} class="portfolio-lab-a-card__link">
+                    <div class="portfolio-lab-a-card__media">
+                      {coverImage ? (
+                        <img src={coverImage} alt={`${title} preview`} loading="lazy" decoding="async" />
+                      ) : (
+                        <div class="portfolio-lab-a-card__fallback">{title.charAt(0)}</div>
+                      )}
+                      <span class="portfolio-lab-a-card__num">{num}</span>
+                      <span class="portfolio-lab-a-card__status">{status}</span>
+                    </div>
+                    <div class="portfolio-lab-a-card__body">
+                      <span class="portfolio-lab-a-card__category">{category}</span>
+                      <h4>{title}</h4>
+                      <p>{description}</p>
+                      <span class="portfolio-lab-a-card__cta">
+                        Case study <span aria-hidden="true">&rarr;</span>
+                      </span>
+                    </div>
+                  </a>
+                </article>
+              );
+            })}
+          </div>
+
+          <a href="/projects" class="portfolio-lab-all-link">
+            All projects <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio-lab-option portfolio-lab-option--b">
+      <div class="container-main">
+        <div class="portfolio-lab-option-head">
+          <p class="portfolio-lab-kicker">Option B — Featured + supporting layout</p>
+          <span class="portfolio-lab-badge">Recommended</span>
+          <h2>One hero project with compact supporting cards beside or below.</h2>
+          <p>
+            Best if you want a clear hierarchy — lead with the strongest case study, then let
+            supporting work fill in without competing for attention.
+          </p>
+        </div>
+
+        <div class="portfolio-lab-frame">
+          <div class="portfolio-lab-section-intro">
+            <span class="portfolio-lab-label">{sectionLabel}</span>
+            <h3>{sectionTitle}</h3>
+            <p>{sectionSubtitle}</p>
+          </div>
+
+          {heroProject && (
+            <div class="portfolio-lab-b-layout">
+              <article class="portfolio-lab-b-featured">
+                <a href={`/projects/${heroProject.slug}`} class="portfolio-lab-b-featured__link">
+                  <div class="portfolio-lab-b-featured__media">
+                    {heroProject.data.coverImage ? (
+                      <img
+                        src={heroProject.data.coverImage}
+                        alt={`${heroProject.data.title} preview`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <div class="portfolio-lab-a-card__fallback">{heroProject.data.title.charAt(0)}</div>
+                    )}
+                  </div>
+                  <div class="portfolio-lab-b-featured__body">
+                    <span class="portfolio-lab-label">Featured case study</span>
+                    <span class="portfolio-lab-b-featured__category">{heroProject.data.category}</span>
+                    <h4>{heroProject.data.title}</h4>
+                    <p>{heroProject.data.description}</p>
+                    {heroProject.data.outcomes.length > 0 && (
+                      <ul class="portfolio-lab-b-featured__outcomes" role="list">
+                        {heroProject.data.outcomes.slice(0, 3).map((item) => (
+                          <li>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                    <span class="portfolio-lab-a-card__cta">
+                      Read case study <span aria-hidden="true">&rarr;</span>
+                    </span>
+                  </div>
+                </a>
+              </article>
+
+              <div class="portfolio-lab-b-supporting">
+                {supportingProjects.map((project, index) => {
+                  const { title, description, category, status, coverImage } = project.data;
+                  return (
+                    <article class="portfolio-lab-b-support">
+                      <a href={`/projects/${project.slug}`} class="portfolio-lab-b-support__link">
+                        <div class="portfolio-lab-b-support__thumb">
+                          {coverImage ? (
+                            <img src={coverImage} alt="" loading="lazy" decoding="async" />
+                          ) : (
+                            <span>{title.charAt(0)}</span>
+                          )}
+                        </div>
+                        <div class="portfolio-lab-b-support__copy">
+                          <span class="portfolio-lab-b-support__meta">
+                            {String(index + 2).padStart(2, '0')} · {category} · {status}
+                          </span>
+                          <h5>{title}</h5>
+                          <p>{description}</p>
+                        </div>
+                        <span class="portfolio-lab-b-support__arrow" aria-hidden="true">&rarr;</span>
+                      </a>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          <a href="/projects" class="portfolio-lab-all-link">
+            All projects <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio-lab-option portfolio-lab-option--c">
+      <div class="container-main">
+        <div class="portfolio-lab-option-head">
+          <p class="portfolio-lab-kicker">Option C — Case study index list</p>
+          <h2>Dense index rows with status, stack, and arrow links.</h2>
+          <p>
+            Best if you want a scannable directory feel — less visual noise, more editorial
+            restraint, easy to extend as the portfolio grows.
+          </p>
+        </div>
+
+        <div class="portfolio-lab-frame">
+          <div class="portfolio-lab-c-header">
+            <div>
+              <span class="portfolio-lab-label">{sectionLabel}</span>
+              <h3>{sectionTitle}</h3>
+            </div>
+            <p>{sectionSubtitle}</p>
+          </div>
+
+          <ol class="portfolio-lab-c-list">
+            {featured.map((project, index) => {
+              const { title, description, category, status, stack } = project.data;
+              const num = String(index + 1).padStart(2, '0');
+              return (
+                <li class="portfolio-lab-c-row">
+                  <a href={`/projects/${project.slug}`} class="portfolio-lab-c-row__link">
+                    <span class="portfolio-lab-c-row__num">{num}</span>
+                    <div class="portfolio-lab-c-row__main">
+                      <div class="portfolio-lab-c-row__title-row">
+                        <h4>{title}</h4>
+                        <span class="portfolio-lab-c-row__status">{status}</span>
+                      </div>
+                      <p class="portfolio-lab-c-row__desc">{description}</p>
+                      <div class="portfolio-lab-c-row__meta">
+                        <span>{category}</span>
+                        <span>{stack.slice(0, 4).join(' · ')}</span>
+                      </div>
+                    </div>
+                    <span class="portfolio-lab-c-row__arrow" aria-hidden="true">&rarr;</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ol>
+
+          <a href="/projects" class="portfolio-lab-all-link">
+            All projects <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .portfolio-lab-page {
+    --lab-paper: #f7f6f1;
+    --lab-linen: #faf9f5;
+    --lab-sand: #f6f2eb;
+    --lab-sand-strong: #f3eee5;
+    --lab-line: #d8d4ca;
+    --lab-navy: #1f344a;
+    --lab-navy-deep: #162a3d;
+    --lab-ink: #111827;
+    --lab-muted: #4b5563;
+    background: var(--lab-paper);
+    color: var(--lab-ink);
+  }
+
+  .portfolio-lab-page :global(.container-main) {
+    max-width: 1180px;
+  }
+
+  .portfolio-lab-hero {
+    background:
+      radial-gradient(circle at 82% 12%, rgba(31, 52, 74, 0.09), transparent 28%),
+      linear-gradient(180deg, var(--lab-sand) 0%, var(--lab-paper) 100%);
+    border-bottom: 1px solid rgba(216, 212, 202, 0.76);
+    padding: clamp(3.5rem, 7vw, 6rem) 0 clamp(2rem, 4vw, 3rem);
+  }
+
+  .portfolio-lab-topnote {
+    align-items: center;
+    border: 1px solid var(--lab-line);
+    border-radius: 999px;
+    color: var(--lab-muted);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.72rem;
+    gap: 0.75rem 1rem;
+    justify-content: space-between;
+    letter-spacing: 0.08em;
+    margin-bottom: 2.5rem;
+    padding: 0.7rem 0.95rem;
+    text-transform: uppercase;
+  }
+
+  .portfolio-lab-topnote a,
+  .portfolio-lab-all-link {
+    color: var(--lab-navy);
+    font-weight: 600;
+  }
+
+  .portfolio-lab-kicker,
+  .portfolio-lab-label {
+    color: var(--lab-navy);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.45;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .portfolio-lab-hero h1 {
+    color: var(--lab-ink);
+    font-size: clamp(2.6rem, 7vw, 5.5rem);
+    letter-spacing: -0.06em;
+    line-height: 0.94;
+    margin: 1rem 0 0;
+    max-width: 920px;
+  }
+
+  .portfolio-lab-lede {
+    color: var(--lab-muted);
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    line-height: 1.65;
+    margin: 1.5rem 0 0;
+    max-width: 760px;
+  }
+
+  .portfolio-lab-option {
+    border-bottom: 1px solid rgba(216, 212, 202, 0.76);
+    padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+  }
+
+  .portfolio-lab-option--b {
+    background: #f0ebe3;
+  }
+
+  .portfolio-lab-option-head {
+    margin-bottom: 1.5rem;
+    max-width: 760px;
+  }
+
+  .portfolio-lab-badge {
+    background: var(--lab-navy);
+    border-radius: 999px;
+    color: var(--lab-paper);
+    display: inline-block;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+    padding: 0.35rem 0.65rem;
+    text-transform: uppercase;
+  }
+
+  .portfolio-lab-option-head h2 {
+    color: var(--lab-ink);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin: 0.75rem 0 0;
+  }
+
+  .portfolio-lab-option-head p:last-child {
+    color: var(--lab-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0.8rem 0 0;
+  }
+
+  .portfolio-lab-frame {
+    background: var(--lab-linen);
+    border: 1px solid var(--lab-line);
+    border-radius: 1.5rem;
+    box-shadow:
+      0 16px 46px rgba(31, 52, 74, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    overflow: hidden;
+    padding: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .portfolio-lab-section-intro {
+    border-bottom: 1px solid var(--lab-line);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .portfolio-lab-section-intro h3,
+  .portfolio-lab-c-header h3 {
+    color: var(--lab-ink);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin: 0.65rem 0 0;
+  }
+
+  .portfolio-lab-section-intro p,
+  .portfolio-lab-c-header p {
+    color: var(--lab-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0.65rem 0 0;
+    max-width: 38rem;
+  }
+
+  .portfolio-lab-a-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .portfolio-lab-a-card {
+    background: #fffaf2;
+    border: 1px solid #d7d0c3;
+    border-radius: 1.15rem;
+    overflow: hidden;
+  }
+
+  .portfolio-lab-a-card__link {
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  .portfolio-lab-a-card__media {
+    aspect-ratio: 16 / 10;
+    background: var(--lab-sand-strong);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .portfolio-lab-a-card__media img {
+    height: 100%;
+    object-fit: contain;
+    object-position: top;
+    padding: 0.75rem;
+    width: 100%;
+  }
+
+  .portfolio-lab-a-card__fallback {
+    align-items: center;
+    background: linear-gradient(135deg, var(--lab-sand) 0%, var(--lab-navy) 100%);
+    color: rgba(247, 246, 241, 0.35);
+    display: flex;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 4rem;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .portfolio-lab-a-card__num,
+  .portfolio-lab-a-card__status {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    position: absolute;
+    text-transform: uppercase;
+  }
+
+  .portfolio-lab-a-card__num {
+    color: rgba(31, 52, 74, 0.55);
+    left: 1rem;
+    top: 1rem;
+  }
+
+  .portfolio-lab-a-card__status {
+    background: rgba(247, 246, 241, 0.92);
+    border: 1px solid var(--lab-line);
+    border-radius: 999px;
+    color: var(--lab-navy);
+    padding: 0.3rem 0.55rem;
+    right: 1rem;
+    top: 1rem;
+  }
+
+  .portfolio-lab-a-card__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1.25rem 1.35rem 1.4rem;
+  }
+
+  .portfolio-lab-a-card__category {
+    color: var(--lab-navy);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .portfolio-lab-a-card__body h4,
+  .portfolio-lab-b-featured__body h4,
+  .portfolio-lab-c-row__title-row h4 {
+    color: var(--lab-ink);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0.55rem 0 0;
+  }
+
+  .portfolio-lab-a-card__body p,
+  .portfolio-lab-b-featured__body p,
+  .portfolio-lab-b-support__copy p,
+  .portfolio-lab-c-row__desc {
+    color: var(--lab-muted);
+    flex: 1;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0.65rem 0 0;
+  }
+
+  .portfolio-lab-a-card__cta {
+    color: var(--lab-navy);
+    display: inline-flex;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.72rem;
+    gap: 0.35rem;
+    letter-spacing: 0.1em;
+    margin-top: 1rem;
+    text-transform: uppercase;
+  }
+
+  .portfolio-lab-all-link {
+    display: inline-flex;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.75rem;
+    gap: 0.35rem;
+    letter-spacing: 0.1em;
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .portfolio-lab-b-layout {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .portfolio-lab-b-featured {
+    background: linear-gradient(180deg, var(--lab-sand) 0%, var(--lab-sand-strong) 100%);
+    border: 1px solid #d7d0c3;
+    border-radius: 1.15rem;
+    overflow: hidden;
+  }
+
+  .portfolio-lab-b-featured__link {
+    color: inherit;
+    display: grid;
+    gap: 0;
+    grid-template-columns: minmax(0, 1fr);
+    text-decoration: none;
+  }
+
+  .portfolio-lab-b-featured__media {
+    aspect-ratio: 16 / 9;
+    background: #fffaf2;
+    overflow: hidden;
+  }
+
+  .portfolio-lab-b-featured__media img {
+    height: 100%;
+    object-fit: contain;
+    object-position: top;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .portfolio-lab-b-featured__body {
+    padding: 1.35rem 1.5rem 1.5rem;
+  }
+
+  .portfolio-lab-b-featured__category {
+    color: var(--lab-muted);
+    display: block;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    margin-top: 0.45rem;
+    text-transform: uppercase;
+  }
+
+  .portfolio-lab-b-featured__outcomes {
+    border-top: 1px solid rgba(31, 52, 74, 0.12);
+    display: grid;
+    gap: 0.45rem;
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 1rem 0 0;
+  }
+
+  .portfolio-lab-b-featured__outcomes li {
+    color: var(--lab-muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .portfolio-lab-b-featured__outcomes li::before {
+    color: var(--lab-navy);
+    content: '—';
+    left: 0;
+    position: absolute;
+  }
+
+  .portfolio-lab-b-supporting {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .portfolio-lab-b-support {
+    background: #fffaf2;
+    border: 1px solid #d7d0c3;
+    border-radius: 0.95rem;
+  }
+
+  .portfolio-lab-b-support__link {
+    align-items: center;
+    color: inherit;
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+    padding: 0.85rem;
+    text-decoration: none;
+  }
+
+  .portfolio-lab-b-support__thumb {
+    aspect-ratio: 1;
+    background: var(--lab-sand);
+    border: 1px solid var(--lab-line);
+    border-radius: 0.65rem;
+    overflow: hidden;
+  }
+
+  .portfolio-lab-b-support__thumb img {
+    height: 100%;
+    object-fit: contain;
+    padding: 0.25rem;
+    width: 100%;
+  }
+
+  .portfolio-lab-b-support__thumb span {
+    align-items: center;
+    color: var(--lab-navy);
+    display: flex;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 1.5rem;
+    height: 100%;
+    justify-content: center;
+    opacity: 0.45;
+  }
+
+  .portfolio-lab-b-support__meta {
+    color: var(--lab-navy);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .portfolio-lab-b-support__copy h5 {
+    color: var(--lab-ink);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0.35rem 0 0;
+  }
+
+  .portfolio-lab-b-support__copy p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-top: 0.35rem;
+    overflow: hidden;
+  }
+
+  .portfolio-lab-b-support__arrow {
+    color: var(--lab-navy);
+    font-size: 1.1rem;
+  }
+
+  .portfolio-lab-c-header {
+    border-bottom: 1px solid var(--lab-line);
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: minmax(0, 1fr);
+    margin-bottom: 0.5rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .portfolio-lab-c-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .portfolio-lab-c-row {
+    border-bottom: 1px solid var(--lab-line);
+  }
+
+  .portfolio-lab-c-row:last-child {
+    border-bottom: none;
+  }
+
+  .portfolio-lab-c-row__link {
+    align-items: center;
+    color: inherit;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    padding: 1.1rem 0.25rem;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .portfolio-lab-c-row__link:hover {
+    background: rgba(246, 242, 235, 0.65);
+  }
+
+  .portfolio-lab-c-row__num {
+    color: rgba(31, 52, 74, 0.35);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 2rem;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    min-width: 2.5rem;
+  }
+
+  .portfolio-lab-c-row__title-row {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.85rem;
+    justify-content: space-between;
+  }
+
+  .portfolio-lab-c-row__status {
+    background: var(--lab-sand);
+    border: 1px solid var(--lab-line);
+    border-radius: 999px;
+    color: var(--lab-navy);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .portfolio-lab-c-row__meta {
+    color: var(--lab-muted);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.68rem;
+    gap: 0.5rem 1rem;
+    letter-spacing: 0.06em;
+    margin-top: 0.45rem;
+    text-transform: uppercase;
+  }
+
+  .portfolio-lab-c-row__arrow {
+    color: var(--lab-navy);
+    font-size: 1.25rem;
+  }
+
+  @media (min-width: 720px) {
+    .portfolio-lab-a-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 960px) {
+    .portfolio-lab-b-layout {
+      grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+    }
+
+    .portfolio-lab-b-featured__link {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    }
+
+    .portfolio-lab-c-header {
+      align-items: end;
+      grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.75fr);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .portfolio-lab-topnote,
+    .portfolio-lab-frame {
+      border-radius: 1rem;
+    }
+
+    .portfolio-lab-b-support__link {
+      grid-template-columns: 3.75rem minmax(0, 1fr);
+    }
+
+    .portfolio-lab-b-support__arrow {
+      display: none;
+    }
+  }
+</style>
