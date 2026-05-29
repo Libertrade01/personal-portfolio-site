@@ -12,7 +12,7 @@ const { projects } = Astro.props;
 const preferredFeaturedProject = projects.find(
   (project) =>
     project.slug === 'libertrade-journal-analytics' ||
-    project.data.title.toLowerCase().includes('libertrade journal analytics')
+    project.data.title.toLowerCase().includes('trading review operating system')
 );
 const featuredProject = preferredFeaturedProject ?? projects[0];
 const supportingProjects = featuredProject
@@ -422,9 +422,12 @@ const featuredCover = featuredProject ? getCoverDetails(featuredProject) : undef
   }
 
   .home-portfolio-featured__support-thumb img {
-    object-fit: contain;
-    object-position: top;
-    padding: 0.25rem;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center;
+    padding: 0;
+    width: 100%;
   }
 
   .home-portfolio-featured__support-thumb span {

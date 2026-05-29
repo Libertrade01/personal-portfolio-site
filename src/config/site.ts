@@ -39,10 +39,11 @@ export const about = {
 } as const;
 
 export const hero = {
-  role: 'Practical AI implementation',
+  role: 'Practical AI Implementation',
   title: 'Make AI useful, not overwhelming.',
+  titleLines: ['Make AI useful,', 'not', 'overwhelming.'] as const,
   intro:
-    'I help small teams organise scattered information, automate repeated tasks and build practical systems that fit how they already operate.',
+    'I design AI-assisted systems that capture information, reason over it, automate the boring parts, and turn it into clean operating workflows.',
   punchline: {
     before: 'Built from ',
     messyWord: 'messy',
@@ -66,14 +67,14 @@ export const hero = {
     'AI systems · dashboards · automation',
   ] as const,
   cta: {
-    label: 'What I can help with',
+    label: 'Turn scattered work into clean AI systems.',
     href: '/#help',
   },
 } as const;
 
 /** Homepage — help section header */
-export const homeHelpLabel = 'WAYS TO WORK TOGETHER' as const;
-export const homeHelpTitle = 'Not sure what you need?' as const;
+export const homeHelpLabel = 'Scattered work to working systems' as const;
+export const homeHelpTitle = 'Start with the right kind of help.' as const;
 export const homeHelpIntro =
   'Most projects start with an audit or a focused build sprint. From there, we can turn the workflow into a system your team can actually run.' as const;
 
@@ -112,15 +113,23 @@ export const homeHelpAreas = [
 
 /** Homepage — who this is for (preview lab + future placement) */
 export const homeWhoLabel = 'WHO THIS IS FOR' as const;
-export const homeWhoTitle = 'Who this is for' as const;
+export const homeWhoTitle = 'For teams buried in scattered work.' as const;
 export const homeWhoIntro =
-  'Small teams, creators, founders, and solo professionals who are buried in information-heavy work.' as const;
+  'Small teams, creators, business owners, and solo operators who rely on information-heavy workflows but do not yet have a clean system for capturing, organising, reviewing, or reusing what matters.' as const;
 export const homeWhoPains = [
   'Too many tools that do not connect',
   'Too many tabs, docs, and half-finished systems',
   'Repeated manual work eating up attention',
   'Scattered knowledge that is hard to reuse',
   'No clear process for capturing, reviewing, or handing off information',
+] as const;
+
+/** Homepage — why agentic AI matters (between Who and Ways) */
+export const homeWhyMattersTitle = 'The shift from answers to systems.' as const;
+export const homeWhyMattersBody = [
+  'The real shift in AI is the move from one-off answers to systems that can carry work across an entire workflow.',
+  'Agentic systems can monitor information, coordinate tools, apply rules, adapt when conditions change, and produce useful outputs without needing a human to manually push every step.',
+  'This changes AI from something you consult into something that helps operate.',
 ] as const;
 
 export const workPage = {
@@ -178,10 +187,10 @@ export const workPage = {
 } as const;
 
 export const featuredProjectSlugs = [
-  'raiz-life-journal',
-  'podcast-knowledge-workflow',
-  'book-inmobiliaria',
   'libertrade-journal-analytics',
+  'book-inmobiliaria',
+  'raiz-life-journal',
+  'trading-knowledge-wiki',
 ] as const;
 
 export const nav = [

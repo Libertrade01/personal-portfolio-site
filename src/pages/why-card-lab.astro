@@ -1,0 +1,576 @@
+---
+import Layout from '../components/Layout.astro';
+import {
+  homeHelpIntro,
+  homeHelpTitle,
+  homeWhyMattersBody,
+  homeWhyMattersTitle,
+  homeWhoTitle,
+} from '../config/site';
+
+const [pullQuote, ...restParagraphs] = homeWhyMattersBody;
+
+const options = [
+  {
+    id: 'a',
+    option: 'Option A',
+    title: 'Warm editorial panel',
+    note: 'Cream panel, Fraunces title, subtle border — aligned with the hero / help shell editorial tone.',
+    variant: 'a' as const,
+  },
+  {
+    id: 'b',
+    option: 'Option B',
+    title: 'Sand band inset',
+    note: 'Full-bleed sand band with a lifted inner cream card so the middle slot reads as a deliberate inset.',
+    variant: 'b' as const,
+  },
+  {
+    id: 'c',
+    option: 'Option C',
+    title: 'Left accent rule',
+    note: 'White panel with a 4px navy left rule and mono eyebrow above the title for a spec-like label.',
+    variant: 'c' as const,
+  },
+  {
+    id: 'd',
+    option: 'Option D',
+    title: 'Split typographic',
+    note: 'First sentence as a large pull-quote; remaining copy in smaller stacked body below.',
+    variant: 'd' as const,
+  },
+  {
+    id: 'e',
+    option: 'Option E',
+    title: 'Soft elevated card',
+    note: 'Rounded card with shadow, slightly stronger border, and a small [·] marker like offering badges.',
+    variant: 'e' as const,
+  },
+] as const;
+---
+
+<Layout
+  title="Why card lab — Michael Low"
+  description="Compare five middle-card treatments between the Who panel and Ways offerings on the homepage help stack."
+>
+  <header class="why-card-lab-hero">
+    <div class="container-main">
+      <p class="why-card-lab-note">
+        Preview only — live homepage unchanged.
+        <a href="/">Back to homepage</a>
+      </p>
+      <h1 class="why-card-lab-hero__title">Why card — design options (middle slot only)</h1>
+      <p class="why-card-lab-hero__subtitle">
+        Five treatments for the card between the navy <em>Who</em> panel and the sand <em>Ways</em> block. Top and bottom
+        mocks are frozen; only the middle card changes per option.
+      </p>
+    </div>
+  </header>
+
+  <div class="why-card-lab-page">
+    {
+      options.map((item) => (
+        <section class="why-card-lab-section" id={`option-${item.id}`}>
+          <div class="container-main">
+            <article class="why-card-lab-frame">
+              <header class="why-card-lab-frame__meta">
+                <p class="why-card-lab-frame__eyebrow">{item.option}</p>
+                <h2 class="why-card-lab-frame__title">{item.title}</h2>
+                <p class="why-card-lab-frame__note">{item.note}</p>
+              </header>
+
+              <div class="why-card-lab-preview" data-variant={item.variant}>
+                <div class="why-card-lab-shell">
+                  <div class="why-card-lab-frozen-who" aria-hidden="false">
+                    <h3 class="why-card-lab-frozen-who__title">{homeWhoTitle}</h3>
+                    <p class="why-card-lab-frozen-who__hint">Frozen Who mock — title only</p>
+                  </div>
+
+                  {item.variant === 'a' && (
+                    <article class="why-card-lab-variant why-card-lab-variant--a" aria-labelledby={`why-a-${item.id}`}>
+                      <h4 id={`why-a-${item.id}`} class="why-card-lab-variant--a__title">
+                        {homeWhyMattersTitle}
+                      </h4>
+                      <div class="why-card-lab-variant--a__body">
+                        {homeWhyMattersBody.map((paragraph) => (
+                          <p>{paragraph}</p>
+                        ))}
+                      </div>
+                    </article>
+                  )}
+
+                  {item.variant === 'b' && (
+                    <div class="why-card-lab-variant why-card-lab-variant--b">
+                      <article class="why-card-lab-variant--b__inner" aria-labelledby={`why-b-${item.id}`}>
+                        <h4 id={`why-b-${item.id}`} class="why-card-lab-variant--b__title">
+                          {homeWhyMattersTitle}
+                        </h4>
+                        <div class="why-card-lab-variant--b__body">
+                          {homeWhyMattersBody.map((paragraph) => (
+                            <p>{paragraph}</p>
+                          ))}
+                        </div>
+                      </article>
+                    </div>
+                  )}
+
+                  {item.variant === 'c' && (
+                    <article class="why-card-lab-variant why-card-lab-variant--c" aria-labelledby={`why-c-${item.id}`}>
+                      <h4 id={`why-c-${item.id}`} class="why-card-lab-variant--c__title">
+                        {homeWhyMattersTitle}
+                      </h4>
+                      <div class="why-card-lab-variant--c__body">
+                        {homeWhyMattersBody.map((paragraph) => (
+                          <p>{paragraph}</p>
+                        ))}
+                      </div>
+                    </article>
+                  )}
+
+                  {item.variant === 'd' && (
+                    <article class="why-card-lab-variant why-card-lab-variant--d" aria-labelledby={`why-d-${item.id}`}>
+                      <h4 id={`why-d-${item.id}`} class="why-card-lab-variant--d__title visually-hidden">
+                        {homeWhyMattersTitle}
+                      </h4>
+                      <blockquote class="why-card-lab-variant--d__pull">
+                        <p>{pullQuote}</p>
+                      </blockquote>
+                      <div class="why-card-lab-variant--d__rest">
+                        {restParagraphs.map((paragraph) => (
+                          <p>{paragraph}</p>
+                        ))}
+                      </div>
+                    </article>
+                  )}
+
+                  {item.variant === 'e' && (
+                    <article class="why-card-lab-variant why-card-lab-variant--e" aria-labelledby={`why-e-${item.id}`}>
+                      <span class="why-card-lab-variant--e__marker" aria-hidden="true">
+                        [·]
+                      </span>
+                      <h4 id={`why-e-${item.id}`} class="why-card-lab-variant--e__title">
+                        {homeWhyMattersTitle}
+                      </h4>
+                      <div class="why-card-lab-variant--e__body">
+                        {homeWhyMattersBody.map((paragraph) => (
+                          <p>{paragraph}</p>
+                        ))}
+                      </div>
+                    </article>
+                  )}
+
+                  <div class="why-card-lab-frozen-ways">
+                    <h3 class="why-card-lab-frozen-ways__title">{homeHelpTitle}</h3>
+                    <p class="why-card-lab-frozen-ways__intro">{homeHelpIntro}</p>
+                    <p class="why-card-lab-frozen-ways__hint">Frozen Ways mock — header only</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</Layout>
+
+<style>
+  .why-card-lab-hero {
+    border-bottom: 1px solid #d8d4ca;
+    background: linear-gradient(180deg, #f7f6f1 0%, #f3f1ea 100%);
+    padding: clamp(2.5rem, 6vw, 4rem) 0;
+  }
+
+  .why-card-lab-note {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0 0 1.25rem;
+    border: 1px solid #d8d4ca;
+    border-radius: 999px;
+    background: #f0ebe3;
+    color: #4b5563;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    padding: 0.55rem 0.8rem;
+  }
+
+  .why-card-lab-note a {
+    color: #1f344a;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .why-card-lab-hero__title {
+    max-width: 44rem;
+    margin: 0;
+    color: #111827;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+
+  .why-card-lab-hero__subtitle {
+    max-width: 42rem;
+    margin: 1rem 0 0;
+    color: #4b5563;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.65;
+  }
+
+  .why-card-lab-page {
+    background: #f7f6f1;
+  }
+
+  .why-card-lab-section {
+    border-bottom: 1px solid #d8d4ca;
+    padding: clamp(2.75rem, 6vw, 4.5rem) 0;
+  }
+
+  .why-card-lab-section:last-child {
+    border-bottom: 0;
+  }
+
+  .why-card-lab-frame {
+    display: grid;
+    gap: 1.35rem;
+  }
+
+  .why-card-lab-frame__eyebrow {
+    margin: 0;
+    color: rgba(31, 52, 74, 0.58);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .why-card-lab-frame__title {
+    margin: 0.4rem 0 0;
+    color: #111827;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+  }
+
+  .why-card-lab-frame__note {
+    max-width: 40rem;
+    margin: 0.75rem 0 0;
+    color: #4b5563;
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .why-card-lab-preview {
+    border: 1px solid #d8d4ca;
+    border-radius: 1.25rem;
+    background: linear-gradient(180deg, #f7f6f1 0%, #f3f1ea 100%);
+    box-shadow: 0 16px 42px rgba(31, 52, 74, 0.06);
+    padding: clamp(0.85rem, 2.5vw, 1.25rem);
+  }
+
+  .why-card-lab-shell {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 3vw, 1.65rem);
+    border: 1px solid rgba(31, 52, 74, 0.14);
+    border-radius: 1.35rem;
+    background:
+      linear-gradient(180deg, rgba(247, 246, 241, 0.65), rgba(240, 235, 227, 0.38)),
+      #f7f6f1;
+    box-shadow:
+      0 18px 48px rgba(31, 52, 74, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    padding: clamp(1rem, 3vw, 1.4rem);
+  }
+
+  /* Frozen Who — navy, title only */
+  .why-card-lab-frozen-who {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.25rem;
+    background:
+      radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.08), transparent 34%),
+      linear-gradient(145deg, #29415b 0%, #1f344a 58%, #192b3f 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 20px 44px rgba(31, 52, 74, 0.16);
+    color: #f7f6f1;
+    padding: clamp(1.25rem, 3.5vw, 2rem);
+  }
+
+  .why-card-lab-frozen-who__title {
+    margin: 0;
+    max-width: 46rem;
+    color: #fffaf2;
+    font-size: clamp(1.85rem, 3.8vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+  }
+
+  .why-card-lab-frozen-who__hint,
+  .why-card-lab-frozen-ways__hint {
+    margin: 0.65rem 0 0;
+    color: rgba(31, 52, 74, 0.42);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .why-card-lab-frozen-who__hint {
+    color: rgba(247, 246, 241, 0.45);
+  }
+
+  /* Frozen Ways — sand header only */
+  .why-card-lab-frozen-ways {
+    border: 1px solid #d8d4ca;
+    border-radius: 1.25rem;
+    background: #f0ebe3;
+    box-shadow:
+      0 14px 36px rgba(31, 52, 74, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    padding: clamp(1rem, 3vw, 1.35rem);
+  }
+
+  .why-card-lab-frozen-ways__title {
+    margin: 0;
+    max-width: 42rem;
+    color: #111827;
+    font-size: clamp(1.65rem, 3vw, 2.1rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .why-card-lab-frozen-ways__intro {
+    margin: 0.85rem 0 0;
+    max-width: 42rem;
+    color: #4b5563;
+    font-size: 1.02rem;
+    line-height: 1.6;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Shared variant body copy */
+  .why-card-lab-variant p {
+    margin: 0;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: #4b5563;
+  }
+
+  .why-card-lab-variant p + p {
+    margin-top: 1rem;
+  }
+
+  /* A — Warm editorial */
+  .why-card-lab-variant--a {
+    border: 1px solid #d8d4ca;
+    border-radius: 1.25rem;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(250, 248, 244, 0.9) 100%),
+      #faf8f4;
+    box-shadow:
+      0 12px 32px rgba(31, 52, 74, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+  }
+
+  .why-card-lab-variant--a__title {
+    margin: 0;
+    max-width: 40rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.9rem, 3.5vw, 2.4rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    color: #111827;
+  }
+
+  .why-card-lab-variant--a__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.1rem;
+    max-width: 44rem;
+  }
+
+  /* B — Sand band inset */
+  .why-card-lab-variant--b {
+    margin-inline: calc(clamp(1rem, 3vw, 1.4rem) * -1);
+    border-block: 1px solid #d8d4ca;
+    background: #f0ebe3;
+    padding: clamp(1.25rem, 3.5vw, 1.75rem) clamp(1rem, 3vw, 1.4rem);
+  }
+
+  .why-card-lab-variant--b__inner {
+    border: 1px solid #d8d4ca;
+    border-radius: 1.15rem;
+    background:
+      linear-gradient(180deg, #fffdf9 0%, #faf8f4 100%);
+    box-shadow: 0 10px 28px rgba(31, 52, 74, 0.06);
+    padding: clamp(1.35rem, 3.5vw, 2rem);
+  }
+
+  .why-card-lab-variant--b__title {
+    margin: 0;
+    font-size: clamp(1.5rem, 2.8vw, 1.95rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    color: #111827;
+  }
+
+  .why-card-lab-variant--b__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    max-width: 44rem;
+  }
+
+  /* C — Left accent rule */
+  .why-card-lab-variant--c {
+    border: 1px solid #d8d4ca;
+    border-left: 4px solid #1f344a;
+    border-radius: 0 1.15rem 1.15rem 0;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(31, 52, 74, 0.04);
+    padding: clamp(1.25rem, 3.5vw, 1.85rem) clamp(1.25rem, 3.5vw, 1.85rem)
+      clamp(1.25rem, 3.5vw, 1.85rem) clamp(1.1rem, 3vw, 1.6rem);
+  }
+
+  .why-card-lab-variant--c__label {
+    margin: 0;
+    color: rgba(31, 52, 74, 0.62);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .why-card-lab-variant--c__title {
+    margin: 0.55rem 0 0;
+    font-size: clamp(1.55rem, 2.8vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    color: #111827;
+  }
+
+  .why-card-lab-variant--c__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    max-width: 44rem;
+  }
+
+  /* D — Split typographic */
+  .why-card-lab-variant--d {
+    padding: clamp(0.35rem, 1.5vw, 0.75rem) 0;
+  }
+
+  .why-card-lab-variant--d__pull {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .why-card-lab-variant--d__pull p {
+    margin: 0;
+    max-width: 46rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    color: #1f344a;
+  }
+
+  .why-card-lab-variant--d__rest {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 1.35rem;
+    max-width: 44rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #d8d4ca;
+  }
+
+  .why-card-lab-variant--d__rest p {
+    font-size: 0.98rem;
+    line-height: 1.62;
+  }
+
+  @media (min-width: 768px) {
+    .why-card-lab-variant--d__rest {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem 1.75rem;
+    }
+
+    .why-card-lab-variant--d__rest p:last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* E — Soft elevated */
+  .why-card-lab-variant--e {
+    position: relative;
+    border: 1px solid #c9c4bb;
+    border-radius: 1rem;
+    background: #ffffff;
+    box-shadow:
+      0 22px 50px rgba(31, 52, 74, 0.1),
+      0 4px 12px rgba(31, 52, 74, 0.05);
+    padding: clamp(1.5rem, 4vw, 2.1rem);
+  }
+
+  .why-card-lab-variant--e__marker {
+    display: inline-block;
+    margin-bottom: 0.65rem;
+    color: rgba(31, 52, 74, 0.55);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+
+  .why-card-lab-variant--e__title {
+    margin: 0;
+    font-size: clamp(1.55rem, 2.8vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    color: #111827;
+  }
+
+  .why-card-lab-variant--e__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    max-width: 44rem;
+  }
+
+</style>

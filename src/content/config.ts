@@ -21,6 +21,10 @@ const projectSchema = z.object({
   coverPosition: z.enum(['center', 'top']).optional(),
   github: z.string().url().optional(),
   liveUrl: z.string().url().optional(),
+  /** Case study hero CTA label (e.g. View live site, Open live demo). */
+  liveLabel: z.string().optional(),
+  /** Secondary line under the live URL button on case study heroes. */
+  liveCtaNote: z.string().optional(),
   video: z.string().optional(),
   draft: z.boolean().default(false),
 });

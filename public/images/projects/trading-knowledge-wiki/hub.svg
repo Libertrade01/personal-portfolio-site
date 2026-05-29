@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#f7f6f1"/>
+  <text x="72" y="72" fill="#1f344a" font-family="Georgia, serif" font-size="32">Trading Wiki</text>
+  <rect x="72" y="100" width="240" height="120" rx="10" fill="#fffaf2" stroke="#d8d4ca"/>
+  <rect x="336" y="100" width="240" height="120" rx="10" fill="#fffaf2" stroke="#d8d4ca"/>
+  <rect x="600" y="100" width="240" height="120" rx="10" fill="#fffaf2" stroke="#d8d4ca"/>
+  <rect x="72" y="248" width="240" height="120" rx="10" fill="#fffaf2" stroke="#d8d4ca"/>
+  <rect x="336" y="248" width="240" height="120" rx="10" fill="#fffaf2" stroke="#d8d4ca"/>
+  <rect x="600" y="248" width="240" height="120" rx="10" fill="#fffaf2" stroke="#d8d4ca"/>
+</svg>

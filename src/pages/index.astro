@@ -4,13 +4,14 @@ import Hero from '../components/Hero.astro';
 import FeaturedPortfolioSection from '../components/FeaturedPortfolioSection.astro';
 import HelpSignalGrid from '../components/HelpSignalGrid.astro';
 import WhoPainList from '../components/WhoPainList.astro';
+import WhyThisMattersCard from '../components/WhyThisMattersCard.astro';
 import {
   homeHelpCta,
   homeHelpIntro,
   homeHelpLabel,
-  homeHelpTitle,
+  homeHelpTitle as waysOfferingsTitle,
   homeWhoIntro,
-  homeWhoTitle,
+  homeWhoTitle as whoPanelTitle,
   site,
 } from '../config/site';
 import { getFeaturedProjects } from '../utils/content';
@@ -33,14 +34,16 @@ const homeContactStatus =
 
         <div class="home-help-shell">
           <div class="help-who-block">
-            <h2 class="help-who-block__title">{homeWhoTitle}</h2>
+            <h2 class="help-who-block__title">{whoPanelTitle}</h2>
             <p class="help-who-block__intro section-subtitle-strong">{homeWhoIntro}</p>
             <WhoPainList />
           </div>
 
+          <WhyThisMattersCard />
+
           <div class="home-signal-section">
             <div class="help-offerings-head">
-              <h2 class="help-offerings-head__title">{homeHelpTitle}</h2>
+              <h2 class="help-offerings-head__title">{waysOfferingsTitle}</h2>
               <p class="help-offerings-head__intro section-subtitle-strong">{homeHelpIntro}</p>
             </div>
 

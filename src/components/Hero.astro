@@ -6,7 +6,7 @@ import HeroCtaBar from './HeroCtaBar.astro';
 
 import HeroTerminalBlock from './HeroTerminalBlock.astro';
 
-const { title, intro } = hero;
+const { titleLines, intro } = hero;
 
 ---
 
@@ -24,7 +24,12 @@ const { title, intro } = hero;
           <h1
             class="animate-fade-up-delay-1 mt-5 font-sans text-[2.5rem] font-bold leading-[1.05] tracking-tight text-off-white sm:text-5xl md:mt-7 md:text-[3.25rem] lg:text-[4.5rem] lg:leading-[1.03] xl:text-[4.75rem]"
           >
-            {title}
+            {titleLines.map((line, index) => (
+              <>
+                {index > 0 && <br />}
+                {line}
+              </>
+            ))}
           </h1>
 
           <p

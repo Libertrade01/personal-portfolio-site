@@ -13,6 +13,8 @@ const {
   description,
   descriptionExtra,
   liveUrl,
+  liveLabel = 'View live site',
+  liveCtaNote,
   coverImage,
   coverFit,
   coverPosition,
@@ -37,9 +39,9 @@ const hasRetinaCover =
           <div class="case-study-hero__actions">
             <a class="case-study-hero__demo-cta" href={liveUrl} target="_blank" rel="noopener noreferrer">
               <span>
-                Open live demo <span aria-hidden="true">&rarr;</span>
+                {liveLabel} <span aria-hidden="true">&rarr;</span>
               </span>
-              <small>Interactive analytics dashboard</small>
+              {liveCtaNote && <small>{liveCtaNote}</small>}
             </a>
           </div>
         )

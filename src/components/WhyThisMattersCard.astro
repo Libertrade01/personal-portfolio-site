@@ -1,0 +1,16 @@
+---
+import { homeWhyMattersBody, homeWhyMattersTitle } from '../config/site';
+---
+
+<article class="home-why-card" aria-labelledby="home-why-matters-title">
+  <h2 id="home-why-matters-title" class="home-why-card__title">
+    {homeWhyMattersTitle}
+  </h2>
+  <div class="home-why-card__body">
+    {
+      homeWhyMattersBody.map((paragraph) => (
+        <p class="home-why-card__paragraph">{paragraph}</p>
+      ))
+    }
+  </div>
+</article>

@@ -1,13 +1,14 @@
 ---
-title: Book Inmobiliaria
+title: Real Estate Marketing & Listings Platform
 description: CMS-backed real estate platform with dynamic property pages, i18n, SEO, and contact/newsletter flows.
+descriptionExtra: A production-grade marketing site where non-technical staff manage listings in Sanity while Next.js handles SEO, bilingual routing, and enquiry flows on Vercel.
 date: 2026-01-20
 status: In Progress
 category: Built Products
 type: product
 stack: [Next.js, Sanity CMS, TypeScript, Tailwind, Resend, next-intl]
 featured: true
-order: 3
+order: 1
 role: Solo builder — frontend, CMS schema, API routes, deployment
 outcomes:
   - Sanity Studio with property content model
@@ -16,68 +17,102 @@ outcomes:
   - Newsletter subscription endpoint
   - Spanish/English i18n structure in place
 audience: [employer, smb]
-coverImage: /images/projects/book-inmobiliaria/cover.svg
+coverImage: /images/projects/book-inmobiliaria/cover.png
+coverFit: contain
+coverPosition: top
+liveUrl: https://book-inmobiliaria.vercel.app/
+liveLabel: View live site
+liveCtaNote: Production property marketing site
 ---
 
-import WorkflowDiagram from '../../components/WorkflowDiagram.astro';
-import ArchitectureDiagram from '../../components/ArchitectureDiagram.astro';
-import ScreenshotGrid from '../../components/ScreenshotGrid.astro';
+import ProblemGoalSplit from '../../components/case-study/ProblemGoalSplit.astro';
+import SnapshotCarousel from '../../components/case-study/SnapshotCarousel.astro';
+import SystemWatchGrid from '../../components/case-study/SystemWatchGrid.astro';
+import SystemStoryFlow from '../../components/case-study/SystemStoryFlow.astro';
 
-## Problem
+<ProblemGoalSplit
+  problem={{
+    title: 'Problem',
+    lead: 'A real estate business needed a professional web presence with manageable property listings, education content, and lead capture — without developer involvement for every listing update.',
+  }}
+  goal={{
+    title: 'Goal',
+    lead: 'Build a production-grade site where non-technical staff edit content in Sanity, and the Next.js frontend handles SEO, i18n, and enquiry flows.',
+    body: [
+      'Demonstrates CMS-backed production website ability — schema design, dynamic routes, API integrations, and multi-language structure. Honest In Progress status shows product thinking, not overselling.',
+    ],
+  }}
+/>
 
-A real estate business needed a professional web presence with manageable property listings, education content, and lead capture — without developer involvement for every listing update.
-
-## Goal
-
-Build a production-grade site where non-technical staff edit content in Sanity, and the Next.js frontend handles SEO, i18n, and enquiry flows.
-
-## Shipped vs remaining
-
-**Shipped today:**
-- Property schema and Sanity Studio
-- Homepage, listings, property detail routes
-- Contact API + Resend integration
-- Newsletter API endpoint
-- i18n routing structure
-
-**Remaining:**
-- Content population and launch polish
-- SEO metadata refinement per property
-- Performance audit and image optimization pass
-
-## System
-
-<ArchitectureDiagram
-  nodes={[
-    { label: 'Sanity CMS', detail: 'Property & blog content' },
-    { label: 'Next.js 14', detail: 'SSR pages + API routes' },
-    { label: 'Property pages', detail: 'Dynamic [slug] routes' },
-    { label: 'Contact + Newsletter', detail: 'Resend email APIs' },
-    { label: 'Vercel', detail: 'Production deployment' },
+<SystemWatchGrid
+  heading="Features"
+  items={[
+    {
+      title: 'Sanity Studio & property schema',
+      description: 'Property content model and Studio so staff can publish and update listings without touching code.',
+    },
+    {
+      title: 'Dynamic listing & detail pages',
+      description: 'Homepage, listings index, and property detail routes driven by CMS content and dynamic [slug] paths.',
+    },
+    {
+      title: 'Contact form API',
+      description: 'Contact API with Resend integration for enquiry delivery from the marketing site.',
+    },
+    {
+      title: 'Newsletter subscription',
+      description: 'Newsletter API endpoint for lead capture alongside property enquiries.',
+    },
+    {
+      title: 'Spanish / English i18n',
+      description: 'Bilingual routing structure in place with next-intl for market-ready content expansion.',
+    },
   ]}
 />
 
-## Why Next.js (not Astro)
-
-This is a **client production site** — it needs Sanity preview, dynamic listings, and ongoing content edits. The portfolio site (Astro) is a separate concern: static, fast, MDX-driven. Using the right tool per job matters.
-
-## Visual proof
-
-<ScreenshotGrid
-  screenshots={[
-    { src: '/images/projects/book-inmobiliaria/home.svg', alt: 'Homepage', caption: 'Homepage' },
-    { src: '/images/projects/book-inmobiliaria/listings.svg', alt: 'Property listings', caption: 'Listings' },
-    { src: '/images/projects/book-inmobiliaria/detail.svg', alt: 'Property detail', caption: 'Detail page' },
+<SystemStoryFlow
+  heading="System"
+  cards={[
+    {
+      title: 'Sanity CMS',
+      description: 'Property and blog content authored in Studio — the source of truth for listings and marketing copy.',
+    },
+    {
+      title: 'Next.js 14',
+      description: 'SSR pages and API routes for listings, detail views, contact, and newsletter flows.',
+    },
+    {
+      title: 'Property pages',
+      description: 'Dynamic [slug] routes render each listing from CMS data with SEO-friendly structure.',
+    },
+    {
+      title: 'Contact + newsletter',
+      description: 'Resend-backed email APIs for enquiries and subscription sign-ups.',
+    },
+    {
+      title: 'Vercel',
+      description: 'Production deployment for the live marketing site.',
+    },
   ]}
 />
 
-## Result
-
-Demonstrates CMS-backed production website ability — schema design, dynamic routes, API integrations, and multi-language structure. Honest **In Progress** status shows product thinking, not overselling.
-
-## What I'd improve next
-
-- Complete content migration and go-live
-- Add property search/filter
-- Sanity webhook revalidation tuning
-- Lighthouse performance pass on image-heavy pages
+<SnapshotCarousel
+  heading="Snapshots"
+  shots={[
+    {
+      image: '/images/projects/book-inmobiliaria/home.svg',
+      alt: 'Homepage',
+      label: 'Homepage',
+    },
+    {
+      image: '/images/projects/book-inmobiliaria/listings.svg',
+      alt: 'Property listings',
+      label: 'Listings',
+    },
+    {
+      image: '/images/projects/book-inmobiliaria/detail.svg',
+      alt: 'Property detail',
+      label: 'Detail page',
+    },
+  ]}
+/>

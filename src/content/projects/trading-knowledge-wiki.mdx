@@ -1,0 +1,132 @@
+---
+title: Trading Knowledge Wiki
+description: A structured trading reference wiki for Market Profile and auction-market concepts — built for session prep, not scattered PDFs.
+descriptionExtra: Long-form articles with consistent sectioning, callouts for the distinctions that matter, and related-topic links so a concept read before the open stays findable after it.
+date: 2026-05-15
+status: Built
+category: Trading Systems
+type: product
+stack: [Markdown, Vercel]
+featured: true
+order: 3
+role: Solo builder — content structure, reference UX, deployment
+audience: [personal, employer]
+coverImage: /images/projects/trading-knowledge-wiki/cover.png
+coverFit: contain
+coverPosition: top
+liveUrl: https://trade-wiki.vercel.app/
+liveLabel: View live site
+liveCtaNote: Live trading reference wiki
+---
+
+import ProblemGoalSplit from '../../components/case-study/ProblemGoalSplit.astro';
+import SnapshotCarousel from '../../components/case-study/SnapshotCarousel.astro';
+import SystemWatchGrid from '../../components/case-study/SystemWatchGrid.astro';
+import SystemStoryFlow from '../../components/case-study/SystemStoryFlow.astro';
+
+<ProblemGoalSplit
+  problem={{
+    title: 'Problem',
+    lead: 'The trading concepts I rely on were spread across books, PDFs, and one-off notes.',
+    items: [
+      'Market Profile and auction-market theory live in dense source material.',
+      'Highlights and summaries did not share one structure.',
+      'Pre-session review meant reopening multiple files and guessing where I left off.',
+    ],
+    body: [
+      'The information was not missing — it was fragmented.',
+      'What I needed before a session was a single place to re-read the frameworks in the same language I use when reviewing structure, not a hunt through folders.',
+    ],
+  }}
+  goal={{
+    title: 'Goal',
+    lead: 'Build a personal reference wiki for trading theory — readable, linkable, and stable.',
+    intro: 'The wiki needed to:',
+    items: [
+      'Hold long-form concept pages (auction mechanism, value, timeframe participants).',
+      'Use consistent sectioning so each article reads the same way.',
+      'Surface important distinctions without burying them in prose.',
+      'Link related topics so one concept leads to the next.',
+      'Stay fast to open on desktop before the session.',
+    ],
+    body: ['The aim was reference clarity for live trading prep, not a blog or course platform.'],
+  }}
+/>
+
+<SystemWatchGrid
+  heading="Features"
+  items={[
+    {
+      title: 'Topic-organized articles',
+      description:
+        'Trading concepts grouped by subject — e.g. auction market theory, timeframe participants, price–time–value — each as a dedicated reference page.',
+    },
+    {
+      title: 'Structured long-form layout',
+      description:
+        'Multi-part articles with anchored sections, tables, and a predictable reading order so dense theory stays scannable.',
+    },
+    {
+      title: 'Distinction callouts',
+      description:
+        'Important and note-style emphasis for ideas that are easy to misread in the heat of a session — initiative vs responsive activity, structure vs time vs logic.',
+    },
+    {
+      title: 'Related-article navigation',
+      description:
+        'Cross-links at the end of each page so one framework connects to the next without leaving the wiki.',
+    },
+    {
+      title: 'Source attribution',
+      description:
+        'Concept pages tied back to primary references (e.g. Jim Dalton’s Mind Over Markets) so the wiki stays honest reference material, not improvised theory.',
+    },
+  ]}
+/>
+
+<SystemStoryFlow
+  heading="System"
+  cards={[
+    {
+      title: 'Source material',
+      description:
+        'Books and notes on Market Profile and auction-market theory — the raw concepts worth keeping in one operating reference.',
+    },
+    {
+      title: 'Structure',
+      description:
+        'Break each framework into parts, tables, and callouts that match how I actually review before a session.',
+    },
+    {
+      title: 'Publish',
+      description:
+        'Deploy as a static wiki on Vercel — always available, no login, fast to open from any machine.',
+    },
+    {
+      title: 'Review loop',
+      description:
+        'Use before the open to re-read the two big questions, timeframe dynamics, and value logic — then return to the same pages after the session when something needs a second pass.',
+    },
+  ]}
+/>
+
+<SnapshotCarousel
+  heading="Snapshots"
+  shots={[
+    {
+      image: '/images/projects/trading-knowledge-wiki/article.svg',
+      alt: 'Auction Market Theory article with section navigation and structured parts',
+      label: 'Concept article',
+    },
+    {
+      image: '/images/projects/trading-knowledge-wiki/hub.svg',
+      alt: 'Wiki hub with topic entry points',
+      label: 'Wiki hub',
+    },
+    {
+      image: '/images/projects/trading-knowledge-wiki/related.svg',
+      alt: 'Related articles and source references at end of page',
+      label: 'Related topics',
+    },
+  ]}
+/>

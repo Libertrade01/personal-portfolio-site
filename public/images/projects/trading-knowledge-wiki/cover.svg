@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#f7f6f1"/>
+  <rect x="48" y="48" width="704" height="354" rx="12" fill="#fffaf2" stroke="#d8d4ca" stroke-width="2"/>
+  <rect x="72" y="80" width="120" height="12" rx="2" fill="#1f344a" opacity="0.35"/>
+  <rect x="72" y="108" width="280" height="28" rx="4" fill="#1f344a"/>
+  <rect x="72" y="156" width="520" height="10" rx="2" fill="#4b5563" opacity="0.5"/>
+  <rect x="72" y="178" width="480" height="10" rx="2" fill="#4b5563" opacity="0.4"/>
+  <rect x="72" y="200" width="500" height="10" rx="2" fill="#4b5563" opacity="0.35"/>
+  <rect x="72" y="240" width="200" height="72" rx="8" fill="#f0ebe3" stroke="#d7d0c3"/>
+  <text x="400" y="380" text-anchor="middle" fill="#1f344a" font-family="Georgia, serif" font-size="22">Trading Knowledge Wiki</text>
+  <text x="400" y="408" text-anchor="middle" fill="#4b5563" font-family="system-ui, sans-serif" font-size="14">Reference � Market Profile</text>
+</svg>

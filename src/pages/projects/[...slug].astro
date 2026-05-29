@@ -21,14 +21,19 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 const allProjects = await getPublishedProjects();
 const { title, description, outcomes } = project.data;
-const isLibertradeJournalCaseStudy = project.slug === 'libertrade-journal-analytics';
+const caseStudySlugs = [
+  'libertrade-journal-analytics',
+  'book-inmobiliaria',
+  'trading-knowledge-wiki',
+] as const;
+const isCaseStudy = caseStudySlugs.includes(project.slug as (typeof caseStudySlugs)[number]);
 ---
 
 <Layout title={`${title} — Michael Low`} description={description} ogImage={project.data.coverImage}>
-  {isLibertradeJournalCaseStudy ? <CaseStudyHero project={project} /> : <ProjectHero project={project} />}
-  <article class:list={['pb-24 md:pb-32', isLibertradeJournalCaseStudy ? 'pt-0' : 'pt-8 md:pt-12']}>
+  {isCaseStudy ? <CaseStudyHero project={project} /> : <ProjectHero project={project} />}
+  <article class:list={['pb-24 md:pb-32', isCaseStudy ? 'pt-0' : 'pt-8 md:pt-12']}>
     <div class="container-main max-w-4xl">
-      {outcomes.length > 0 && <OutcomeList outcomes={outcomes} />}
+      {!isCaseStudy && outcomes.length > 0 && <OutcomeList outcomes={outcomes} />}
       <div
         class="prose-content mt-4 text-muted [&_a]:text-amber-accent [&_a]:hover:underline [&_h2]:mb-6 [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:text-off-white [&_h2:first-child]:mt-0 [&_h2:not(:first-child)]:mt-20 [&_h2:not(:first-child)]:md:mt-24 [&_h3]:mb-2 [&_h3]:text-lg [&_h3]:text-off-white [&_li]:ml-4 [&_li]:list-disc [&_p+p]:mt-4 [&_p]:leading-relaxed [&_p]:text-[15px] [&_p]:md:text-base [&_strong]:text-off-white [&_ul]:space-y-2"
       >
