@@ -15,9 +15,6 @@ import { site } from '../config/site';
 
     <div class="site-nav__actions">
       <span class="site-nav__availability"><i aria-hidden="true"></i>Open to AI roles</span>
-      <button class="site-nav__theme" type="button" data-theme-toggle aria-label="Switch to dark mode">
-        <span aria-hidden="true" data-theme-icon>◐</span>
-      </button>
       <details class="site-nav__menu">
         <summary>Menu</summary>
         <div>
@@ -32,28 +29,3 @@ import { site } from '../config/site';
     </div>
   </nav>
 </header>
-
-<script>
-  const toggle = document.querySelector('[data-theme-toggle]');
-  const root = document.documentElement;
-
-  const syncThemeControl = () => {
-    if (!(toggle instanceof HTMLButtonElement)) return;
-    const dark = root.dataset.theme === 'dark';
-    toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
-  };
-
-  toggle?.addEventListener('click', () => {
-    const dark = root.dataset.theme === 'dark';
-    if (dark) {
-      delete root.dataset.theme;
-      localStorage.setItem('ml-theme', 'light');
-    } else {
-      root.dataset.theme = 'dark';
-      localStorage.setItem('ml-theme', 'dark');
-    }
-    syncThemeControl();
-  });
-
-  syncThemeControl();
-</script>

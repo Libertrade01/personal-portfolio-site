@@ -43,15 +43,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <script is:inline>
-      (() => {
-        try {
-          if (localStorage.getItem('ml-theme') === 'dark') {
-            document.documentElement.dataset.theme = 'dark';
-          }
-        } catch {}
-      })();
-    </script>
     <title>{title}</title>
   </head>
   <body class="relative min-h-screen flex flex-col">

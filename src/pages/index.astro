@@ -82,21 +82,16 @@ const skills = [
 
         <figure class="mock-refinement">
           <img
-            src="/images/hero-refinement-v3.png"
-            alt="A warm blurred form gradually becoming a precise charcoal rectangle"
+            src="/images/neural-system-hero.png"
+            alt="An intricate spherical network of connected nodes and paths"
             width="1254"
             height="1254"
             loading="eager"
             decoding="async"
           />
-          <figcaption><span>Iterative refinement</span></figcaption>
         </figure>
       </div>
 
-      <div class="mock-shell mock-hero__foot">
-        <span>Based in São Paulo · Working globally</span>
-        <span>Open to AI product &amp; systems roles</span>
-      </div>
     </section>
 
     <!-- NEW: quick proof strip for hiring managers skimming -->
@@ -350,29 +345,9 @@ const skills = [
   .mock-hero {
     position: relative;
     overflow: hidden;
-    min-height: calc(100svh - 4.75rem);
+    min-height: calc(100svh - 6.4rem);
     display: flex;
     flex-direction: column;
-  }
-
-  .mock-hero::after {
-    content: '';
-    position: absolute;
-    z-index: 2;
-    top: 4%;
-    right: 0;
-    bottom: 4%;
-    width: min(46vw, 46rem);
-    pointer-events: none;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 3.5rem 3.5rem;
-    opacity: 0.32;
-    mask-image:
-      linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.15) 20%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.88) 80%, #000 100%),
-      linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
-    mask-composite: intersect;
   }
 
   .mock-hero__grid {
@@ -380,29 +355,31 @@ const skills = [
     position: relative;
     display: flex;
     align-items: center;
-    padding-block: clamp(4rem, 8vh, 7rem) clamp(3rem, 6vh, 5rem);
+    width: calc(100% - 3.5rem);
+    max-width: none;
+    padding-block: clamp(4.5rem, 8vh, 7rem) clamp(3rem, 5vh, 4rem);
   }
 
   .mock-hero__copy {
     position: relative;
     z-index: 3;
-    max-width: 40rem;
+    max-width: 42rem;
   }
 
   .mock-hero h1 {
     margin: 1.25rem 0 0;
-    font-size: clamp(3rem, 5.7vw, 5.7rem);
+    font-size: clamp(3.6rem, 5.7vw, 5.75rem);
     font-weight: 500;
     line-height: 0.98;
     letter-spacing: -0.065em;
   }
 
   .mock-hero__intro {
-    max-width: 40rem;
+    max-width: 42rem;
     margin: 1.8rem 0 0;
-    color: var(--muted);
+    color: #263b47;
     font-size: clamp(1.05rem, 1.6vw, 1.35rem);
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.65;
     text-wrap: balance;
   }
@@ -411,8 +388,8 @@ const skills = [
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1.35rem;
-    margin-top: 2.25rem;
+    gap: 1.65rem;
+    margin-top: 2.75rem;
   }
 
   .mock-button {
@@ -420,10 +397,10 @@ const skills = [
     align-items: center;
     justify-content: center;
     gap: 0.55rem;
-    min-height: 2.8rem;
-    padding: 0.75rem 1.15rem;
+    min-height: 3.65rem;
+    padding: 0.95rem 1.45rem;
     border-radius: 0.35rem;
-    font-size: 0.84rem;
+    font-size: 0.98rem;
     font-weight: 500;
     transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms ease;
   }
@@ -452,7 +429,8 @@ const skills = [
     align-items: center;
     gap: 0.55rem;
     color: var(--soft);
-    font-size: 0.84rem;
+    font-size: 0.98rem;
+    font-weight: 500;
   }
 
   .mock-text-link span {
@@ -477,42 +455,32 @@ const skills = [
 
   .mock-refinement {
     position: absolute;
-    left: 11%;
-    top: 50%;
-    width: min(68vw, 58rem);
+    left: auto;
+    right: -1rem;
+    top: 51%;
+    width: min(49vw, 50rem);
+    height: auto;
     aspect-ratio: 1;
     transform: translateY(-50%);
     margin: 0;
     z-index: 1;
     pointer-events: none;
+    overflow: visible;
   }
 
   .mock-refinement img {
+    position: static;
     width: 100%;
+    max-width: 100%;
     height: 100%;
     display: block;
-    object-fit: contain;
-    mix-blend-mode: darken;
-    transform: translateY(-9%) scaleY(1.36);
-    transform-origin: 50% 53%;
-    mask-image:
-      linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%),
-      linear-gradient(180deg, transparent 0%, #000 5%, #000 95%, transparent 100%);
-    mask-composite: intersect;
-  }
-
-  .mock-refinement figcaption {
-    position: absolute;
-    left: 78%;
-    top: 63%;
-    transform: translateX(-50%);
-    width: max-content;
     margin: 0;
-    color: var(--muted);
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    object-fit: contain;
+    object-position: center;
+    mix-blend-mode: darken;
+    opacity: 0.98;
+    -webkit-mask-image: radial-gradient(circle, #000 68%, rgba(0, 0, 0, 0.72) 83%, transparent 100%);
+    mask-image: radial-gradient(circle, #000 68%, rgba(0, 0, 0, 0.72) 83%, transparent 100%);
   }
 
   .mock-hero__foot {
@@ -1126,9 +1094,18 @@ const skills = [
     }
 
     .mock-refinement {
-      left: 20%;
-      width: min(90vw, 48rem);
-      opacity: 0.7;
+      left: auto;
+      right: -9%;
+      top: 53%;
+      bottom: auto;
+      width: min(61vw, 38rem);
+      height: auto;
+      transform: translateY(-50%);
+    }
+
+    .mock-refinement img {
+      transform: none;
+      height: 100%;
     }
   }
 
@@ -1142,10 +1119,26 @@ const skills = [
     }
 
     .mock-refinement {
-      left: -10%;
-      top: 58%;
-      width: 120vw;
-      opacity: 0.42;
+      position: relative;
+      left: auto;
+      right: auto;
+      top: auto;
+      bottom: auto;
+      width: 112%;
+      height: auto;
+      margin: 1.25rem -6% -1rem;
+      opacity: 0.72;
+    }
+
+    .mock-hero__grid {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .mock-hero__intro,
+    .mock-actions {
+      background: none;
+      padding-right: 0;
     }
 
     .mock-hero__foot {
