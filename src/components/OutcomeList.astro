@@ -7,16 +7,64 @@ interface Props {
 const { outcomes, title = 'Outcomes' } = Astro.props;
 ---
 
-<div class="my-8 card-surface p-6 md:p-8">
-  <p class="section-label">{title}</p>
-  <ul class="mt-6 space-y-3">
+<section class="project-outcomes" aria-labelledby="project-outcomes-title">
+  <p id="project-outcomes-title">{title}</p>
+  <ul>
     {
-      outcomes.map((outcome) => (
-        <li class="flex gap-4 text-sm leading-relaxed text-muted">
-          <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-accent" aria-hidden="true"></span>
-          <span>{outcome}</span>
+      outcomes.map((outcome, index) => (
+        <li>
+          <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <strong>{outcome}</strong>
         </li>
       ))
     }
   </ul>
-</div>
+</section>
+
+<style>
+  .project-outcomes {
+    width: min(100%, 58rem);
+    margin: 0 auto clamp(4rem, 8vw, 7rem);
+    padding: clamp(1.4rem, 3vw, 2.25rem);
+    background: var(--ml-paper-raised);
+    border: 1px solid var(--ml-line);
+  }
+
+  .project-outcomes > p {
+    margin: 0;
+    color: var(--ml-clay);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .project-outcomes ul {
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .project-outcomes li {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    align-items: baseline;
+    padding-block: 0.9rem;
+    border-top: 1px solid var(--ml-line);
+  }
+
+  .project-outcomes li > span {
+    color: var(--ml-muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+  }
+
+  .project-outcomes strong {
+    color: var(--ml-ink-soft);
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+</style>

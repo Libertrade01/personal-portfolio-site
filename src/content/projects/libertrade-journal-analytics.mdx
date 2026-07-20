@@ -1,107 +1,25 @@
 ---
-title: Trading Review Operating System
-description: A trading review operating system that connects trades, readiness, journal notes, discipline, and AI weekly review into one clear review loop.
-descriptionExtra: Built to answer whether the process was followed. Not just whether the week was green or red, but whether trades were taken cleanly, rules held under pressure, and the right lessons were carried into the next session.
+title: Libertrade LOOP
+description: Designing a process-first trading journal for discretionary futures traders.
+descriptionExtra: LOOP connects readiness, planning, risk, execution, and review so yesterday's lesson can shape the next session.
 date: 2026-05-01
-status: Built
-category: Trading Systems
+status: Live
+category: Trading process & journal system
 type: product
-stack: [HTML, Chart.js, Supabase, Vercel]
+stack: [Next.js, Supabase, Chart.js, ChatGPT, Vercel]
 featured: true
 order: 4
-role: Solo builder — product design, analytics UI, demo deployment
+role: Solo product designer & builder — strategy, UX/UI, full-stack delivery
 audience: [employer, personal]
-coverImage: /images/projects/libertrade-analytics/cover.png
+coverImage: /images/projects/libertrade-analytics/loop-homepage-hd.png
 coverFit: contain
 coverPosition: top
-liveUrl: https://libertrade-journal-analystics-demo-eight.vercel.app/
-liveLabel: Open live demo
-liveCtaNote: Interactive analytics dashboard
+showHeroCover: false
+liveUrl: https://libertrade.app
+liveLabel: Visit Libertrade LOOP
+liveCtaNote: Live product · Libertrade.app
 ---
 
-import ProblemGoalSplit from '../../components/case-study/ProblemGoalSplit.astro';
-import SnapshotCarousel from '../../components/case-study/SnapshotCarousel.astro';
-import SystemWatchGrid from '../../components/case-study/SystemWatchGrid.astro';
-import SystemStoryFlow from '../../components/case-study/SystemStoryFlow.astro';
+import LoopCaseStudy from '../../components/case-study/LoopCaseStudy.astro';
 
-<ProblemGoalSplit
-  problem={{
-    title: 'Problem',
-    lead: 'My trading review was split across too many places.',
-    items: [
-      'Broker CSVs had the numbers.',
-      'Journal notes had the psychology.',
-      'Whoop had the readiness.',
-      'Weekly reflections lived somewhere else.',
-    ],
-    body: [
-      'The information was there, connecting the dots was the hard part.',
-      'I could see the pieces individually but making one honest picture of the week meant manual stitching, memory, and guesswork.',
-      'The real problem was not a lack of data. It was a lack of one place where the data could challenge the story I was telling myself.',
-    ],
-  }}
-  goal={{
-    title: 'Goal',
-    lead: 'Build a single operator dashboard for trade review.',
-    leadStrong: 'operator dashboard',
-    intro: 'The system needed to answer:',
-    items: [
-      'Did I follow the plan?',
-      'Where does my edge actually show up?',
-      'Which sessions leak money?',
-      'Does readiness affect execution?',
-      'What emotional patterns keep repeating?',
-      "What should next week's focus be?",
-    ],
-    body: ['The aim was process clarity, not a focus on P&L.'],
-  }}
-/>
-
-<SystemWatchGrid
-  heading="Features"
-  items={[
-    { title: 'Session analytics', description: 'Time-of-day buckets, instrument mix, setup performance, expectancy-style views. The point is to stop guessing where the edge lives.' },
-    { title: 'Readiness gate', description: 'Sleep, recovery, daily gate, and P&L in one strip.' },
-    { title: 'Discipline and rules', description: 'Daily rule compliance tied to trading days. A green day with broken process still gets marked.' },
-    { title: 'Journal integration', description: 'Intraday notes and emotion tags connected to the same calendar and time as trades plus lessons, and outcomes.' },
-    { title: 'AI weekly reports', description: 'A weekly debrief across Performance and Psychology: edge quality, timing, emotional leaks, rule breaks, and next-week focus.' },
-  ]}
-/>
-
-<SystemStoryFlow
-  heading="System"
-  cards={[
-    {
-      title: 'Capture',
-      description: 'Import trades, sync journal notes, log daily readiness and rule compliance.',
-    },
-    {
-      title: 'Diagnose',
-      description: 'Break the week down by session, setup, instrument, timing, tags, and rule behaviour.',
-    },
-    {
-      title: 'Synthesize',
-      description: 'Generate weekly Performance and Psychology reviews that turn raw trades into a clean operating focus.',
-    },
-    {
-      title: 'Act',
-      description: 'Leave the week with a small number of specific changes: size rules, time windows, hold-quality targets, emotional gates, or setup filters.',
-    },
-  ]}
-/>
-
-<SnapshotCarousel
-  heading="Snapshots"
-  shots={[
-    {
-      image: '/images/projects/libertrade-analytics/discipline-journal.png',
-      alt: 'Discipline tracking with daily rule compliance and intraday journal entries with emotion tags',
-      label: 'Discipline & journal',
-    },
-    {
-      image: '/images/projects/libertrade-analytics/agent-weekly-review.png',
-      alt: 'AI agent weekly review with Performance tab showing edge quality, session distribution, and improvement focus',
-      label: 'Agent weekly review',
-    },
-  ]}
-/>
+<LoopCaseStudy />

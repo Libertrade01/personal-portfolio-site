@@ -132,7 +132,6 @@ const skills = [
                     decoding="async"
                   />
                 ) : null}
-                <span class="mock-feature__index" aria-hidden="true">01</span>
               </div>
               <div class="mock-feature__copy">
                 <div class="mock-feature__meta">
@@ -200,7 +199,7 @@ const skills = [
         <figure class="mock-about__photo">
           <div class="mock-about__cutout">
             <img
-              src={`${site.headshotCutout}?v=8`}
+              src={`${site.headshotCutout}?v=12`}
               alt={`${site.name} portrait`}
               width="1024"
               height="978"
@@ -355,20 +354,21 @@ const skills = [
     position: relative;
     display: flex;
     align-items: center;
-    width: calc(100% - 3.5rem);
-    max-width: none;
+    width: min(92rem, calc(100% - 3rem));
+    max-width: 92rem;
+    margin-inline: auto;
     padding-block: clamp(4.5rem, 8vh, 7rem) clamp(3rem, 5vh, 4rem);
   }
 
   .mock-hero__copy {
     position: relative;
     z-index: 3;
-    max-width: 42rem;
+    max-width: min(44rem, 48%);
   }
 
   .mock-hero h1 {
     margin: 1.25rem 0 0;
-    font-size: clamp(3.6rem, 5.7vw, 5.75rem);
+    font-size: clamp(3.6rem, 4.8vw + 1.2rem, 6.1rem);
     font-weight: 500;
     line-height: 0.98;
     letter-spacing: -0.065em;
@@ -456,9 +456,9 @@ const skills = [
   .mock-refinement {
     position: absolute;
     left: auto;
-    right: -1rem;
-    top: 51%;
-    width: min(49vw, 50rem);
+    right: -1.5%;
+    top: 53%;
+    width: min(54%, 48rem);
     height: auto;
     aspect-ratio: 1;
     transform: translateY(-50%);
@@ -589,7 +589,7 @@ const skills = [
 
   .mock-about__photo {
     margin: -0.5rem 0 0;
-    max-width: 34rem;
+    max-width: 31rem;
     width: 100%;
     justify-self: start;
   }
@@ -618,7 +618,7 @@ const skills = [
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 34rem;
+    max-width: 31rem;
     height: auto;
     display: block;
     object-fit: contain;
@@ -734,6 +734,7 @@ const skills = [
     overflow: hidden;
     min-height: clamp(22rem, 42vw, 34rem);
     background: var(--deep);
+    border-radius: 0.5rem;
   }
 
   .mock-feature__visual img {
@@ -742,27 +743,13 @@ const skills = [
     display: block;
     object-fit: cover;
     object-position: center top;
-    filter: saturate(0.88) contrast(0.97);
+    filter: saturate(0.96) contrast(1.02);
     transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1), filter 300ms ease;
   }
 
   .mock-feature:hover .mock-feature__visual img {
     transform: scale(1.03);
     filter: saturate(0.98) contrast(1);
-  }
-
-  .mock-feature__index {
-    position: absolute;
-    left: 1.1rem;
-    bottom: 0.85rem;
-    color: color-mix(in srgb, var(--paper) 55%, transparent);
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: clamp(3.5rem, 7vw, 6rem);
-    font-weight: 400;
-    letter-spacing: -0.06em;
-    line-height: 0.85;
-    pointer-events: none;
-    mix-blend-mode: difference;
   }
 
   .mock-feature__copy {
@@ -857,6 +844,7 @@ const skills = [
     overflow: hidden;
     aspect-ratio: 5 / 4;
     background: var(--deep);
+    border-radius: 0.5rem;
   }
 
   .mock-pair__item--offset .mock-pair__visual {

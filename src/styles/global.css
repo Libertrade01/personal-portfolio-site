@@ -2437,6 +2437,7 @@ html[data-theme='dark'] .home-v2-refinement img {
   display: grid;
   place-items: center;
   background: var(--ml-paper-deep);
+  border-radius: 0.5rem;
 }
 
 .home-v2-system__visual img {

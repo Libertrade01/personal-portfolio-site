@@ -1,0 +1,903 @@
+---
+const loopStages = [
+  { title: 'Check-in', detail: 'State, mindset, context' },
+  { title: 'Session plan', detail: 'Bias, levels, setups, risk' },
+  { title: 'Trade', detail: 'Plan and risk rails in view' },
+  { title: 'Close the loop', detail: 'Import, adherence, reflection' },
+  { title: 'Review patterns', detail: 'History, analytics, weekly review' },
+  { title: 'Next session', detail: 'Carry one lesson forward' },
+];
+
+const principles = [
+  'Process before outcome',
+  'Decisions before pressure',
+  'Readiness before risk',
+  'Reflect while the session is fresh',
+  'Carry one lesson into the next session',
+  'Useful structure without excessive friction',
+];
+
+const productAreas = [
+  ['Home dashboard', 'Today’s state, plan, and open loop'],
+  ['History & calendar', 'Sessions placed in time and context'],
+  ['Trade analytics', 'Patterns across setups, timing, and risk'],
+  ['Process adherence', 'Plan quality separated from P&L'],
+  ['Weekly reviews', 'A deliberate adjustment for the next week'],
+  ['Prop-firm economics', 'Rules, drawdown, and account constraints'],
+  ['LOOP Intelligence', 'Assisted synthesis across the workflow'],
+  ['Process settings', 'Personal rules without rebuilding the system'],
+];
+
+const validationGroups = [
+  {
+    title: 'Usability',
+    question: 'Can traders understand and complete the workflow?',
+    signals: ['Onboarding completion', 'Check-in to plan conversion', 'Points of confusion or abandonment'],
+  },
+  {
+    title: 'Behaviour',
+    question: 'Do traders return and consistently close the loop?',
+    signals: ['Completed close-loop reviews', 'Weekly review usage', 'Return frequency'],
+  },
+  {
+    title: 'Product value',
+    question: 'Does LOOP improve pattern recognition and risk decisions?',
+    signals: ['Risk-plan adherence', 'Useful patterns identified', 'Qualitative trader feedback'],
+  },
+];
+---
+
+<div class="loop-study">
+  <section class="loop-opening" aria-labelledby="loop-opening-title">
+    <header class="loop-section-head">
+      <p><span>01</span> Opening snapshot</p>
+      <div>
+        <h2 id="loop-opening-title">One daily loop for preparation, execution, and reflection.</h2>
+        <p>
+          Libertrade LOOP is a process-first trading journal for discretionary futures traders. It connects
+          readiness, planning, risk, execution, and review so lessons can influence the next decision—not simply
+          describe the last one.
+        </p>
+      </div>
+    </header>
+
+    <div class="loop-opening__screens" aria-label="Representative product screen placeholders">
+      <figure class="loop-screen loop-screen--primary">
+        <div class="loop-screen__chrome"><i></i><i></i><i></i></div>
+        <div class="loop-screen__image">
+          <img
+            src="/images/projects/libertrade-analytics/loop-check-in.png"
+            alt="Libertrade LOOP pre-market readiness check-in"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption>Readiness before risk</figcaption>
+      </figure>
+      <figure class="loop-screen">
+        <div class="loop-screen__chrome"><i></i><i></i><i></i></div>
+        <div class="loop-screen__placeholder">
+          <span>Screen 02</span>
+          <strong>Session plan</strong>
+          <small>Replace with final product screenshot</small>
+        </div>
+        <figcaption>Decisions before pressure</figcaption>
+      </figure>
+      <figure class="loop-screen">
+        <div class="loop-screen__chrome"><i></i><i></i><i></i></div>
+        <div class="loop-screen__placeholder">
+          <span>Screen 03</span>
+          <strong>Close the loop</strong>
+          <small>Replace with final product screenshot</small>
+        </div>
+        <figcaption>Process before outcome</figcaption>
+      </figure>
+    </div>
+
+    <dl class="loop-facts">
+      <div>
+        <dt>Who it serves</dt>
+        <dd>Discretionary futures traders operating under time, risk, and emotional pressure.</dd>
+      </div>
+      <div>
+        <dt>Core problem</dt>
+        <dd>The plan, the trade, and the lesson live in separate places.</dd>
+      </div>
+      <div>
+        <dt>Current signal</dt>
+        <dd>Early product build. Validation evidence and baseline measurements will be added here.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="loop-problem" aria-labelledby="loop-problem-title">
+    <header class="loop-section-head">
+      <p><span>02</span> The trading problem</p>
+      <div>
+        <h2 id="loop-problem-title">The problem wasn’t missing analytics. It was a broken feedback loop.</h2>
+        <p>
+          Traders prepare, execute, and reflect in different tools—or skip parts entirely. Risk decisions then move
+          into the most pressurised moment, while journals explain P&amp;L after the fact instead of reinforcing a
+          better process before the next session.
+        </p>
+      </div>
+    </header>
+
+    <div class="loop-broken-flow" aria-label="Existing fragmented trading workflow">
+      <article><span>01</span><h3>Prepare</h3><p>Bias and levels in notes, charts, or memory.</p></article>
+      <article><span>02</span><h3>Execute</h3><p>Risk choices made live while attention is divided.</p></article>
+      <article><span>03</span><h3>Record</h3><p>Broker data captures outcomes, not decision quality.</p></article>
+      <article><span>04</span><h3>Reflect</h3><p>Lessons are written down but rarely carried forward.</p></article>
+    </div>
+
+    <div class="loop-opportunity">
+      <p>Chosen opportunity</p>
+      <blockquote>
+        Bring readiness, planning, execution, and reflection into one low-friction daily cycle.
+      </blockquote>
+      <ul>
+        <li>Keep the trader’s state visible before capital is at risk.</li>
+        <li>Commit risk decisions before the market creates urgency.</li>
+        <li>Review adherence separately from whether the session made money.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="loop-thesis" aria-labelledby="loop-thesis-title">
+    <div class="loop-thesis__statement">
+      <p>03 — Product thesis</p>
+      <h2 id="loop-thesis-title">
+        Better performance does not come from recording more data alone. It comes from reinforcing a better decision
+        process every trading day.
+      </h2>
+    </div>
+    <ol>
+      {principles.map((principle, index) => (
+        <li><span>{String(index + 1).padStart(2, '0')}</span>{principle}</li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="loop-model" aria-labelledby="loop-model-title">
+    <header class="loop-section-head">
+      <p><span>04</span> The LOOP model</p>
+      <div>
+        <h2 id="loop-model-title">A closed process, not another collection of dashboards.</h2>
+        <p>
+          Each stage prepares the next. Supporting features extend this cycle; they do not compete with it.
+        </p>
+      </div>
+    </header>
+
+    <ol class="loop-cycle">
+      {loopStages.map((stage, index) => (
+        <li>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <div><h3>{stage.title}</h3><p>{stage.detail}</p></div>
+          {index < loopStages.length - 1 && <i aria-hidden="true">→</i>}
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="loop-deep-dives" aria-labelledby="loop-deep-dives-title">
+    <header class="loop-section-head">
+      <p><span>05</span> Three product deep dives</p>
+      <div>
+        <h2 id="loop-deep-dives-title">The decisions that make the daily loop useful.</h2>
+        <p>Each chapter will document the problem, insight, design decision, iteration, final experience, and evidence.</p>
+      </div>
+    </header>
+
+    <article class="loop-deep-dive">
+      <div class="loop-deep-dive__copy">
+        <p>Deep dive 01</p>
+        <h3>Knowing your state before risking capital</h3>
+        <div class="loop-decision-grid">
+          <div><span>Problem</span><p>Readiness affects decisions but is usually considered informally.</p></div>
+          <div><span>Insight</span><p>The check-in must be useful without becoming a long questionnaire.</p></div>
+          <div><span>Decision</span><p>Capture only state inputs that can change the session plan or warning state.</p></div>
+          <div><span>Evidence</span><p>Testing notes and readiness-to-plan conversion will be documented here.</p></div>
+        </div>
+      </div>
+      <figure class="loop-screen loop-screen--detail">
+        <div class="loop-screen__chrome"><i></i><i></i><i></i></div>
+        <div class="loop-screen__placeholder">
+          <span>Deep dive 01</span>
+          <strong>Check-in iterations</strong>
+          <small>Final screen + earlier iteration</small>
+        </div>
+        <figcaption>Placeholder — readiness and warning states</figcaption>
+      </figure>
+    </article>
+
+    <article class="loop-deep-dive loop-deep-dive--reverse">
+      <div class="loop-deep-dive__copy">
+        <p>Deep dive 02</p>
+        <h3>Removing decisions from the moment</h3>
+        <div class="loop-decision-grid">
+          <div><span>Problem</span><p>Bias, limits, and invalidation become negotiable under pressure.</p></div>
+          <div><span>Insight</span><p>Risk has to be committed while the trader can still think deliberately.</p></div>
+          <div><span>Decision</span><p>Keep the plan and risk rails visible without pretending the product controls behaviour.</p></div>
+          <div><span>Evidence</span><p>Plan completion and adherence signals will be documented here.</p></div>
+        </div>
+      </div>
+      <figure class="loop-screen loop-screen--detail">
+        <div class="loop-screen__chrome"><i></i><i></i><i></i></div>
+        <div class="loop-screen__placeholder">
+          <span>Deep dive 02</span>
+          <strong>Plan and risk rails</strong>
+          <small>Final screen + interaction detail</small>
+        </div>
+        <figcaption>Placeholder — bias, levels, setups, and limits</figcaption>
+      </figure>
+    </article>
+
+    <article class="loop-deep-dive">
+      <div class="loop-deep-dive__copy">
+        <p>Deep dive 03</p>
+        <h3>Reviewing process rather than only P&amp;L</h3>
+        <div class="loop-decision-grid">
+          <div><span>Problem</span><p>A green day can hide broken rules; a red day can still contain good decisions.</p></div>
+          <div><span>Insight</span><p>The useful review compares planned behaviour with actual behaviour.</p></div>
+          <div><span>Decision</span><p>Close each session while context is fresh and carry one lesson forward.</p></div>
+          <div><span>Evidence</span><p>Close-loop completion and weekly review usage will be documented here.</p></div>
+        </div>
+      </div>
+      <figure class="loop-screen loop-screen--detail">
+        <div class="loop-screen__chrome"><i></i><i></i><i></i></div>
+        <div class="loop-screen__placeholder">
+          <span>Deep dive 03</span>
+          <strong>Post-market review</strong>
+          <small>Final screen + analytics connection</small>
+        </div>
+        <figcaption>Placeholder — adherence, reflection, and lesson</figcaption>
+      </figure>
+    </article>
+  </section>
+
+  <section class="loop-system" aria-labelledby="loop-system-title">
+    <header class="loop-section-head">
+      <p><span>06</span> Supporting product system</p>
+      <div>
+        <h2 id="loop-system-title">A broader product organised around the daily loop.</h2>
+        <p>The supporting system reveals patterns over time without turning every capability into a separate story.</p>
+      </div>
+    </header>
+    <div class="loop-system-grid">
+      {productAreas.map(([title, detail], index) => (
+        <article><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{detail}</p></article>
+      ))}
+    </div>
+    <figure class="loop-architecture">
+      <div>
+        <span>Architecture placeholder</span>
+        <strong>Workflow components · data model · privacy · reliability</strong>
+        <small>Replace with information architecture or technical system diagram</small>
+      </div>
+    </figure>
+  </section>
+
+  <section class="loop-validation" aria-labelledby="loop-validation-title">
+    <header class="loop-section-head">
+      <p><span>07</span> Validation and outcomes</p>
+      <div>
+        <h2 id="loop-validation-title">Evidence at the right level of maturity.</h2>
+        <p>No invented metrics. This framework separates what has been observed from what the next validation cycle must measure.</p>
+      </div>
+    </header>
+    <div class="loop-validation-grid">
+      {validationGroups.map((group, index) => (
+        <article>
+          <span>0{index + 1}</span>
+          <h3>{group.title}</h3>
+          <p>{group.question}</p>
+          <ul>{group.signals.map((signal) => <li>{signal}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+    <div class="loop-evidence-placeholder">
+      <span>Current evidence placeholder</span>
+      <p>Add usability findings, product behaviour, trader feedback, and changes made after testing.</p>
+    </div>
+  </section>
+
+  <section class="loop-reflection" aria-labelledby="loop-reflection-title">
+    <p>08 — Reflection and next chapter</p>
+    <h2 id="loop-reflection-title">
+      The most important design challenge was not helping traders document the past. It was making yesterday’s lesson
+      useful before the next trade.
+    </h2>
+    <div>
+      <p><span>What changed</span>The product moved from an analytics-first idea toward a process-first operating loop.</p>
+      <p><span>What remains</span>Validate which moments deserve structure and where structure becomes friction.</p>
+      <p><span>Next question</span>Can LOOP reinforce better risk decisions without becoming another task to maintain?</p>
+    </div>
+  </section>
+</div>
+
+<style>
+  .loop-study {
+    color: var(--ml-ink);
+  }
+
+  .loop-study section {
+    width: min(100%, 72rem);
+    margin-inline: auto;
+  }
+
+  .loop-section-head {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+  }
+
+  .loop-section-head > p,
+  .loop-thesis__statement > p,
+  .loop-deep-dive__copy > p,
+  .loop-reflection > p {
+    margin: 0;
+    color: var(--ml-clay);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.66rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .loop-section-head > p span {
+    display: inline-block;
+    min-width: 2.4rem;
+    color: var(--ml-muted);
+  }
+
+  .loop-section-head h2,
+  .loop-thesis h2,
+  .loop-reflection h2 {
+    margin: 0;
+    color: var(--ml-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(2.15rem, 4.7vw, 4.4rem);
+    font-weight: 400;
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .loop-section-head div > p {
+    max-width: 44rem;
+    margin: 1.25rem 0 0;
+    color: var(--ml-muted);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  .loop-opening {
+    padding-bottom: clamp(5rem, 10vw, 9rem);
+  }
+
+  .loop-opening__screens {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .loop-screen {
+    --loop-screen-radius: 0.5rem;
+    margin: 0;
+  }
+
+  .loop-screen__chrome {
+    display: flex;
+    gap: 0.35rem;
+    height: 2rem;
+    align-items: center;
+    padding-inline: 0.75rem;
+    background: var(--ml-ink);
+    border: 1px solid var(--ml-ink);
+    border-radius: var(--loop-screen-radius) var(--loop-screen-radius) 0 0;
+  }
+
+  .loop-screen__chrome i {
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--ml-paper) 35%, transparent);
+  }
+
+  .loop-screen__placeholder {
+    min-height: 17rem;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    padding: 2rem;
+    text-align: center;
+    background:
+      linear-gradient(var(--ml-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--ml-line) 1px, transparent 1px),
+      var(--ml-paper-raised);
+    background-size: 2.5rem 2.5rem;
+    border: 1px solid var(--ml-line);
+    border-top: 0;
+    border-radius: 0 0 var(--loop-screen-radius) var(--loop-screen-radius);
+  }
+
+  .loop-screen__image {
+    overflow: hidden;
+    background: #03070d;
+    border: 1px solid var(--ml-line);
+    border-top: 0;
+    border-radius: 0 0 var(--loop-screen-radius) var(--loop-screen-radius);
+  }
+
+  .loop-screen__image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .loop-screen__placeholder span,
+  .loop-screen__placeholder small {
+    color: var(--ml-muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .loop-screen__placeholder strong {
+    margin-block: 0.65rem;
+    color: var(--ml-ink);
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    font-weight: 400;
+  }
+
+  .loop-screen figcaption {
+    margin-top: 0.7rem;
+    color: var(--ml-muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .loop-facts {
+    display: grid;
+    margin: clamp(2.5rem, 5vw, 4.5rem) 0 0;
+    border-top: 1px solid var(--ml-line);
+  }
+
+  .loop-facts div {
+    padding-block: 1.3rem;
+    border-bottom: 1px solid var(--ml-line);
+  }
+
+  .loop-facts dt {
+    color: var(--ml-clay);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .loop-facts dd {
+    margin: 0.55rem 0 0;
+    color: var(--ml-ink-soft);
+    font-size: 0.92rem;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .loop-problem,
+  .loop-model,
+  .loop-deep-dives,
+  .loop-system,
+  .loop-validation {
+    padding-block: clamp(5rem, 10vw, 9rem);
+    border-top: 1px solid var(--ml-line);
+  }
+
+  .loop-broken-flow {
+    display: grid;
+    gap: 1px;
+  }
+
+  .loop-broken-flow article,
+  .loop-system-grid article,
+  .loop-validation-grid article {
+    background: color-mix(in srgb, var(--ml-paper-raised) 84%, transparent);
+    border: 1px solid var(--ml-line);
+    padding: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .loop-broken-flow span,
+  .loop-system-grid span,
+  .loop-validation-grid article > span {
+    color: var(--ml-muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  .loop-broken-flow h3,
+  .loop-system-grid h3,
+  .loop-validation-grid h3 {
+    margin: 2rem 0 0;
+    color: var(--ml-ink);
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 400;
+  }
+
+  .loop-broken-flow p,
+  .loop-system-grid p,
+  .loop-validation-grid p {
+    margin: 0.65rem 0 0;
+    color: var(--ml-muted);
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  .loop-opportunity {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background: var(--ml-paper-deep);
+    border: 1px solid var(--ml-line);
+  }
+
+  .loop-opportunity > p {
+    margin: 0;
+    color: var(--ml-clay);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.64rem;
+    text-transform: uppercase;
+  }
+
+  .loop-opportunity blockquote {
+    margin: 0;
+    color: var(--ml-ink);
+    font-size: clamp(1.5rem, 3vw, 2.6rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+  }
+
+  .loop-opportunity ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .loop-opportunity li {
+    padding-block: 0.75rem;
+    color: var(--ml-ink-soft);
+    border-top: 1px solid var(--ml-line);
+    font-size: 0.9rem;
+  }
+
+  .loop-thesis {
+    width: 100% !important;
+    max-width: none !important;
+    display: grid;
+    gap: clamp(3rem, 8vw, 8rem);
+    grid-template-columns: minmax(0, 1fr);
+    padding: clamp(4rem, 8vw, 7rem) max(1.5rem, calc((100vw - 72rem) / 2));
+    background: var(--ml-ink);
+    color: var(--ml-paper);
+  }
+
+  .loop-thesis h2 {
+    margin-top: 1rem;
+    color: var(--ml-paper);
+  }
+
+  .loop-thesis ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .loop-thesis li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 1rem;
+    color: color-mix(in srgb, var(--ml-paper) 82%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--ml-paper) 14%, transparent);
+    font-size: 0.95rem;
+  }
+
+  .loop-thesis li span {
+    color: color-mix(in srgb, var(--ml-paper) 36%, transparent);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+  }
+
+  .loop-cycle {
+    display: grid;
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .loop-cycle li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    min-height: 7.5rem;
+    padding: 1.25rem;
+    background: var(--ml-paper-raised);
+    border: 1px solid var(--ml-line);
+  }
+
+  .loop-cycle li > span,
+  .loop-cycle li > i {
+    color: var(--ml-muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.64rem;
+    font-style: normal;
+  }
+
+  .loop-cycle h3 {
+    margin: 0;
+    color: var(--ml-ink);
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+
+  .loop-cycle p {
+    margin: 0.35rem 0 0;
+    color: var(--ml-muted);
+    font-size: 0.82rem;
+  }
+
+  .loop-deep-dive {
+    display: grid;
+    gap: clamp(2rem, 5vw, 5rem);
+    padding-block: clamp(3rem, 7vw, 6rem);
+    border-top: 1px solid var(--ml-line);
+  }
+
+  .loop-deep-dive__copy h3 {
+    margin: 0.8rem 0 0;
+    color: var(--ml-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(1.8rem, 3.7vw, 3.4rem);
+    font-weight: 400;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .loop-decision-grid {
+    margin-top: 2rem;
+  }
+
+  .loop-decision-grid div {
+    display: grid;
+    gap: 0.5rem;
+    padding-block: 0.9rem;
+    border-top: 1px solid var(--ml-line);
+  }
+
+  .loop-decision-grid span {
+    color: var(--ml-clay);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .loop-decision-grid p {
+    margin: 0;
+    color: var(--ml-muted);
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .loop-screen--detail .loop-screen__placeholder {
+    min-height: 28rem;
+  }
+
+  .loop-system-grid,
+  .loop-validation-grid {
+    display: grid;
+    gap: 1px;
+  }
+
+  .loop-system-grid h3 {
+    margin-top: 1.4rem;
+  }
+
+  .loop-architecture {
+    margin: 1rem 0 0;
+    min-height: 20rem;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    text-align: center;
+    background:
+      linear-gradient(var(--ml-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--ml-line) 1px, transparent 1px),
+      var(--ml-paper-deep);
+    background-size: 3rem 3rem;
+    border: 1px solid var(--ml-line);
+    border-radius: 0.5rem;
+  }
+
+  .loop-architecture div {
+    display: grid;
+    max-width: 34rem;
+  }
+
+  .loop-architecture span,
+  .loop-architecture small {
+    color: var(--ml-muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .loop-architecture strong {
+    margin-block: 0.8rem;
+    color: var(--ml-ink);
+    font-size: clamp(1.4rem, 3vw, 2.4rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+  }
+
+  .loop-validation-grid article {
+    min-height: 22rem;
+  }
+
+  .loop-validation-grid h3 {
+    margin-top: 3rem;
+    font-size: 1.6rem;
+  }
+
+  .loop-validation-grid ul {
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .loop-validation-grid li {
+    padding-block: 0.65rem;
+    color: var(--ml-ink-soft);
+    border-top: 1px solid var(--ml-line);
+    font-size: 0.84rem;
+  }
+
+  .loop-evidence-placeholder {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding: 1.5rem;
+    background: var(--ml-paper-deep);
+    border: 1px dashed var(--ml-line-strong);
+  }
+
+  .loop-evidence-placeholder span {
+    color: var(--ml-clay);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .loop-evidence-placeholder p {
+    margin: 0;
+    color: var(--ml-muted);
+    font-size: 0.9rem;
+  }
+
+  .loop-reflection {
+    width: 100% !important;
+    max-width: none !important;
+    padding: clamp(5rem, 10vw, 9rem) max(1.5rem, calc((100vw - 72rem) / 2));
+    background: var(--ml-paper-deep);
+    border-top: 1px solid var(--ml-line);
+  }
+
+  .loop-reflection h2 {
+    max-width: 17ch;
+    margin-top: 1rem;
+  }
+
+  .loop-reflection > div {
+    display: grid;
+    gap: 1rem;
+    margin-top: clamp(3rem, 7vw, 6rem);
+  }
+
+  .loop-reflection > div p {
+    margin: 0;
+    padding-top: 1rem;
+    color: var(--ml-muted);
+    border-top: 1px solid var(--ml-line);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .loop-reflection > div span {
+    display: block;
+    margin-bottom: 0.55rem;
+    color: var(--ml-clay);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 720px) {
+    .loop-section-head {
+      grid-template-columns: minmax(9rem, 0.28fr) minmax(0, 1fr);
+    }
+
+    .loop-opening__screens {
+      grid-template-columns: 1.35fr 0.825fr 0.825fr;
+      align-items: end;
+    }
+
+    .loop-screen--primary .loop-screen__placeholder {
+      min-height: 22rem;
+    }
+
+    .loop-facts,
+    .loop-broken-flow {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .loop-facts div {
+      padding-inline: 1.25rem;
+      border-right: 1px solid var(--ml-line);
+    }
+
+    .loop-facts div:first-child {
+      padding-left: 0;
+    }
+
+    .loop-broken-flow {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .loop-opportunity {
+      grid-template-columns: minmax(8rem, 0.25fr) minmax(0, 0.85fr) minmax(16rem, 0.55fr);
+      align-items: start;
+    }
+
+    .loop-thesis {
+      grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.75fr);
+    }
+
+    .loop-cycle {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .loop-deep-dive {
+      grid-template-columns: minmax(0, 0.9fr) minmax(24rem, 1.1fr);
+      align-items: center;
+    }
+
+    .loop-deep-dive--reverse .loop-deep-dive__copy {
+      order: 2;
+    }
+
+    .loop-system-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .loop-validation-grid,
+    .loop-reflection > div {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

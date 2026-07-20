@@ -18,6 +18,12 @@ const {
   coverImage,
   coverFit,
   coverPosition,
+  showHeroCover,
+  category,
+  status,
+  role,
+  stack,
+  github,
 } = project.data;
 
 const coverRetina = coverImage?.replace(/\.(png|jpe?g|webp)$/i, '@2x.$1');
@@ -34,22 +40,48 @@ const hasRetinaCover =
       <p class="case-study-hero__lede">{description}</p>
       {descriptionExtra && <p class="case-study-hero__intro">{descriptionExtra}</p>}
 
-      {
-        liveUrl && (
-          <div class="case-study-hero__actions">
+      <div class="case-study-hero__actions">
+        {
+          liveUrl && (
             <a class="case-study-hero__demo-cta" href={liveUrl} target="_blank" rel="noopener noreferrer">
               <span>
                 {liveLabel} <span aria-hidden="true">&rarr;</span>
               </span>
               {liveCtaNote && <small>{liveCtaNote}</small>}
             </a>
-          </div>
-        )
-      }
+          )
+        }
+        {
+          github && (
+            <a class="case-study-hero__source-link" href={github} target="_blank" rel="noopener noreferrer">
+              View source <span aria-hidden="true">↗</span>
+            </a>
+          )
+        }
+      </div>
+
+      <dl class="case-study-hero__meta">
+        <div>
+          <dt>System</dt>
+          <dd>{category}</dd>
+        </div>
+        <div>
+          <dt>Role</dt>
+          <dd>{role}</dd>
+        </div>
+        <div>
+          <dt>Status</dt>
+          <dd>{status}</dd>
+        </div>
+        <div>
+          <dt>Built with</dt>
+          <dd>{stack.join(' · ')}</dd>
+        </div>
+      </dl>
     </div>
 
     {
-      coverImage && (
+      coverImage && showHeroCover && (
         <div class="case-study-hero__artifact">
           {
             hasRetinaCover ? (
@@ -83,21 +115,16 @@ const hasRetinaCover =
 
 <style>
   .case-study-hero {
-    --case-study-navy: var(--ml-ink);
-    --case-study-navy-deep: var(--ml-ink-soft);
-    --case-study-paper: var(--ml-paper);
-    --case-study-sand: var(--ml-paper-deep);
-    --case-study-ink: var(--ml-ink);
-    --case-study-muted: var(--ml-muted);
-    --case-study-line: var(--ml-line);
-    background: var(--case-study-paper);
-    border-bottom: 1px solid var(--case-study-line);
-    color: var(--case-study-ink);
-    padding: clamp(3.25rem, 7vw, 6rem) 0 2.25rem;
+    background: var(--ml-paper);
+    border-bottom: 1px solid var(--ml-line);
+    color: var(--ml-ink);
+    padding: clamp(4rem, 8vw, 7.5rem) 0 2.5rem;
   }
 
   .case-study-hero :global(.container-main) {
-    max-width: 1180px;
+    width: var(--ml-shell);
+    max-width: none;
+    padding-inline: 0;
   }
 
   .case-study-hero__label {
@@ -109,10 +136,7 @@ const hasRetinaCover =
   }
 
   .case-study-hero__label {
-    color: var(--case-study-navy);
-  }
-
-  .case-study-hero__label {
+    color: var(--ml-muted);
     margin: 0;
   }
 
@@ -121,17 +145,21 @@ const hasRetinaCover =
   }
 
   .case-study-hero h1 {
-    color: var(--case-study-ink);
-    font-size: clamp(2.8rem, 7vw, 6.4rem);
-    letter-spacing: -0.055em;
-    line-height: 0.93;
+    color: var(--ml-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(3rem, 7vw, 6.6rem);
+    font-weight: 400;
+    letter-spacing: -0.065em;
+    line-height: 0.95;
     margin: 1rem 0 0;
     max-width: 920px;
+    text-wrap: balance;
   }
 
   .case-study-hero__lede {
-    color: var(--case-study-ink);
+    color: var(--ml-ink-soft);
     font-size: clamp(1.1rem, 2vw, 1.42rem);
+    font-weight: 300;
     line-height: 1.55;
     margin: 1.5rem 0 0;
     max-width: 800px;
@@ -139,7 +167,7 @@ const hasRetinaCover =
 
   .case-study-hero__intro {
     border-left: 1px solid var(--ml-line-strong);
-    color: var(--case-study-muted);
+    color: var(--ml-muted);
     font-size: 1rem;
     line-height: 1.75;
     margin: 1.25rem 0 0;
@@ -148,6 +176,7 @@ const hasRetinaCover =
   }
 
   .case-study-hero__actions {
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
@@ -156,8 +185,8 @@ const hasRetinaCover =
 
   .case-study-hero__demo-cta {
     align-items: center;
-    background: var(--case-study-navy);
-    border: 1px solid var(--case-study-navy);
+    background: var(--ml-ink);
+    border: 1px solid var(--ml-ink);
     border-radius: 0.35rem;
     box-shadow: 0 10px 26px rgba(31, 31, 28, 0.12);
     color: var(--ml-paper);
@@ -176,8 +205,8 @@ const hasRetinaCover =
   }
 
   .case-study-hero__demo-cta:hover {
-    background: var(--case-study-navy-deep);
-    border-color: var(--case-study-navy-deep);
+    background: var(--ml-ink-soft);
+    border-color: var(--ml-ink-soft);
     transform: translateY(-1px);
   }
 
@@ -195,10 +224,54 @@ const hasRetinaCover =
     letter-spacing: 0.1em;
   }
 
+  .case-study-hero__source-link {
+    color: var(--ml-ink-soft);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .case-study-hero__source-link:hover {
+    color: var(--ml-clay);
+  }
+
+  .case-study-hero__meta {
+    display: grid;
+    gap: 1.5rem 2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: clamp(3rem, 6vw, 5.5rem) 0 0;
+    padding: 1.2rem 0 0;
+    border-top: 1px solid var(--ml-line);
+  }
+
+  .case-study-hero__meta div {
+    min-width: 0;
+  }
+
+  .case-study-hero__meta dt {
+    color: var(--ml-muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .case-study-hero__meta dd {
+    margin: 0.45rem 0 0;
+    color: var(--ml-ink-soft);
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
   .case-study-hero__artifact {
-    border-radius: 0;
-    margin: 2rem 0 0;
+    background: var(--ml-paper-deep);
+    border: 1px solid var(--ml-line);
+    border-radius: 0.5rem;
+    margin: 2.5rem 0 0;
     overflow: hidden;
+    padding: clamp(0.65rem, 1.5vw, 1.25rem);
   }
 
   .case-study-hero__artifact picture {
@@ -208,6 +281,13 @@ const hasRetinaCover =
   .case-study-hero__artifact img {
     display: block;
     width: 100%;
+    border-radius: 0.35rem;
+  }
+
+  @media (min-width: 760px) {
+    .case-study-hero__meta {
+      grid-template-columns: 0.8fr 1.35fr 0.55fr 1.3fr;
+    }
   }
 
   @media (max-width: 640px) {

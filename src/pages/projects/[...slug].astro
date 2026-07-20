@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../components/Layout.astro';
-import ProjectHero from '../../components/ProjectHero.astro';
 import CaseStudyHero from '../../components/case-study/CaseStudyHero.astro';
 import OutcomeList from '../../components/OutcomeList.astro';
 import RelatedProjects from '../../components/RelatedProjects.astro';
@@ -30,16 +29,103 @@ const isCaseStudy = caseStudySlugs.includes(project.slug as (typeof caseStudySlu
 ---
 
 <Layout title={`${title} — Michael Low`} description={description} ogImage={project.data.coverImage}>
-  {isCaseStudy ? <CaseStudyHero project={project} /> : <ProjectHero project={project} />}
-  <article class:list={['pb-24 md:pb-32', isCaseStudy ? 'pt-0' : 'pt-8 md:pt-12']}>
-    <div class="container-main max-w-4xl">
+  <main class="project-case-study">
+    <CaseStudyHero project={project} />
+    <article class="project-case-study__article">
+      <div class="project-case-study__body">
       {!isCaseStudy && outcomes.length > 0 && <OutcomeList outcomes={outcomes} />}
-      <div
-        class="prose-content mt-4 text-muted [&_a]:text-amber-accent [&_a]:hover:underline [&_h2]:mb-6 [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:text-off-white [&_h2:first-child]:mt-0 [&_h2:not(:first-child)]:mt-20 [&_h2:not(:first-child)]:md:mt-24 [&_h3]:mb-2 [&_h3]:text-lg [&_h3]:text-off-white [&_li]:ml-4 [&_li]:list-disc [&_p+p]:mt-4 [&_p]:leading-relaxed [&_p]:text-[15px] [&_p]:md:text-base [&_strong]:text-off-white [&_ul]:space-y-2"
-      >
-        <Content />
+        <div class="project-case-study__content">
+          <Content />
+        </div>
       </div>
       <RelatedProjects projects={allProjects} currentSlug={project.slug} />
-    </div>
-  </article>
+    </article>
+  </main>
 </Layout>
+
+<style>
+  .project-case-study {
+    background: var(--ml-paper);
+    color: var(--ml-ink);
+  }
+
+  .project-case-study__article {
+    padding-block: clamp(3.5rem, 7vw, 7rem);
+  }
+
+  .project-case-study__body {
+    width: var(--ml-shell);
+    margin-inline: auto;
+  }
+
+  .project-case-study__content {
+    color: var(--ml-ink-soft);
+  }
+
+  .project-case-study__content :global(> h2),
+  .project-case-study__content :global(> h3),
+  .project-case-study__content :global(> p),
+  .project-case-study__content :global(> ul),
+  .project-case-study__content :global(> ol) {
+    width: min(100%, 46rem);
+    margin-inline: auto;
+  }
+
+  .project-case-study__content :global(> h2) {
+    margin-top: clamp(4.5rem, 8vw, 8rem);
+    margin-bottom: 1.25rem;
+    color: var(--ml-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 4vw, 3.7rem);
+    font-weight: 400;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .project-case-study__content :global(> h2:first-child) {
+    margin-top: 0;
+  }
+
+  .project-case-study__content :global(> h3) {
+    margin-top: 2.5rem;
+    margin-bottom: 0.65rem;
+    color: var(--ml-ink);
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    font-weight: 500;
+  }
+
+  .project-case-study__content :global(> p),
+  .project-case-study__content :global(> li) {
+    font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+    font-weight: 300;
+    line-height: 1.78;
+  }
+
+  .project-case-study__content :global(> p + p) {
+    margin-top: 1rem;
+  }
+
+  .project-case-study__content :global(> ul),
+  .project-case-study__content :global(> ol) {
+    margin-top: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
+  .project-case-study__content :global(> ul li),
+  .project-case-study__content :global(> ol li) {
+    margin-top: 0.55rem;
+    line-height: 1.65;
+  }
+
+  .project-case-study__content :global(a) {
+    color: var(--ml-clay);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .project-case-study__content :global(strong) {
+    color: var(--ml-ink);
+    font-weight: 500;
+  }
+</style>

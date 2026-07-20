@@ -6,7 +6,7 @@ const projectSchema = z.object({
   /** Optional second hero paragraph below description (case study pages). */
   descriptionExtra: z.string().optional(),
   date: z.coerce.date(),
-  status: z.enum(['Built', 'Prototype', 'In Progress', 'Concept']),
+  status: z.enum(['Live', 'Built', 'Prototype', 'In Progress', 'Concept']),
   category: z.string(),
   type: z.enum(['product', 'workflow']),
   stack: z.array(z.string()),
@@ -19,6 +19,8 @@ const projectSchema = z.object({
   /** Card thumbnail: contain = full UI visible; cover = fill crop (best for designed SVGs). */
   coverFit: z.enum(['cover', 'contain']).optional(),
   coverPosition: z.enum(['center', 'top']).optional(),
+  /** Hide the standard hero artifact when a case study provides its own opening-screen composition. */
+  showHeroCover: z.boolean().default(true),
   github: z.string().url().optional(),
   liveUrl: z.string().url().optional(),
   /** Case study hero CTA label (e.g. View live site, Open live demo). */

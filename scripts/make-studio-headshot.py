@@ -1,4 +1,4 @@
-"""Rebuild a clean, brighter studio cutout from the original headshot."""
+"""Rebuild a clean, naturally lit studio cutout from the original headshot."""
 from pathlib import Path
 import ssl
 import urllib.request
@@ -34,10 +34,11 @@ def main() -> None:
     alpha = alpha.filter(ImageFilter.GaussianBlur(0.25))
 
     rgb = cut.convert("RGB")
-    rgb = ImageEnhance.Brightness(rgb).enhance(1.32)
-    rgb = ImageEnhance.Contrast(rgb).enhance(1.06)
-    rgb = ImageEnhance.Color(rgb).enhance(0.96)
-    rgb = ImageEnhance.Sharpness(rgb).enhance(1.15)
+    rgb = ImageEnhance.Brightness(rgb).enhance(1.30)
+    rgb = ImageEnhance.Contrast(rgb).enhance(1.08)
+    rgb = ImageEnhance.Color(rgb).enhance(0.97)
+    rgb = ImageEnhance.Sharpness(rgb).enhance(1.28)
+    rgb = rgb.filter(ImageFilter.UnsharpMask(radius=1.1, percent=65, threshold=3))
 
     r, g, b = rgb.split()
     r = r.point(lambda x: int(x * 0.985))

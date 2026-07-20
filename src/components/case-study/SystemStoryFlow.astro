@@ -56,16 +56,14 @@ const hasQuestions = questions.length > 0;
 
 <style>
   .case-study-system-flow {
-    --case-study-navy: #1f344a;
-    --case-study-navy-deep: #162a3d;
-    --case-study-paper: #f7f6f1;
-    --case-study-sand: #f0ebe3;
-    --case-study-ink: #111827;
-    --case-study-muted: #4b5563;
-    --case-study-line: #d8d4ca;
-    margin: 5rem 0 1.5rem 50%;
-    transform: translateX(-50%);
-    width: min(100vw - 3rem, 72rem);
+    --case-study-navy: var(--ml-ink);
+    --case-study-paper: var(--ml-paper);
+    --case-study-sand: var(--ml-paper-deep);
+    --case-study-ink: var(--ml-ink);
+    --case-study-muted: var(--ml-muted);
+    --case-study-line: var(--ml-line);
+    margin: clamp(5rem, 9vw, 8rem) auto 1.5rem;
+    width: min(100%, 72rem);
   }
 
   .case-study-system-flow__header {
@@ -77,7 +75,7 @@ const hasQuestions = questions.length > 0;
   }
 
   .case-study-system-flow .case-study-system-flow__label {
-    color: rgba(31, 52, 74, 0.62);
+    color: var(--ml-clay);
     font-family: var(--font-mono, ui-monospace, monospace);
     font-size: 0.72rem;
     font-weight: 700;
@@ -89,8 +87,8 @@ const hasQuestions = questions.length > 0;
 
   .case-study-system-flow .case-study-system-flow__heading {
     color: var(--case-study-ink);
-    font-family: var(--font-serif, Georgia, serif);
-    font-size: clamp(2.25rem, 5.2vw, 4.8rem);
+    font-family: var(--font-sans);
+    font-size: clamp(2.15rem, 4.6vw, 4.2rem);
     font-weight: 400;
     letter-spacing: -0.055em;
     line-height: 0.95;
@@ -99,7 +97,7 @@ const hasQuestions = questions.length > 0;
   }
 
   .case-study-system-flow .case-study-system-flow__note {
-    border-left: 1px solid rgba(31, 52, 74, 0.2);
+    border-left: 1px solid var(--ml-line-strong);
     color: var(--case-study-muted);
     font-size: clamp(0.92rem, 1.2vw, 1rem);
     line-height: 1.65;
@@ -115,29 +113,25 @@ const hasQuestions = questions.length > 0;
   }
 
   .case-study-system-flow__card {
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(246, 242, 235, 0.88)),
-      var(--case-study-sand);
-    border: 1px solid #d7d0c3;
-    box-shadow: 0 12px 34px rgba(31, 52, 74, 0.055);
+    background: color-mix(in srgb, var(--ml-paper-raised) 84%, transparent);
+    border: 1px solid var(--case-study-line);
+    box-shadow: none;
     min-height: 18rem;
     padding: clamp(1.25rem, 2.8vw, 1.8rem);
   }
 
   .case-study-system-flow__cards[data-layout='rows'] {
     background: var(--case-study-sand);
-    border: 1px solid #d7d0c3;
-    border-radius: 1.35rem;
-    box-shadow: 0 12px 34px rgba(31, 52, 74, 0.055);
+    border: 1px solid var(--case-study-line);
+    border-radius: 0;
+    box-shadow: none;
     gap: 0;
     overflow: hidden;
   }
 
   .case-study-system-flow__cards[data-layout='rows'] .case-study-system-flow__card {
     align-items: baseline;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(246, 242, 235, 0.86)),
-      var(--case-study-sand);
+    background: color-mix(in srgb, var(--ml-paper-raised) 84%, transparent);
     border: 0;
     box-shadow: none;
     display: grid;
@@ -148,16 +142,16 @@ const hasQuestions = questions.length > 0;
   }
 
   .case-study-system-flow__cards[data-layout='rows'] .case-study-system-flow__card + .case-study-system-flow__card {
-    border-top: 1px solid rgba(31, 52, 74, 0.16);
+    border-top: 1px solid var(--case-study-line);
   }
 
   .case-study-system-flow__card:first-child {
-    border-top-left-radius: 1.35rem;
-    border-top-right-radius: 1.35rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 
   .case-study-system-flow__card-index {
-    color: rgba(31, 52, 74, 0.26);
+    color: color-mix(in srgb, var(--ml-ink) 25%, transparent);
     display: block;
     font-family: var(--font-serif, Georgia, serif);
     font-size: clamp(2.4rem, 5vw, 3.8rem);
@@ -175,7 +169,7 @@ const hasQuestions = questions.length > 0;
   }
 
   .case-study-system-flow .case-study-system-flow__eyebrow {
-    color: rgba(31, 52, 74, 0.58);
+    color: var(--ml-clay);
     font-family: var(--font-mono, ui-monospace, monospace);
     font-size: 0.68rem;
     font-weight: 700;
@@ -187,7 +181,7 @@ const hasQuestions = questions.length > 0;
 
   .case-study-system-flow .case-study-system-flow__title {
     color: var(--case-study-navy);
-    font-family: var(--font-serif, Georgia, serif);
+    font-family: var(--font-sans);
     font-size: clamp(1.4rem, 2.5vw, 1.9rem);
     letter-spacing: -0.035em;
     line-height: 1.04;
@@ -202,13 +196,11 @@ const hasQuestions = questions.length > 0;
   }
 
   .case-study-system-flow__question-band {
-    background:
-      linear-gradient(180deg, rgba(247, 246, 241, 0.08), rgba(247, 246, 241, 0.02)),
-      var(--case-study-navy);
-    border: 1px solid rgba(31, 52, 74, 0.24);
+    background: var(--case-study-navy);
+    border: 1px solid var(--case-study-navy);
     border-top: 0;
-    border-bottom-left-radius: 1.35rem;
-    border-bottom-right-radius: 1.35rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     overflow: hidden;
@@ -216,9 +208,9 @@ const hasQuestions = questions.length > 0;
 
   .case-study-system-flow .case-study-system-flow__question {
     align-items: center;
-    color: #fffaf2;
+    color: var(--ml-paper);
     display: flex;
-    font-family: var(--font-serif, Georgia, serif);
+    font-family: var(--font-sans);
     font-size: clamp(1.2rem, 2.1vw, 1.7rem);
     letter-spacing: -0.035em;
     line-height: 1.08;
@@ -246,7 +238,7 @@ const hasQuestions = questions.length > 0;
     }
 
     .case-study-system-flow__card:last-child {
-      border-top-right-radius: 1.35rem;
+      border-top-right-radius: 0;
     }
 
     .case-study-system-flow__question + .case-study-system-flow__question {
@@ -264,7 +256,7 @@ const hasQuestions = questions.length > 0;
   @media (max-width: 720px) {
     .case-study-system-flow {
       margin-top: 4rem;
-      width: min(100vw - 2rem, 72rem);
+      width: 100%;
     }
 
     .case-study-system-flow__cards[data-layout='rows'] .case-study-system-flow__card {
