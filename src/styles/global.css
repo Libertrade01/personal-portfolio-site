@@ -3052,38 +3052,23 @@ html[data-theme='dark'] .border-border {
   display: grid;
   grid-template-columns: minmax(16rem, 0.95fr) minmax(22rem, 1.05fr);
   gap: clamp(1.5rem, 5vw, 4.5rem);
-  align-items: end;
+  align-items: center;
 }
 
 .about-v2__photo {
   margin: 0;
-  max-width: 20rem;
+  max-width: 28rem;
   width: 100%;
-  align-self: end;
+  align-self: center;
 }
 
 .about-v2__frame {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 0;
   aspect-ratio: auto;
   background: transparent;
-}
-
-.about-v2__frame::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 28%;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    rgba(247, 246, 241, 0) 0%,
-    rgba(247, 246, 241, 0.55) 45%,
-    rgba(247, 246, 241, 0.96) 100%
-  );
+  line-height: 0;
 }
 
 .about-v2__photo img {
@@ -3091,8 +3076,7 @@ html[data-theme='dark'] .border-border {
   height: auto;
   display: block;
   object-fit: contain;
-  object-position: center bottom;
-  filter: drop-shadow(0 18px 28px rgba(48, 47, 43, 0.12));
+  object-position: center center;
 }
 
 .about-v2__photo figcaption {
@@ -3239,7 +3223,7 @@ html[data-theme='dark'] .border-border {
   }
 
   .about-v2__photo {
-    max-width: 18rem;
+    max-width: 22rem;
   }
 
   .about-v2__principle-list article {
