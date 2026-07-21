@@ -1,0 +1,71 @@
+---
+title: Macro Signal Room
+description: A live macro research desk that compresses the market call, what changed, next tests, and the drivers behind the view into one readable room.
+descriptionExtra: The room keeps the primary call, revision notes, upcoming tests, and the bigger-picture drivers in one frame — so the thesis stays operable instead of buried in notes.
+date: 2026-07-21
+status: Prototype
+category: Macro research system
+type: product
+stack: [Next.js, TypeScript, Vercel]
+featured: true
+order: 3
+role: Solo builder — product design, research structure, implementation
+outcomes:
+  - Primary call with confidence and last-update metadata
+  - Since-last-update revisions with what changed, what stays, and why it matters
+  - Next tests with timing windows and invalidation conditions
+  - Bigger-picture driver cards across inflation, policy, rates, and risk
+audience: [employer, personal]
+coverImage: /images/projects/macro-signal-room/cover.png
+cardImage: /images/projects/macro-signal-room/cover-card.png
+coverFit: contain
+coverPosition: top
+systemLine: Call → Revisions → Tests → Drivers
+---
+
+import ProblemGoalSplit from '../../components/case-study/ProblemGoalSplit.astro';
+import Callout from '../../components/Callout.astro';
+
+<ProblemGoalSplit
+  problem={{
+    title: 'Problem',
+    lead: 'Macro views usually live in scattered notes, chat threads, and half-finished dashboards.',
+    items: [
+      'The current call is hard to find when the market moves.',
+      'What changed since the last update is rarely written down clearly.',
+      'Tests, risks, and invalidation conditions stay informal — so the thesis drifts.',
+    ],
+    body: [
+      'The issue is not more data. It is the absence of a stable room that keeps the view, the revisions, and the next tests in one place.',
+    ],
+  }}
+  goal={{
+    title: 'Goal',
+    lead: 'Build a macro signal room that makes the current view operable in one screen.',
+    items: [
+      'Lead with the call and confidence.',
+      'Surface what changed, what stays, and why it matters.',
+      'List the next tests and the drivers behind the broader picture.',
+    ],
+    body: [
+      'The product should feel like a research terminal: dense, calm, and oriented around decision-making rather than chart browsing.',
+    ],
+  }}
+/>
+
+## System
+
+Macro Signal Room is structured as a single operating view:
+
+1. **The call** — the primary thesis, confidence, and last update.
+2. **Since last update** — what changed, what stays, and why it matters.
+3. **Next tests** — timed questions that would confirm or challenge the view.
+4. **Bigger picture** — inflation, policy, rates, and risk as the drivers behind the room.
+
+## Result
+
+Macro Signal Room turns a private research habit into a productized desk. The design priority is orientation: know the call, know what moved, know what to watch next.
+
+<Callout type="tip">
+  The cover screenshot shows the live room layout: the call, revision strip, next tests, and the four driver cards underneath.
+</Callout>

@@ -1,0 +1,69 @@
+---
+title: SENTINEL — Mental-Game Agent
+description: A desktop mental-game agent that catches FOMO, impatience and half-setups in real time — then interrupts the chase before it becomes a trade.
+descriptionExtra: SENTINEL sits on the desk during live sessions: capture the thought, tag the emotion, and get a caution when the urge is running ahead of the setup.
+date: 2026-07-21
+status: Prototype
+category: Trading psychology system
+type: product
+stack: [Python, PyQt6, Anthropic API, Supabase]
+featured: true
+order: 4
+role: Solo builder — product design, desktop UX, agent logic
+outcomes:
+  - Always-on-top status pill with live session clock
+  - Thought capture with emotion tagging during the session
+  - Real-time caution alerts that name the pattern and prescribe a reset
+audience: [employer, personal]
+coverImage: /images/projects/sentinel/cover.png
+cardImage: /images/projects/sentinel/cover-card.png
+coverFit: contain
+coverPosition: center
+systemLine: Thought → Emotion → Caution → Reset
+---
+
+import ProblemGoalSplit from '../../components/case-study/ProblemGoalSplit.astro';
+import Callout from '../../components/Callout.astro';
+
+<ProblemGoalSplit
+  problem={{
+    title: 'Problem',
+    lead: 'Most trading mistakes start in the body before they show up on the chart.',
+    items: [
+      'FOMO and impatience arrive as a story that feels urgent and rational in the moment.',
+      'Journaling after the session is too late — the scratch trade already happened.',
+      'There is no interrupt between the urge and the click.',
+    ],
+    body: [
+      'The gap is not more education. It is a live agent that can catch the pattern while the market is still open.',
+    ],
+  }}
+  goal={{
+    title: 'Goal',
+    lead: 'Build a mental-game agent that sits on the desk and intervenes before the chase becomes a trade.',
+    items: [
+      'Capture the thought in the moment.',
+      'Tag the emotion without leaving the session.',
+      'Surface a caution that names the pattern and gives a concrete reset.',
+    ],
+    body: [
+      'SENTINEL should feel like a coach on the glass: fast to open, hard to ignore, and specific enough to change the next action.',
+    ],
+  }}
+/>
+
+## System
+
+SENTINEL runs as a desktop overlay during live sessions:
+
+1. **Status pill** — always-on-top clock so the agent stays present without owning the screen.
+2. **Capture panel** — thought entry, emotion tags, and optional lessons in one pass.
+3. **Caution alert** — when the pattern matches, name it, explain the trap, and prescribe a short reset.
+
+## Result
+
+SENTINEL turns post-session journaling into an in-session interrupt. The design priority is speed and specificity: catch the urge, name it, and create a pause before the trade.
+
+<Callout type="tip">
+  The cover shows the live desk composition: status pill, capture panel with FOMO and Impatient tagged, and a caution alert that reframes the chase.
+</Callout>
