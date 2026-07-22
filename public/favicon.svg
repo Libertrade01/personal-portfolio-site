@@ -1,4 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="6" fill="#0f1115"/>
-  <text x="16" y="22" text-anchor="middle" fill="#d4a853" font-family="Georgia, serif" font-size="16" font-weight="500">ML</text>
+  <rect width="32" height="32" rx="7" fill="#f4f0e8"/>
+  <path
+    fill="#1d1f1e"
+    d="M7.5 24V8.2h3.05l5.45 11.35L21.45 8.2H24.5V24h-2.7V13.05L16.55 24h-1.1L10.2 13.05V24H7.5Z"
+  />
 </svg>
