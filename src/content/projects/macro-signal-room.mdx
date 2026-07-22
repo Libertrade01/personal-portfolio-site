@@ -2,7 +2,7 @@
 title: Macro Signal Room
 description: An automated macro-intelligence dashboard. Hermes watches trusted podcasts and newsletters, summarizes new inputs, and synthesizes a living Room View with evidence and revision history.
 descriptionExtra: >-
-  Not a pile of links — a current macro stance, next tests, regime label, causal
+  Not a pile of links. A current macro stance, next tests, regime label, causal
   drivers, source alignment, and an audit trail of what the system believed when
   the view changed.
 date: 2026-07-21
@@ -12,34 +12,50 @@ type: product
 stack: [Hermes Agent, Next.js, Vercel, Supabase, Python]
 featured: true
 order: 3
-role: Solo builder — product design, research structure, agent pipelines
+role: Solo builder / product design, research structure, agent pipelines
+caseOverview:
+  lead: A living Room View across trusted macro sources.
+  body: >-
+    Macro Signal Room is an automated macro-intelligence dashboard. Hermes Agent
+    watches trusted podcasts and newsletters, summarizes new inputs, and
+    synthesizes them into a living Room View so macro can be followed without
+    manually listening to every episode or reading every letter.
+  note: >-
+    The system brings sources into one room, compares their views, tracks what
+    changed, and keeps a historical trail of the macro view over time. It is not
+    just a summarizer. It maintains a collective macro stance with evidence.
+    Discovery and source credentials stay on the Hermes VPS. This app owns the
+    ingest contract, durable archive, Room View persistence, and the V2 synthesis
+    worker that reads stored inputs and writes a validated living view. It spun
+    out of Briefing Studio and can share the same Supabase project as the earlier
+    briefing stack.
+  facts:
+    - label: Role
+      value: Solo builder / product design, research structure, agent pipelines
+    - label: Stack
+      value: Hermes Agent, Next.js, Vercel, Supabase, Python, scheduled jobs, transcript ingestion
+    - label: Status
+      value: Prototype agentic macro desk
+    - label: Core object
+      value: macro_briefing · slug macro-living
 audience: [employer, personal]
 coverImage: /images/projects/macro-signal-room/cover.png
 cardImage: /images/projects/macro-signal-room/cover-card.png
 coverFit: contain
 coverPosition: top
+coverFrame: browser
+coverFrameLabel: Macro Signal Room
 systemLine: Watch → Summarize → Synthesize → Revise
+github: https://github.com/Libertrade01/Macro-Signal-Room
 ---
 
 import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro';
 
 <ProjectCaseBrief
-  overview={{
-    title: 'Overview',
-    lead: 'A living Room View across trusted macro sources.',
-    body: 'Macro Signal Room is an automated macro-intelligence dashboard. Hermes Agent watches trusted podcasts and newsletters, summarizes new inputs, and synthesizes them into a living Room View — so macro can be followed without manually listening to every episode or reading every letter.',
-    note: 'The system brings sources into one room, compares their views, tracks what changed, and keeps a historical trail of the macro view over time. It is not just a summarizer — it maintains a collective macro stance with evidence.',
-    facts: [
-      { label: 'Role', value: 'Solo builder — product design, research structure, agent pipelines' },
-      { label: 'Stack', value: 'Hermes Agent, Next.js, Vercel, Supabase, Python, scheduled jobs, transcript ingestion' },
-      { label: 'Status', value: 'Prototype agentic macro desk' },
-      { label: 'Core object', value: 'macro_briefing · slug macro-living' },
-    ],
-  }}
   problem={{
     title: 'Problem',
     lead: 'Macro research is a synthesis problem, not just a volume problem.',
-    body: 'Signal is spread across long podcasts, interviews, newsletters, and recurring source views — each with its own vocabulary and cadence. The hard part is knowing whether the collective view has actually changed.',
+    body: 'Signal is spread across long podcasts, interviews, newsletters, and recurring source views, each with its own vocabulary and cadence. The hard part is knowing whether the collective view has actually changed. Trusted inputs today include 1000x Network, Forward Guidance, Capital Flows Research, and Friday Speedrun from the Spectra Markets library.',
     columns: [
       {
         title: 'What the system must do',
@@ -64,7 +80,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
   solution={{
     title: 'Solution',
     lead: 'Agentic pipeline into a durable, structured Room View.',
-    body: 'Hermes monitors sources, summarizes new inputs into the app, then re-runs cross-source synthesis against the stored archive. The current Room View lives as a macro_briefing with slug macro-living; inputs persist as podcast_summary or newsletter_summary.',
+    body: 'Hermes monitors sources, summarizes new inputs into the app, then re-runs cross-source synthesis against the stored archive. The current Room View lives as a macro_briefing with slug macro-living; inputs persist as podcast_summary or newsletter_summary. The living view is stored as content_json with room_view, next_tests, regime, drivers, and source_alignment so the dashboard can render without guessing from prose.',
     pipeline: [
       'Watch trusted sources',
       'Fetch + summarize new input',
@@ -91,14 +107,14 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       },
     ],
     sections: [
-      'Current stance',
+      'The call',
       'Next tests',
-      'Regime label',
-      'Causal drivers',
+      'Current regime',
+      'Causal picture',
       'Source alignment',
-      'Evidence trail',
+      'Since last update',
     ],
-    note: 'Structured Room View JSON lets the frontend render without guessing from prose. Material changes preserve revisions so the prior belief stays auditable.',
+    note: 'Structured Room View JSON lets the frontend render without guessing from prose. Material changes preserve revisions so the prior belief stays auditable. Legacy markdown Room Views still render if content_json is absent.',
   }}
   build={{
     title: 'Implementation & challenges',
@@ -106,7 +122,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
     challenges: [
       {
         title: 'Two ingest paths, one archive',
-        body: 'Podcast monitoring and Friday Speedrun newsletter ingestion both land in Supabase as typed summaries — with discovery, dedupe, fetch, and summarization tuned to each source cadence.',
+        body: 'Podcast monitoring and Friday Speedrun newsletter ingestion both land in Supabase as typed summaries, with discovery, dedupe, fetch, and summarization tuned to each source cadence.',
         tradeoff: 'Trade-off: separate pipelines over one brittle “generic feed” scraper.',
       },
       {
@@ -116,17 +132,17 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       },
       {
         title: 'V2 synthesis with validation gates',
-        body: 'The worker fetches recent inputs, compacts evidence, asks the agent to synthesize, validates structure, and only persists when checks pass — nondeterministic output cannot silently corrupt the living view.',
+        body: 'The worker fetches recent inputs, compacts evidence, asks the agent to synthesize, validates structure, and only persists when checks pass. Default is dry-run. Persisting a reviewed report requires an explicit --persist flag so bad synthesis cannot silently overwrite the living view.',
         tradeoff: 'Trade-off: rejected runs and retries over always-write synthesis.',
       },
       {
         title: 'Structured Room View, not free prose',
-        body: 'Room View JSON carries stance, tests, regime, drivers, alignment, and evidence slugs so the dashboard can render a desk — not parse a chat reply.',
+        body: 'Room View JSON carries room_view, next_tests, regime, drivers, source_alignment, and evidence slugs so the dashboard can render a desk, not parse a chat reply.',
         tradeoff: 'Trade-off: rigid schema over flexible essay output.',
       },
       {
         title: 'Revisions and regime memory',
-        body: 'Historical revisions and regime-change records preserve what the system believed at each material shift — so new evidence is compared against a prior view, not a blank slate.',
+        body: 'Historical revisions and regime-change records preserve what the system believed at each material shift, so new evidence is compared against a prior view, not a blank slate.',
         tradeoff: 'Trade-off: more storage and merge logic for auditability over time.',
       },
     ],
@@ -135,15 +151,13 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
     title: 'Results & learnings',
     lead: 'Trusted macro content became a living intelligence system.',
     items: [
-      'Monitors sources automatically and summarizes podcasts and newsletters.',
-      'Keeps a durable input archive separate from the synthesized Room View.',
-      'Maintains a current stance with next tests, regime, drivers, and source alignment.',
+      'Maintains a current call with next tests, regime, causal drivers, and source alignment.',
       'Preserves evidence-linked revisions when the view changes.',
       'Separates input count from source count on a readable dashboard.',
       'Feels less like a chatbot and more like an automated analyst desk.',
     ],
     pullquote:
-      'Macro Signal Room is an agentic synthesis system, not just a summarization app. Hermes monitors trusted source lists, detects new podcast and newsletter inputs, fetches transcripts or article text, summarizes each input, then re-runs a cross-source synthesis against the stored archive. The V2 worker produces a structured Room View payload with revision metadata, regime state, causal drivers, source alignment, evidence slugs, and validation checks before persistence. The key engineering challenge was maintaining reliable macro state over time: separating raw inputs from synthesized views, validating nondeterministic model output, and preserving historical revisions so the system can be audited.',
+      'The hard part was not summarizing episodes. It was keeping a living macro view that knows its prior belief, checks new evidence against it, and only writes when the structured Room View passes validation.',
     next: [
       'Backtesting of prior Room Views against later outcomes',
       'Source-level reliability scoring over time',
@@ -151,11 +165,13 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       'Model evals for synthesis consistency',
       'A human approval queue for major regime changes',
     ],
-    note: 'Agentic AI becomes more valuable when it is connected to durable state and evidence. A one-off summary is not enough — the system needs to know its prior view, compare new evidence against it, and decide whether a change is material.',
+    note: 'Agentic AI becomes more valuable when it is connected to durable state and evidence. A one-off summary is not enough. The system needs to know its prior view, compare new evidence against it, and decide whether a change is material.',
   }}
   screenshot={{
     src: '/images/projects/macro-signal-room/cover.png',
     alt: 'Macro Signal Room desk layout',
     caption: 'Room View · inputs · revisions · evidence',
+    frame: 'browser',
+    frameLabel: 'Macro Signal Room',
   }}
 />

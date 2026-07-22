@@ -6,9 +6,9 @@ import { getFeaturedProjects } from '../utils/content';
 const featured = await getFeaturedProjects();
 const priority = [
   'libertrade-journal-analytics',
-  'ai-daily-pulse',
-  'macro-signal-room',
   'sentinel-mental-game-agent',
+  'macro-signal-room',
+  'ai-daily-pulse',
 ];
 const systems = priority
   .map((slug) => featured.find((project) => project.slug === slug))

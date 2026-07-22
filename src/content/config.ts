@@ -13,6 +13,20 @@ const projectSchema = z.object({
   featured: z.boolean().default(false),
   order: z.number().default(99),
   role: z.string().default('Solo builder — design, implementation, deployment'),
+  /** Overview content integrated into the case-study hero. */
+  caseOverview: z
+    .object({
+      lead: z.string(),
+      body: z.string(),
+      note: z.string().optional(),
+      facts: z.array(
+        z.object({
+          label: z.string(),
+          value: z.string(),
+        }),
+      ),
+    })
+    .optional(),
   outcomes: z.array(z.string()).default([]),
   audience: z.array(z.enum(['smb', 'employer', 'personal'])).default([]),
   coverImage: z.string().optional(),
@@ -21,6 +35,9 @@ const projectSchema = z.object({
   /** Card thumbnail: contain = full UI visible; cover = fill crop (best for designed SVGs). */
   coverFit: z.enum(['cover', 'contain']).optional(),
   coverPosition: z.enum(['center', 'top']).optional(),
+  /** Optional product-window treatment for case-study screenshots. */
+  coverFrame: z.enum(['browser', 'window']).optional(),
+  coverFrameLabel: z.string().optional(),
   /** Hide the standard hero artifact when a case study provides its own opening-screen composition. */
   showHeroCover: z.boolean().default(true),
   /** Optional one-line operating loop shown on homepage feature cards. */

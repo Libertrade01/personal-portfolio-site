@@ -191,6 +191,8 @@ export const workPage = {
 
 export const featuredProjectSlugs = [
   'libertrade-journal-analytics',
+  'sentinel-mental-game-agent',
+  'macro-signal-room',
   'ai-daily-pulse',
   'book-inmobiliaria',
   'raiz-life-journal',

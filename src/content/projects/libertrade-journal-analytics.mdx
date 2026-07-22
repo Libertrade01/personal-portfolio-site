@@ -2,7 +2,7 @@
 title: Libertrade LOOP
 description: A trading performance operating system that combines readiness scoring, process journaling, broker trade import, weekly review, and an AI assistant over the trader’s own data.
 descriptionExtra: >-
-  Close the loop between readiness, planning, execution, and review — with AI
+  Close the loop between readiness, planning, execution, and review, with AI
   grounded in the trader’s own process data, not generic trading advice.
 date: 2026-05-01
 status: Live
@@ -12,11 +12,37 @@ stack: [Next.js, React, Supabase, Vercel, OpenAI, AI SDK, Chart.js]
 featured: true
 order: 1
 role: Builder / product owner / workflow designer
+caseOverview:
+  lead: A trading performance OS built around closing the loop.
+  body: >-
+    Libertrade LOOP guides discretionary traders through a full daily workflow:
+    pre-market check-in, session plan, trade import, post-market review,
+    analytics, weekly process review, prop account tracking, and AI-assisted
+    reflection, so review focuses on process quality, not only profit and loss.
+  note: >-
+    The focus is not “Did I make money today?” It is: Was I ready, did I follow
+    my plan, and what does the data say about my behaviour? LOOP is built as a
+    product other discretionary futures traders can use, not only a personal
+    journal. Process settings and the public landing path are there so someone
+    else can run their own readiness, plan, and review loop without inheriting
+    mine.
+  facts:
+    - label: Role
+      value: Builder / product owner / workflow designer
+    - label: Stack
+      value: Next.js, React, Supabase, Vercel, OpenAI / ChatGPT, AI SDK, Chart.js, Sentry
+    - label: Status
+      value: Full live app · libertrade.app
+    - label: Repo
+      value: github.com/Libertrade01/Libertrade-LOOP
 audience: [employer, personal]
-coverImage: /images/projects/libertrade-analytics/loop-homepage-hd.png
+coverImage: /images/projects/libertrade-analytics/loop-check-in.png
+cardImage: /images/projects/libertrade-analytics/loop-check-in.png
 coverFit: contain
 coverPosition: top
-showHeroCover: false
+coverFrame: browser
+coverFrameLabel: libertrade.app
+showHeroCover: true
 systemLine: Check in → Plan → Trade → Close loop → Review
 liveUrl: https://libertrade.app
 liveLabel: Visit Libertrade LOOP
@@ -27,22 +53,10 @@ github: https://github.com/Libertrade01/Libertrade-LOOP
 import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro';
 
 <ProjectCaseBrief
-  overview={{
-    title: 'Overview',
-    lead: 'A trading performance OS built around closing the loop.',
-    body: 'Libertrade LOOP guides discretionary traders through a full daily workflow: pre-market check-in, session plan, trade import, post-market review, analytics, weekly process review, prop account tracking, and AI-assisted reflection — so review focuses on process quality, not only P&L.',
-    note: 'The focus is not “Did I make money today?” It is: Was I ready, did I follow my plan, and what does the data say about my behaviour?',
-    facts: [
-      { label: 'Role', value: 'Builder / product owner / workflow designer' },
-      { label: 'Stack', value: 'Next.js, React, Supabase, Vercel, OpenAI / ChatGPT, AI SDK, Chart.js, Sentry' },
-      { label: 'Status', value: 'Full live app · libertrade.app' },
-      { label: 'Repo', value: 'github.com/Libertrade01/Libertrade-LOOP' },
-    ],
-  }}
   problem={{
     title: 'Problem',
-    lead: 'Most trading journals capture outcomes — not the conditions that produced them.',
-    body: 'Discretionary performance is shaped by readiness, sleep, stress, emotional state, risk discipline, overtrading, FOMO, revenge behaviour, planning quality, and whether the trader actually followed their own process. Normal journaling captures fragments. LOOP connects them.',
+    lead: 'Most trading journals capture outcomes, not the conditions that produced them.',
+    body: 'Discretionary performance is shaped by readiness, sleep, stress, emotional state, risk discipline, overtrading, FOMO, revenge behaviour, planning quality, and whether the trader actually followed their own process. Normal journaling captures fragments. LOOP connects them into one daily operating system.',
     columns: [
       {
         title: 'Outcome questions (not enough)',
@@ -55,7 +69,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       {
         title: 'Process questions (the real job)',
         items: [
-          'Was I ready — sleep, HRV, emotional state?',
+          'Was I ready: sleep, HRV, emotional state?',
           'Did I plan before risking capital?',
           'Did I follow risk rails and playbook setups?',
           'Are behavioural flags getting better or worse?',
@@ -66,8 +80,8 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
   }}
   solution={{
     title: 'Solution',
-    lead: 'One structured behaviour loop — not another notebook.',
-    body: 'Three daily stages plus higher-level systems: readiness before risk, a plan locked before exposure, and a close-loop review that compares execution to intent. Analytics, weekly review, prop economics, and Loop Intelligence sit on top of that archive.',
+    lead: 'One structured behaviour loop, not another notebook.',
+    body: 'Three daily stages plus higher-level systems: readiness before risk, a plan locked before exposure, and a close-loop review that compares execution to intent. Analytics, weekly review, prop economics, and Loop Intelligence sit on top of that archive so the trader can see patterns across days, not just one session at a time.',
     pipeline: [
       'Pre-market check-in',
       'Session plan',
@@ -79,7 +93,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       {
         title: 'Daily loop',
         items: [
-          'Readiness score from mental, physical, preparation, and external factors — with Preservation Mode when conditions are poor',
+          'Readiness score from mental, physical, preparation, and external factors, with Preservation Mode when conditions are poor',
           'Session plan: bias, levels, thesis, setups, risk rails, and commitments before capital is at risk',
           'Close loop: import trades, rate process, log behavioural flags, force risk-plan-followed honesty',
         ],
@@ -104,18 +118,60 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
     ],
     note: 'A profitable day with bad process is not treated as clean. A flat or down day with clean execution can still be a process win.',
   }}
+  walkthrough={{
+    title: 'Walkthrough',
+    lead: 'Follow the loop through the product surfaces.',
+    body: 'This is the product tour. Real captures sit beside placeholders for screens still to grab from libertrade.app. The carousel keeps the page from stacking eight full-width shots.',
+    shots: [
+      {
+        image: '/images/projects/libertrade-analytics/loop-check-in.png',
+        alt: 'Libertrade LOOP pre-market readiness check-in',
+        label: 'Check-in · readiness before risk',
+      },
+      {
+        alt: 'Libertrade LOOP session plan placeholder',
+        label: 'Session plan · decisions before pressure',
+        placeholder: 'Session plan with risk rails, levels, and commitments',
+      },
+      {
+        alt: 'Libertrade LOOP close-loop review placeholder',
+        label: 'Close loop · import + process honesty',
+        placeholder: 'Close loop with broker import, flags, and plan-followed check',
+      },
+      {
+        alt: 'Libertrade LOOP analytics dashboard placeholder',
+        label: 'Analytics · patterns across sessions',
+        placeholder: 'Analytics dashboard with setup, risk, and adherence charts',
+      },
+      {
+        image: '/images/projects/libertrade-analytics/agent-weekly-review.png',
+        alt: 'Libertrade LOOP weekly agent performance review',
+        label: 'Weekly review · agent synthesis over the week',
+      },
+      {
+        alt: 'Libertrade LOOP prop economics placeholder',
+        label: 'Prop Economics · fees, resets, payouts',
+        placeholder: 'Prop Economics net journey across evaluations and payouts',
+      },
+      {
+        alt: 'Libertrade LOOP Intelligence assistant placeholder',
+        label: 'Loop Intelligence · grounded answers',
+        placeholder: 'Loop Intelligence answering from the trader’s own data',
+      },
+    ],
+  }}
   build={{
     title: 'Implementation & challenges',
     lead: 'Turn subjective human state into structured, queryable process data.',
     challenges: [
       {
         title: 'Weighted readiness engine + guardrails',
-        body: 'Score sleep, HRV, sleep debt, energy, FOMO/revenge risk, preparation, focus, and pressure into a 0–100 readiness score (mental-weighted). Preservation Mode, recovery days, and defence-day rules treat stepping back as a process win.',
+        body: 'Score sleep, HRV, sleep debt, energy, FOMO/revenge risk, preparation, focus, and pressure into a 0-100 readiness score (mental-weighted). Preservation Mode, recovery days, and defence-day rules treat stepping back as a process win when conditions are poor.',
         tradeoff: 'Trade-off: protective rules over “push through” motivation.',
       },
       {
         title: 'Force planning before exposure',
-        body: 'Session plans require risk rails, key levels, commitments, and planning checks before save — so the product is pre-commitment, not optional notes.',
+        body: 'Session plans require risk rails, key levels, commitments, and planning checks before save, so the product is pre-commitment, not optional notes you can skip when impatient.',
         tradeoff: 'Trade-off: friction at the door to protect the session.',
       },
       {
@@ -125,29 +181,40 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       },
       {
         title: 'Weekly patterns and prop economics',
-        body: 'Weekly Process Review aggregates readiness, adherence, flags, and process scores across the week. Prop Economics tracks evaluation fees, resets, and payouts so the prop journey is honest net-net.',
+        body: 'Weekly Process Review aggregates readiness, adherence, flags, and process scores across the week. Prop Economics tracks evaluation fees, resets, and payouts so the prop journey is honest net-net, not a stack of forgotten receipts.',
         tradeoff: 'Trade-off: more product surface for real workflow pain over a thinner journal.',
       },
       {
         title: 'Loop Intelligence as a tool-using agent',
-        body: 'AI assistant with read-only tools (trades, readiness, plans, journals, session dates). System prompt: fetch before answering; never invent trade or journal data. Built with Login with ChatGPT, AI SDK, routing, and rate limiting over scoped Supabase data.',
+        body: 'AI assistant with read-only tools over trades, readiness, plans, journals, and session dates. System rule: fetch before answering; never invent trade or journal data. Built with Login with ChatGPT, AI SDK, routing, and rate limiting over scoped Supabase data.',
         tradeoff: 'Trade-off: grounded tool calls over a generic trading chatbot.',
+      },
+      {
+        title: 'Configurable for other traders, not only my process',
+        body: 'Personal trading processes are specific, so LOOP had to be customizable: process settings, playbook structure, and a public landing/product path so other discretionary futures traders can run their own loop without inheriting mine. That meant productizing beyond a founder-only tool.',
+        tradeoff: 'Trade-off: more configuration surface so the system travels to other desks.',
+      },
+      {
+        title: 'Production bones for a live product',
+        body: 'Supabase auth and RLS, export/delete paths, Sentry, analytics, and tests so LOOP can run as a real multi-user app, not a personal prototype that only works on one machine.',
+        tradeoff: 'Trade-off: operational overhead for a product people can trust with process data.',
       },
     ],
   }}
   results={{
     title: 'Results & learnings',
-    lead: 'A live trading performance operating system — not a P&L diary.',
+    lead: 'A live trading performance operating system, not a profit and loss diary.',
     items: [
-      'Full daily loop live: check-in, plan, import, close loop, analytics.',
+      'Full daily loop live on libertrade.app: check-in, plan, import, close loop, analytics.',
+      'Built as a multi-user product: process settings and landing path so other discretionary futures traders can adapt the loop to their own playbook.',
       'Preservation / recovery guardrails when readiness is poor.',
       'Weekly Process Review turns daily entries into recurring patterns.',
       'Prop Economics makes fees, resets, and payouts visible as one journey.',
-      'Loop Intelligence answers process questions from real user data.',
+      'Loop Intelligence answers process questions from real user data instead of inventing advice.',
       'Production bones: Supabase auth, RLS, export/delete, Sentry, analytics, tests.',
     ],
     pullquote:
-      'Libertrade LOOP combines structured performance data with an AI assistant that can query the user’s own trading history. The app captures pre-market readiness, session plans, imported trades, post-market reviews, behavioural flags, and weekly process summaries. The assistant is a tool-using agent with read-only access to scoped Supabase data — trades, readiness check-ins, plans, journals, and session dates — so it answers from real data instead of inventing generic trading advice. The core engineering challenge was turning subjective human state into structured, queryable data that could be scored, reviewed, and used by an agent without hallucinating.',
+      'The hard part was not adding AI. It was turning readiness, plans, trades, and journals into structured data a tool-using assistant can query without inventing the trader’s history.',
     next: [
       'Deeper AI-generated weekly reviews and next-week process goals',
       'Automatic readiness-vs-performance correlation',
@@ -155,11 +222,13 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       'Real-time session alerts and stronger prop account modelling',
       'Automatic pattern detection across behavioural flags',
     ],
-    note: 'A P&L chart only tells you what happened. A loop tells you why. LOOP is not “AI tells you how to trade” — it helps you understand the process you actually followed.',
+    note: 'A profit and loss chart only tells you what happened. A loop tells you why. LOOP is not “AI tells you how to trade.” It helps you understand the process you actually followed.',
   }}
   screenshot={{
     src: '/images/projects/libertrade-analytics/loop-check-in.png',
     alt: 'Libertrade LOOP pre-market readiness check-in',
-    caption: 'Readiness · plan · close loop · review',
+    caption: 'Featured surface · readiness before risk',
+    frame: 'browser',
+    frameLabel: 'libertrade.app',
   }}
 />

@@ -1,20 +1,45 @@
 ---
 title: AI Daily Pulse
 description: A scheduled agent system that gathers AI signal, synthesizes a fixed daily briefing, and publishes it into a reader you can finish in minutes.
-descriptionExtra: Hermes Agent runs on a cron, posts a validated briefing to the app API, and a Next.js reader surfaces a structured edition — not another infinite feed.
+descriptionExtra: >-
+  Hermes Agent runs on a cron, posts a validated briefing to the app API, and a
+  Next.js reader surfaces a structured edition, not another infinite feed.
 date: 2026-07-20
 status: Live
 category: Applied AI product
 type: product
 stack: [Hermes Agent, Next.js, Vercel, Supabase, TypeScript]
 featured: true
-order: 2
+order: 4
 role: Builder / product owner / workflow designer
+caseOverview:
+  lead: A daily AI briefing product with a fixed reading contract.
+  body: >-
+    AI Daily Pulse turns a noisy stream of product, research, and infra signal
+    into one short edition you can finish. A Hermes Agent gathers and
+    synthesizes on a schedule; the app validates, stores, and renders the result.
+  note: >-
+    This case study covers AI Daily Pulse only. It started inside a broader
+    Briefing Studio, then was deliberately split. Macro podcasts and newsletters
+    moved into a separate Macro Intelligence project so each product could stay
+    focused. Hermes runs on a VPS with the source credentials and synthesis
+    logic. This app exposes the publish contract and the reader.
+  facts:
+    - label: Role
+      value: Builder / product owner / workflow designer
+    - label: Stack
+      value: Hermes Agent, Next.js, Vercel, Supabase, serverless API, markdown
+    - label: Status
+      value: Live daily briefing product
+    - label: Repo
+      value: github.com/Libertrade01/AI-Daily-Pulse
 audience: [employer, personal]
 coverImage: /images/projects/ai-briefing/cover.png
 cardImage: /images/projects/ai-briefing/cover-card.png
 coverFit: contain
 coverPosition: top
+coverFrame: browser
+coverFrameLabel: AI Daily Pulse
 systemLine: Hermes cron → synthesize → API → Supabase → reader
 github: https://github.com/Libertrade01/AI-Daily-Pulse
 ---
@@ -22,22 +47,10 @@ github: https://github.com/Libertrade01/AI-Daily-Pulse
 import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro';
 
 <ProjectCaseBrief
-  overview={{
-    title: 'Overview',
-    lead: 'A daily AI briefing product with a fixed reading contract.',
-    body: 'AI Daily Pulse turns a noisy stream of product, research, and infra signal into one short edition you can finish. A Hermes Agent gathers and synthesizes on a schedule; the app validates, stores, and renders the result.',
-    note: 'This case study covers AI Daily Pulse only. It started inside a broader Briefing Studio, then was deliberately split — macro podcasts and newsletters moved into a separate Macro Intelligence project so each product could stay focused.',
-    facts: [
-      { label: 'Role', value: 'Builder / product owner / workflow designer' },
-      { label: 'Stack', value: 'Hermes Agent, Next.js, Vercel, Supabase, serverless API, markdown' },
-      { label: 'Status', value: 'Live daily briefing product' },
-      { label: 'Repo', value: 'github.com/Libertrade01/AI-Daily-Pulse' },
-    ],
-  }}
   problem={{
     title: 'Problem',
     lead: 'Useful AI signal is scattered. Nothing packages the day.',
-    body: 'The issue is not access to information. It is the absence of a stable daily format — and an engineering path from raw sources to a finished edition.',
+    body: 'The issue is not access to information. It is the absence of a stable daily format, and an engineering path from raw sources to a finished edition.',
     columns: [
       {
         title: 'Where signal lives',
@@ -45,7 +58,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
           'Product launches and model updates across vendors',
           'Research papers and model cards',
           'Infra, security, and policy shifts',
-          'High-noise social threads with occasional signal',
+          'High-noise social threads with occasional signal from lists like X AI List, TechCrunch, and Papers',
         ],
       },
       {
@@ -62,7 +75,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
   solution={{
     title: 'Solution',
     lead: 'Agent synthesizes. App validates, stores, and renders.',
-    body: 'The product is a pipeline with a hard boundary: Hermes owns gathering and synthesis; the Next.js app owns ingest, storage, and reading.',
+    body: 'The product is a pipeline with a hard boundary. Hermes owns gathering and synthesis on a VPS. The Next.js app owns ingest, storage, and reading. Hermes posts structured fields such as type, date, status, primary_signal, sources, and content_markdown.',
     pipeline: [
       'Hermes cron wakes on schedule',
       'Gather + synthesize the day',
@@ -74,7 +87,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       {
         title: 'Hermes Agent (VPS)',
         items: [
-          'Scheduled run — gather sources, synthesize markdown',
+          'Scheduled run: gather sources, synthesize markdown',
           'Owns editorial judgment and source selection',
           'Posts a structured payload to the app ingest endpoint',
         ],
@@ -83,26 +96,26 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
         title: 'App (Next.js / Vercel)',
         items: [
           'Bearer-auth ingest API with schema validation',
-          'Supabase storage for editions',
+          'Supabase storage for editions, with public read for ready/published rows',
           'Section-aware reader with a fixed reading path',
         ],
       },
     ],
     sections: [
-      'Day in 30 seconds',
+      'Three things to know',
       'The Pulse',
       'Product / Model Releases',
       'Research / Models',
       'Infra / Security / Policy',
-      'X List',
+      'On X',
       'Watchlist',
       'Your takeaway',
     ],
-    note: 'Every edition shares the same section frame so the reader learns the product once and returns for the content.',
+    note: 'Every edition shares the same section frame so the reader learns the product once and returns for the content. A jobs table is designed for pending, running, completed, and failed runs, but today Hermes can POST a finished briefing directly through the ingest contract.',
   }}
   build={{
     title: 'Implementation & challenges',
-    lead: 'Applied AI is contracts, boundaries, and rendering — not just prompts.',
+    lead: 'Applied AI is contracts, boundaries, and rendering, not just prompts.',
     challenges: [
       {
         title: 'Briefing contract before clever prompts',
@@ -116,12 +129,12 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       },
       {
         title: 'Agent on VPS, app on Vercel',
-        body: 'Long-running scheduled gathering does not belong in serverless request paths. Hermes stays on a VPS cron; the app stays deployable and cacheable on Vercel.',
+        body: 'Long-running scheduled gathering does not belong in serverless request paths. Hermes stays on a VPS cron with source credentials. This repo is the publish contract and reader.',
         tradeoff: 'Trade-off: two runtimes to operate, clearer failure domains.',
       },
       {
         title: 'Section-aware reader parsing',
-        body: 'The UI is not a generic markdown dump. Parsing has to map headings into the fixed reading path so filters and hierarchy stay intentional.',
+        body: 'The UI is not a generic markdown dump. Parsing maps headings into the fixed reading path so filters and hierarchy stay intentional.',
         tradeoff: 'Trade-off: tighter coupling to the contract, faster scan in the product.',
       },
       {
@@ -135,19 +148,18 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
     title: 'Results & learnings',
     lead: 'A monitoring habit became a shippable daily product.',
     items: [
-      'Live pipeline: scheduled Hermes run → validated ingest → stored edition → reader.',
-      'Fixed editorial contract makes every day feel like the same product.',
-      'Clear runtime split: agent synthesis vs app delivery.',
-      'Bearer-auth boundary between write path and public read path.',
-      'Deliberate product split kept Pulse focused on AI signal.',
+      'Daily editions land in a fixed reader path instead of another feed.',
+      'Validated ingest keeps agent output behind an auth and schema boundary.',
+      'Runtime split keeps synthesis on the VPS and delivery on Vercel.',
+      'Product split kept Pulse focused on AI signal.',
       'Reader path optimized for finishability, not completeness.',
     ],
     pullquote:
-      'Hiring managers evaluating applied AI should see contracts, validation, storage, auth boundaries, and rendering — not a demo that stops at the prompt.',
+      'The useful part of applied AI here is not the prompt. It is the contract, validation, storage, auth boundary, and rendering path that turns a scheduled agent run into a product people can finish.',
     next: [
       'Tighter source ranking and confidence labels on claims',
       'Edition history and compare-day views',
-      'Richer watchlist → follow-up workflows',
+      'Richer watchlist follow-up workflows',
       'Stronger eval loop on synthesis quality over time',
       'Optional personalization without breaking the shared contract',
     ],
@@ -156,5 +168,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
     src: '/images/projects/ai-briefing/cover.png',
     alt: 'AI Daily Pulse edition layout',
     caption: 'Fixed edition frame · pulse · signal sections',
+    frame: 'browser',
+    frameLabel: 'AI Daily Pulse',
   }}
 />

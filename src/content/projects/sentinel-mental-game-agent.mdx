@@ -1,50 +1,64 @@
 ---
-title: SENTINEL — Mental-Game Agent
-description: A lightweight desktop coaching tool for live trading sessions — always-on-top HUD, emotion tags, and immediate AI feedback when risk states appear.
+title: SENTINEL Mental-Game Agent
+description: A lightweight desktop coaching tool for live trading sessions. Always-on-top HUD, Willow click-to-speak capture, emotion tags, and immediate AI feedback when risk states appear.
 descriptionExtra: >-
-  Capture the thought, tag the emotion, and get a short tiered intervention
+  Speak the thought, tag the emotion, and get a short tiered intervention
   before FOMO or revenge becomes poor execution. Built as an embedded agentic
   loop, not a chatbot.
 date: 2026-07-21
 status: Prototype
 category: Trading psychology system
 type: product
-stack: [Python, PyQt6, Anthropic Claude, Supabase]
+stack: [Python, PyQt6, Anthropic Claude, Willow Dictation, Supabase]
 featured: true
-order: 4
-role: Solo builder — product design, desktop UX, agent logic
+order: 2
+role: Solo builder / product design, desktop UX, agent logic
+caseOverview:
+  lead: A desktop mental-game copilot for live sessions.
+  body: >-
+    SENTINEL sits always-on-top as a lightweight HUD. In the heat of the moment,
+    capture is click-and-speak via Willow dictation into the HUD, so you can get
+    the thought out without typing through the tension. Tag the emotion, and when
+    a risky state appears, an AI coach returns immediate, targeted feedback
+    preloaded with a trader profile and a private mental-game knowledge base.
+  note: >-
+    The coach is grounded in personal notes, trading psychology resources,
+    stress and self-regulation material, and trusted books, not a generic chat
+    prompt. Private coaching context stays in local markdown files outside the
+    public repo. The open code shows the routing, prompt contract, HUD, and
+    persistence path.
+  facts:
+    - label: Role
+      value: Solo builder / product design, desktop UX, agent logic
+    - label: Stack
+      value: Python, PyQt6, Anthropic Claude, Willow Dictation, Supabase
+    - label: Status
+      value: Prototype desktop HUD for live sessions
+    - label: Form
+      value: Always-on-top overlay · pill + expanded modes
 audience: [employer, personal]
 coverImage: /images/projects/sentinel/cover.png
 cardImage: /images/projects/sentinel/cover-card.png
 coverFit: contain
 coverPosition: center
-systemLine: Thought → Emotion → Coach → Journal
+coverFrame: window
+coverFrameLabel: SENTINEL
+systemLine: Speak → Tag → Coach → Journal
+github: https://github.com/Libertrade01/SENTINEL-mental-game-agent
 ---
 
 import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro';
 
 <ProjectCaseBrief
-  overview={{
-    title: 'Overview',
-    lead: 'A desktop mental-game copilot for live sessions.',
-    body: 'SENTINEL sits always-on-top as a lightweight HUD. Log thoughts, emotions, and lessons without leaving the desk. When a risky emotional state is tagged, an AI coach returns immediate, targeted feedback — preloaded with a trader profile and a private mental-game knowledge base.',
-    note: 'The coach is grounded in personal notes, trading psychology resources, stress and self-regulation material, and trusted books — not a generic chat prompt.',
-    facts: [
-      { label: 'Role', value: 'Solo builder — product design, desktop UX, agent logic' },
-      { label: 'Stack', value: 'Python, PyQt6, Anthropic Claude, Supabase, global hotkeys' },
-      { label: 'Status', value: 'Prototype desktop HUD for live sessions' },
-      { label: 'Form', value: 'Always-on-top overlay · pill + expanded modes' },
-    ],
-  }}
   problem={{
     title: 'Problem',
-    lead: 'Psychology review happens after the session — when the state is already gone.',
+    lead: 'Psychology review happens after the session, when the state is already gone.',
     body: 'The goal was not a better journal. It was a real-time self-regulation agent that could intervene while the market is still open.',
     columns: [
       {
         title: 'What had to work live',
         items: [
-          'Capture thoughts without breaking focus',
+          'Speak the thought without typing through the stress',
           'Tag emotional state in one pass',
           'Detect FOMO, revenge, hesitation, frustration, anxiety, overconfidence, or caution',
           'Return short coaching feedback in the moment',
@@ -53,7 +67,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       {
         title: 'What the system must preserve',
         items: [
-          'Store the entry and coach response for later review',
+          'Store timestamped entries and coach responses for later review',
           'Stay lightweight enough for active trading',
           'Interrupt the urge before it becomes a trade',
           'Avoid becoming another post-session essay tool',
@@ -63,11 +77,11 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
   }}
   solution={{
     title: 'Solution',
-    lead: 'Log state. Classify risk. Intervene. Persist.',
-    body: 'A desktop HUD logs session thoughts and emotions to Supabase, then triggers a context-loaded AI coach when risk states appear. Output is constrained to 3–4 direct sentences so it stays usable mid-session.',
+    lead: 'Speak state. Classify risk. Intervene. Persist.',
+    body: 'A desktop HUD accepts frictionless Willow dictation, logs session thoughts and emotions to Supabase, then triggers a context-loaded AI coach when risk states appear. Output is constrained to 3–4 direct sentences so it stays usable mid-session. Claude Haiku keeps the live overlay fast and cheap enough for desk use.',
     pipeline: [
-      'Thought + emotion capture',
-      'Supabase journal entry',
+      'Willow click-to-speak capture',
+      'Emotion tag + Supabase journal entry',
       'Risk-state detection',
       'Context-loaded AI coach',
       'Tiered overlay → saved response',
@@ -77,12 +91,12 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
         title: 'Desktop HUD (PyQt6)',
         items: [
           'Always-on-top pill and expanded journal modes',
-          'Draggable positioning and global hotkeys',
+          'Willow click-to-speak into the journal field for frictionless capture',
           'Async coaching calls in a QThread so the UI never freezes',
         ],
       },
       {
-        title: 'AI coach (Claude)',
+        title: 'AI coach (Claude Haiku)',
         items: [
           'Deterministic emotion → tier routing before the model runs',
           'Private trader-profile and psychology knowledge-base context',
@@ -91,35 +105,40 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       },
     ],
     sections: ['Caution', 'Advice', 'Check'],
-    note: 'CAUTION for high-risk states (FOMO, revenge, overconfidence). ADVICE for anxiety, frustration, hesitation, impatience. CHECK for a softer heads-up when caution is rising.',
+    note: 'CAUTION for high-risk states (FOMO, revenge, overconfidence). ADVICE for anxiety, frustration, hesitation, impatience. CHECK for a softer heads-up when caution is rising. Emotion set: Overconfident, FOMO, Revenge, Anxious, Frustrated, Hesitant, Impatient, Cautious.',
   }}
   build={{
     title: 'Implementation & challenges',
     lead: 'Deterministic routing first. Then a tightly scoped model call.',
     challenges: [
       {
+        title: 'Frictionless speak capture under pressure',
+        body: 'Willow dictation turns the HUD into a click-and-speak surface. In tense market moments you can open your mouth and get the thought out, then tag the emotion, instead of fighting a keyboard while the urge is rising.',
+        tradeoff: 'Trade-off: depend on a dedicated dictation layer over building custom speech recognition into the app.',
+      },
+      {
         title: 'Native HUD that stays out of the way',
-        body: 'PyQt6 always-on-top overlay with collapsed pill mode, expanded journal mode, draggable positioning, and global hotkeys — present during live sessions without owning the screen.',
+        body: 'PyQt6 always-on-top overlay with collapsed pill mode, expanded journal mode, and draggable positioning. Present during live sessions without owning the screen.',
         tradeoff: 'Trade-off: desktop complexity over a simpler web note form.',
       },
       {
         title: 'Emotion taxonomy before the LLM',
-        body: 'Risk emotions map into intervention tiers deterministically. The model is not asked to invent the severity — it receives a routed tier and must coach inside that constraint.',
+        body: 'Risk emotions map into intervention tiers deterministically. The model is not asked to invent the severity. It receives a routed tier and must coach inside that constraint.',
         tradeoff: 'Trade-off: fixed taxonomy over free-form “how do you feel” chat.',
       },
       {
         title: 'Private coaching context',
-        body: 'Claude gets a tightly scoped system prompt loaded from trader-profile and psychology knowledge-base files — personal notes and trusted sources, not a generic therapist persona.',
+        body: 'Claude gets a tightly scoped system prompt loaded from trader-profile and psychology knowledge-base files. Personal notes and trusted sources, not a generic therapist persona. Those context files stay local and outside the public repo.',
         tradeoff: 'Trade-off: curation and file maintenance over one-shot prompting.',
       },
       {
         title: 'Non-blocking coach calls',
-        body: 'Coaching runs asynchronously in a QThread so capture and hotkeys stay responsive while the model returns. The agent must never freeze the desk during a live session.',
+        body: 'Coaching runs asynchronously in a QThread so capture stays responsive while the model returns. The agent must never freeze the desk during a live session.',
         tradeoff: 'Trade-off: thread and state management over a blocking request.',
       },
       {
         title: 'Real desktop packaging',
-        body: 'Windows launch paths and SSL fixes were required for actual desk use — not just a happy-path script on a developer machine.',
+        body: 'Windows launch paths and an SSL trust workaround were required for actual desk use, not just a happy-path script on a developer machine.',
         tradeoff: 'Trade-off: platform friction for a tool that has to open faster than the chase.',
       },
     ],
@@ -128,19 +147,20 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
     title: 'Results & learnings',
     lead: 'Journaling became a real-time agentic feedback loop.',
     items: [
-      'Detect a risky state as it happens and return a concise intervention before poor execution.',
-      'Architecture: capture live state → classify risk deterministically → use personal context → generate constrained intervention → display immediately → store for review.',
+      'Speak and tag a risky state as it happens, then get a concise intervention before poor execution.',
       'Tiered overlays (CAUTION / ADVICE / CHECK) keep severity readable at a glance.',
-      'Entries and coach responses persist in Supabase for later review.',
+      'Timestamped journal entries and coach responses can later be compared with trade times and outcomes to spot emotional patterns around performance.',
       'Feels less like a chatbot and more like a lightweight mental-game copilot.',
     ],
     pullquote:
-      'SENTINEL combines deterministic state routing with LLM-based coaching. The desktop app captures live trading context, emotion tags, session phase, and journal text, maps risk emotions into intervention tiers, then calls Claude with a tightly scoped system prompt loaded from private trader-profile and psychology context. The result is an embedded agentic loop: observe, classify, retrieve personal context, intervene, and persist.',
+      'The useful part is not chatting with a model during a session. It is speaking the state, routing severity before the model runs, and getting a short intervention grounded in private notes while the market is still open.',
     note: 'Effective applied AI does not always need a big interface. Sometimes the best agent is small, narrow, and embedded directly into the workflow.',
   }}
   screenshot={{
     src: '/images/projects/sentinel/cover.png',
     alt: 'SENTINEL mental-game agent on the desktop',
-    caption: 'Thought · emotion · coach · journal',
+    caption: 'Speak · tag · coach · journal',
+    frame: 'window',
+    frameLabel: 'SENTINEL',
   }}
 />

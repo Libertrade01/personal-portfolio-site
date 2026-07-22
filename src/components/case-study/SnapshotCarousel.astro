@@ -1,17 +1,20 @@
 ---
 interface Shot {
-  image: string;
+  image?: string;
   alt: string;
   label?: string;
+  /** Shown when image is missing */
+  placeholder?: string;
 }
 
 interface Props {
   heading?: string;
+  intro?: string;
   shots: Shot[];
   idPrefix?: string;
 }
 
-const { heading = 'Snapshots', shots, idPrefix = 'snapshot' } = Astro.props;
+const { heading = 'Product walkthrough', intro, shots, idPrefix = 'snapshot' } = Astro.props;
 const headingId = `${idPrefix}-heading`;
 const hasMultipleShots = shots.length > 1;
 ---
@@ -19,14 +22,23 @@ const hasMultipleShots = shots.length > 1;
 <section class="case-study-snapshots" aria-labelledby={headingId} data-snapshot-carousel>
   <header class="case-study-snapshots__header">
     <h2 id={headingId} class="case-study-snapshots__heading">{heading}</h2>
+    {intro && <p class="case-study-snapshots__intro">{intro}</p>}
   </header>
 
   <div class="case-study-snapshots__track" tabindex={hasMultipleShots ? 0 : undefined} data-snapshot-track>
     {
       shots.map((shot, index) => (
         <figure class="case-study-snapshots__slide" id={`${idPrefix}-${index + 1}`} data-snapshot-slide>
-          <div class="case-study-snapshots__image-frame">
-            <img src={shot.image} alt={shot.alt} loading="lazy" decoding="async" />
+          <div class={`case-study-snapshots__image-frame${shot.image ? '' : ' case-study-snapshots__image-frame--placeholder'}`}>
+            {shot.image ? (
+              <img src={shot.image} alt={shot.alt} loading="lazy" decoding="async" />
+            ) : (
+              <div class="case-study-snapshots__placeholder" role="img" aria-label={shot.alt}>
+                <span class="case-study-snapshots__placeholder-kicker">Screenshot needed</span>
+                <strong>{shot.placeholder ?? shot.label ?? shot.alt}</strong>
+                <small>Replace with a libertrade.app capture</small>
+              </div>
+            )}
           </div>
           {shot.label && (
             <figcaption class="case-study-snapshots__caption">
@@ -65,7 +77,7 @@ const hasMultipleShots = shots.length > 1;
     --case-study-paper: var(--ml-paper-raised);
     --case-study-line: var(--ml-line);
     --case-study-muted: var(--ml-muted);
-    margin: clamp(5rem, 9vw, 8rem) auto 0;
+    margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
     width: min(100%, 72rem);
   }
 
@@ -76,12 +88,20 @@ const hasMultipleShots = shots.length > 1;
   .case-study-snapshots .case-study-snapshots__heading {
     color: var(--case-study-ink);
     font-family: var(--font-sans);
-    font-size: clamp(2.15rem, 4.6vw, 4.2rem);
+    font-size: clamp(1.85rem, 3.8vw, 3rem);
     font-weight: 400;
-    letter-spacing: -0.055em;
-    line-height: 0.95;
+    letter-spacing: -0.045em;
+    line-height: 1.05;
     margin: 0;
-    max-width: 13ch;
+    max-width: 18ch;
+  }
+
+  .case-study-snapshots__intro {
+    color: var(--case-study-muted);
+    font-size: 1.02rem;
+    line-height: 1.65;
+    margin: 0.85rem 0 0;
+    max-width: 62ch;
   }
 
   .case-study-snapshots__track {
@@ -100,7 +120,7 @@ const hasMultipleShots = shots.length > 1;
   }
 
   .case-study-snapshots__slide {
-    flex: 0 0 min(88vw, 64rem);
+    flex: 0 0 min(88vw, 58rem);
     margin: 0;
     scroll-margin-inline: 1rem;
     scroll-snap-align: center;
@@ -115,11 +135,56 @@ const hasMultipleShots = shots.length > 1;
   }
 
   .case-study-snapshots__image-frame img {
-    background: var(--case-study-paper);
+    background: #0b1220;
     border-radius: 0.35rem;
     display: block;
     height: auto;
     width: 100%;
+  }
+
+  .case-study-snapshots__placeholder {
+    align-items: flex-start;
+    aspect-ratio: 16 / 10;
+    background:
+      linear-gradient(180deg, rgba(15, 23, 42, 0.04), rgba(15, 23, 42, 0.1)),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 10px,
+        rgba(15, 23, 42, 0.04) 10px,
+        rgba(15, 23, 42, 0.04) 20px
+      );
+    border: 1px dashed var(--case-study-line);
+    border-radius: 0.35rem;
+    color: var(--case-study-ink);
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    justify-content: center;
+    padding: clamp(1.4rem, 4vw, 2.4rem);
+  }
+
+  .case-study-snapshots__placeholder-kicker {
+    color: var(--case-study-muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .case-study-snapshots__placeholder strong {
+    font-family: var(--font-sans);
+    font-size: clamp(1.35rem, 3vw, 1.9rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    max-width: 16ch;
+  }
+
+  .case-study-snapshots__placeholder small {
+    color: var(--case-study-muted);
+    font-size: 0.92rem;
+    line-height: 1.5;
   }
 
   .case-study-snapshots__caption {
@@ -142,6 +207,7 @@ const hasMultipleShots = shots.length > 1;
   .case-study-snapshots__nav {
     align-items: center;
     display: flex;
+    flex-wrap: wrap;
     gap: 0.55rem;
     justify-content: center;
     margin-top: 0.45rem;
@@ -172,12 +238,11 @@ const hasMultipleShots = shots.length > 1;
 
   @media (max-width: 720px) {
     .case-study-snapshots {
-      margin-top: 4rem;
       width: 100%;
     }
 
     .case-study-snapshots__slide {
-      flex-basis: min(86vw, 64rem);
+      flex-basis: min(86vw, 58rem);
       scroll-snap-align: start;
     }
   }
