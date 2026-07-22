@@ -80,7 +80,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
   solution={{
     title: 'Solution',
     lead: 'Agentic pipeline into a durable, structured Room View.',
-    body: 'Hermes monitors sources, summarizes new inputs into the app, then re-runs cross-source synthesis against the stored archive. The current Room View lives as a macro_briefing with slug macro-living; inputs persist as podcast_summary or newsletter_summary. The living view is stored as content_json with room_view, next_tests, regime, drivers, and source_alignment so the dashboard can render without guessing from prose.',
+    body: 'Hermes monitors sources, summarizes new inputs into the app, then re-runs cross-source synthesis against the stored archive. The current Room View lives as a macro_briefing with slug macro-living; inputs persist as podcast_summary or newsletter_summary. The living view is stored as content_json with room_view, next_tests, regime, drivers, and source_alignment so the dashboard can render without guessing from prose. Synthesis starts from retrieved evidence in that archive, not a blank prompt.',
     pipeline: [
       'Watch trusted sources',
       'Fetch + summarize new input',
@@ -122,7 +122,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
     challenges: [
       {
         title: 'Two ingest paths, one archive',
-        body: 'Podcast monitoring and Friday Speedrun newsletter ingestion both land in Supabase as typed summaries, with discovery, dedupe, fetch, and summarization tuned to each source cadence.',
+        body: 'Podcast monitoring and Friday Speedrun newsletter ingestion both land in Supabase as typed summaries, with discovery, dedupe, fetch, and summarization tuned to each source cadence. Raw long-form inputs are normalized into a shared archive the synthesis worker can read.',
         tradeoff: 'Trade-off: separate pipelines over one brittle “generic feed” scraper.',
       },
       {
@@ -132,7 +132,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       },
       {
         title: 'V2 synthesis with validation gates',
-        body: 'The worker fetches recent inputs, compacts evidence, asks the agent to synthesize, validates structure, and only persists when checks pass. Default is dry-run. Persisting a reviewed report requires an explicit --persist flag so bad synthesis cannot silently overwrite the living view.',
+        body: 'The worker retrieves recent inputs, compacts evidence, asks the agent to synthesize, validates structure, and only persists when checks pass. If validation fails, nothing is written. Default is dry-run. Persisting a reviewed report requires an explicit --persist flag so bad synthesis cannot silently overwrite the living view.',
         tradeoff: 'Trade-off: rejected runs and retries over always-write synthesis.',
       },
       {
@@ -153,6 +153,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
     items: [
       'Maintains a current call with next tests, regime, causal drivers, and source alignment.',
       'Preserves evidence-linked revisions when the view changes.',
+      'Rejects invalid Room View payloads instead of overwriting the living view.',
       'Separates input count from source count on a readable dashboard.',
       'Feels less like a chatbot and more like an automated analyst desk.',
     ],

@@ -75,7 +75,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
   solution={{
     title: 'Solution',
     lead: 'Agent synthesizes. App validates, stores, and renders.',
-    body: 'The product is a pipeline with a hard boundary. Hermes owns gathering and synthesis on a VPS. The Next.js app owns ingest, storage, and reading. Hermes posts structured fields such as type, date, status, primary_signal, sources, and content_markdown.',
+    body: 'The product is a pipeline with a hard boundary. Hermes owns gathering and synthesis on a VPS. The Next.js app owns ingest, storage, and reading. Hermes extracts signal from multiple sources and posts normalized fields such as type, date, status, primary_signal, sources, and content_markdown. Invalid payloads are rejected before anything is written.',
     pipeline: [
       'Hermes cron wakes on schedule',
       'Gather + synthesize the day',
@@ -124,7 +124,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       },
       {
         title: 'Authenticated ingest, not open writes',
-        body: 'The agent posts into production storage. Bearer auth on POST /api/briefings keeps the boundary clear between trusted synthesis and public reading.',
+        body: 'The agent posts into production storage. Bearer auth on POST /api/briefings keeps the boundary clear between trusted synthesis and public reading. Schema checks reject bad or incomplete payloads so a broken run cannot corrupt the edition store.',
         tradeoff: 'Trade-off: operational key management over “just drop markdown in a folder.”',
       },
       {
@@ -149,7 +149,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
     lead: 'A monitoring habit became a shippable daily product.',
     items: [
       'Daily editions land in a fixed reader path instead of another feed.',
-      'Validated ingest keeps agent output behind an auth and schema boundary.',
+      'Validated ingest keeps agent output behind an auth and schema boundary; invalid runs do not write.',
       'Runtime split keeps synthesis on the VPS and delivery on Vercel.',
       'Product split kept Pulse focused on AI signal.',
       'Reader path optimized for finishability, not completeness.',

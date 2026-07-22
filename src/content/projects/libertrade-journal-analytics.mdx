@@ -176,7 +176,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       },
       {
         title: 'Close the loop against the plan',
-        body: 'Broker CSV import (including R Trader / Tradovate flows) plus manual entry, setup tagging, playbook adherence, behavioural flags, and an explicit risk-plan-followed check before the day closes.',
+        body: 'Broker CSV import (including R Trader / Tradovate flows) extracts and normalizes trade rows into the journal, alongside manual entry, setup tagging, playbook adherence, behavioural flags, and an explicit risk-plan-followed check before the day closes.',
         tradeoff: 'Trade-off: import complexity so the journal stays realistic enough to use.',
       },
       {
@@ -186,7 +186,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       },
       {
         title: 'Loop Intelligence as a tool-using agent',
-        body: 'AI assistant with read-only tools over trades, readiness, plans, journals, and session dates. System rule: fetch before answering; never invent trade or journal data. Built with Login with ChatGPT, AI SDK, routing, and rate limiting over scoped Supabase data.',
+        body: 'AI assistant with read-only tool calling over trades, readiness, plans, journals, and session dates. System rule: fetch before answering; never invent trade or journal data. Built with Login with ChatGPT, AI SDK, routing, and rate limiting over scoped Supabase data.',
         tradeoff: 'Trade-off: grounded tool calls over a generic trading chatbot.',
       },
       {
@@ -196,7 +196,7 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       },
       {
         title: 'Production bones for a live product',
-        body: 'Supabase auth and RLS, export/delete paths, Sentry, analytics, and tests so LOOP can run as a real multi-user app, not a personal prototype that only works on one machine.',
+        body: 'Supabase auth and RLS, export/delete paths, Sentry monitoring, analytics, and unit tests on import and trading-day helpers so LOOP can run as a real multi-user app, not a personal prototype that only works on one machine.',
         tradeoff: 'Trade-off: operational overhead for a product people can trust with process data.',
       },
     ],
@@ -210,8 +210,8 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
       'Preservation / recovery guardrails when readiness is poor.',
       'Weekly Process Review turns daily entries into recurring patterns.',
       'Prop Economics makes fees, resets, and payouts visible as one journey.',
-      'Loop Intelligence answers process questions from real user data instead of inventing advice.',
-      'Production bones: Supabase auth, RLS, export/delete, Sentry, analytics, tests.',
+      'Loop Intelligence answers process questions via tool calls over real user data instead of inventing advice.',
+      'Production bones: Supabase auth, RLS, export/delete, Sentry monitoring, analytics, tests.',
     ],
     pullquote:
       'The hard part was not adding AI. It was turning readiness, plans, trades, and journals into structured data a tool-using assistant can query without inventing the trader’s history.',
