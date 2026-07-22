@@ -1,15 +1,54 @@
 ---
-interface BriefSection {
+interface Fact {
+  label: string;
+  value: string;
+}
+
+interface ColumnList {
   title: string;
-  lead: string;
-  items?: string[];
-  note?: string;
+  items: string[];
+}
+
+interface SystemPanel {
+  title: string;
+  items: string[];
+}
+
+interface Challenge {
+  title: string;
+  body: string;
+  tradeoff?: string;
 }
 
 interface Screenshot {
   src: string;
   alt: string;
   caption?: string;
+}
+
+interface BriefSection {
+  title: string;
+  lead: string;
+  items?: string[];
+  note?: string;
+  /** Overview: Role / Stack / Status / Repo */
+  facts?: Fact[];
+  /** Overview: short paragraph under the lead */
+  body?: string;
+  /** Problem: two compact columns */
+  columns?: ColumnList[];
+  /** Solution: pipeline steps */
+  pipeline?: string[];
+  /** Solution: Hermes vs App split */
+  systems?: SystemPanel[];
+  /** Solution: briefing section chips */
+  sections?: string[];
+  /** Build: numbered challenge cards */
+  challenges?: Challenge[];
+  /** Results: applied-AI pullquote */
+  pullquote?: string;
+  /** Results: if extended */
+  next?: string[];
 }
 
 interface Props {
@@ -22,63 +61,241 @@ interface Props {
 }
 
 const { overview, problem, solution, build, results, screenshot } = Astro.props;
-
-const sections = [
-  { key: 'overview', index: '01', data: overview },
-  { key: 'problem', index: '02', data: problem },
-  { key: 'solution', index: '03', data: solution },
-  { key: 'build', index: '04', data: build },
-  { key: 'results', index: '05', data: results },
-] as const;
 ---
 
 <div class="project-brief">
-  {
-    sections.map((section) => (
-      <section class={`project-brief__section project-brief__section--${section.key}`} aria-labelledby={`brief-${section.key}-title`}>
-        <header class="project-brief__head">
-          <p class="project-brief__index">
-            <span aria-hidden="true">{section.index}</span>
-            {section.data.title}
-          </p>
-          <h2 id={`brief-${section.key}-title`}>{section.data.lead}</h2>
-        </header>
+  <!-- 01 Overview -->
+  <section class="project-brief__section project-brief__section--overview" aria-labelledby="brief-overview-title">
+    <header class="project-brief__head">
+      <p class="project-brief__index"><span aria-hidden="true">01</span> {overview.title}</p>
+      <h2 id="brief-overview-title">{overview.lead}</h2>
+    </header>
 
+    <div class={`project-brief__overview${overview.facts?.length ? ' project-brief__overview--split' : ''}`}>
+      <div class="project-brief__overview-copy">
+        {overview.body && <p class="project-brief__body">{overview.body}</p>}
         {
-          section.data.items && section.data.items.length > 0 && (
+          overview.items && overview.items.length > 0 && !overview.facts && (
             <ul class="project-brief__list" role="list">
-              {section.data.items.map((item) => (
+              {overview.items.map((item) => (
                 <li>{item}</li>
               ))}
             </ul>
           )
         }
+        {overview.note && <p class="project-brief__note">{overview.note}</p>}
+      </div>
 
-        {section.data.note && <p class="project-brief__note">{section.data.note}</p>}
+      {
+        overview.facts && overview.facts.length > 0 && (
+          <dl class="project-brief__facts">
+            {overview.facts.map((fact) => (
+              <div>
+                <dt>{fact.label}</dt>
+                <dd>{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )
+      }
+    </div>
+  </section>
 
-        {
-          section.key === 'solution' && screenshot && (
-            <figure class="project-brief__shot">
-              <img src={screenshot.src} alt={screenshot.alt} loading="lazy" decoding="async" />
-              {screenshot.caption && <figcaption>{screenshot.caption}</figcaption>}
-            </figure>
-          )
-        }
-      </section>
-    ))
-  }
+  <!-- 02 Problem -->
+  <section class="project-brief__section project-brief__section--problem" aria-labelledby="brief-problem-title">
+    <header class="project-brief__head">
+      <p class="project-brief__index"><span aria-hidden="true">02</span> {problem.title}</p>
+      <h2 id="brief-problem-title">{problem.lead}</h2>
+    </header>
+
+    {problem.body && <p class="project-brief__body">{problem.body}</p>}
+
+    {
+      problem.columns && problem.columns.length > 0 ? (
+        <div class="project-brief__columns">
+          {problem.columns.map((column) => (
+            <div class="project-brief__column">
+              <p class="project-brief__column-title">{column.title}</p>
+              <ul class="project-brief__list" role="list">
+                {column.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        problem.items &&
+        problem.items.length > 0 && (
+          <ul class="project-brief__list" role="list">
+            {problem.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )
+      )
+    }
+
+    {problem.note && <p class="project-brief__note">{problem.note}</p>}
+  </section>
+
+  <!-- 03 Solution -->
+  <section class="project-brief__section project-brief__section--solution" aria-labelledby="brief-solution-title">
+    <header class="project-brief__head">
+      <p class="project-brief__index"><span aria-hidden="true">03</span> {solution.title}</p>
+      <h2 id="brief-solution-title">{solution.lead}</h2>
+    </header>
+
+    {solution.body && <p class="project-brief__body">{solution.body}</p>}
+
+    {
+      solution.pipeline && solution.pipeline.length > 0 && (
+        <ol class="project-brief__pipeline" aria-label="System pipeline">
+          {solution.pipeline.map((step, index) => (
+            <li>
+              <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <p>{step}</p>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+
+    {
+      solution.systems && solution.systems.length > 0 && (
+        <div class="project-brief__systems">
+          {solution.systems.map((system) => (
+            <div class="project-brief__system">
+              <p class="project-brief__column-title">{system.title}</p>
+              <ul class="project-brief__list" role="list">
+                {system.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      solution.sections && solution.sections.length > 0 && (
+        <div class="project-brief__chips" aria-label="Briefing sections">
+          {solution.sections.map((section) => (
+            <span>{section}</span>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      solution.items &&
+      solution.items.length > 0 &&
+      !solution.pipeline &&
+      !solution.systems && (
+        <ul class="project-brief__list" role="list">
+          {solution.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      )
+    }
+
+    {solution.note && <p class="project-brief__note">{solution.note}</p>}
+
+    {
+      screenshot && (
+        <figure class="project-brief__shot">
+          <img src={screenshot.src} alt={screenshot.alt} loading="lazy" decoding="async" />
+          {screenshot.caption && <figcaption>{screenshot.caption}</figcaption>}
+        </figure>
+      )
+    }
+  </section>
+
+  <!-- 04 Build -->
+  <section class="project-brief__section project-brief__section--build" aria-labelledby="brief-build-title">
+    <header class="project-brief__head">
+      <p class="project-brief__index"><span aria-hidden="true">04</span> {build.title}</p>
+      <h2 id="brief-build-title">{build.lead}</h2>
+    </header>
+
+    {
+      build.challenges && build.challenges.length > 0 ? (
+        <div class="project-brief__challenges">
+          {build.challenges.map((challenge, index) => (
+            <article class="project-brief__challenge">
+              <p class="project-brief__challenge-index" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </p>
+              <h3>{challenge.title}</h3>
+              <p>{challenge.body}</p>
+              {challenge.tradeoff && <p class="project-brief__tradeoff">{challenge.tradeoff}</p>}
+            </article>
+          ))}
+        </div>
+      ) : (
+        build.items &&
+        build.items.length > 0 && (
+          <ul class="project-brief__list" role="list">
+            {build.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )
+      )
+    }
+
+    {build.note && <p class="project-brief__note">{build.note}</p>}
+  </section>
+
+  <!-- 05 Results -->
+  <section class="project-brief__section project-brief__section--results" aria-labelledby="brief-results-title">
+    <header class="project-brief__head">
+      <p class="project-brief__index"><span aria-hidden="true">05</span> {results.title}</p>
+      <h2 id="brief-results-title">{results.lead}</h2>
+    </header>
+
+    {
+      results.items && results.items.length > 0 && (
+        <ul class="project-brief__list" role="list">
+          {results.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      )
+    }
+
+    {results.pullquote && <blockquote class="project-brief__pullquote">{results.pullquote}</blockquote>}
+
+    {
+      results.next && results.next.length > 0 && (
+        <div class="project-brief__next">
+          <p class="project-brief__column-title">If extended</p>
+          <ul class="project-brief__list" role="list">
+            {results.next.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    {results.note && <p class="project-brief__note">{results.note}</p>}
+  </section>
 </div>
 
 <style>
   .project-brief {
     display: grid;
-    gap: clamp(3.25rem, 7vw, 5.5rem);
-    width: min(100%, 46rem);
+    gap: clamp(3.75rem, 8vw, 6.5rem);
+    width: min(100%, 72rem);
     margin-inline: auto;
   }
 
   .project-brief__head {
-    margin-bottom: 1.15rem;
+    margin-bottom: 1.35rem;
+    max-width: 46rem;
   }
 
   .project-brief__index {
@@ -102,16 +319,25 @@ const sections = [
     margin: 0.7rem 0 0;
     color: var(--ml-ink);
     font-family: var(--font-sans);
-    font-size: clamp(1.55rem, 3vw, 2.35rem);
+    font-size: clamp(1.65rem, 3.2vw, 2.6rem);
     font-weight: 400;
-    letter-spacing: -0.04em;
-    line-height: 1.12;
+    letter-spacing: -0.045em;
+    line-height: 1.1;
     text-wrap: balance;
+  }
+
+  .project-brief__body {
+    margin: 0 0 1.25rem;
+    max-width: 46rem;
+    color: var(--ml-ink-soft, var(--ml-muted));
+    font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+    font-weight: 300;
+    line-height: 1.65;
   }
 
   .project-brief__list {
     display: grid;
-    gap: 0.7rem;
+    gap: 0.65rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -121,21 +347,132 @@ const sections = [
 
   .project-brief__list li {
     color: var(--ml-ink-soft, var(--ml-muted));
-    font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+    font-size: clamp(0.94rem, 1.1vw, 1.02rem);
     font-weight: 300;
     line-height: 1.55;
   }
 
   .project-brief__note {
-    margin: 1.15rem 0 0;
+    margin: 1.25rem 0 0;
+    max-width: 42rem;
     color: var(--ml-muted);
     font-size: 0.92rem;
     font-weight: 300;
     line-height: 1.6;
   }
 
+  /* Overview */
+  .project-brief__overview--split {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+    align-items: start;
+  }
+
+  .project-brief__facts {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    border-top: 1px solid var(--ml-line);
+  }
+
+  .project-brief__facts > div {
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--ml-line);
+  }
+
+  .project-brief__facts dt {
+    color: var(--ml-muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .project-brief__facts dd {
+    margin: 0;
+    color: var(--ml-ink);
+    font-size: 0.92rem;
+    font-weight: 400;
+    line-height: 1.45;
+  }
+
+  /* Problem columns */
+  .project-brief__columns,
+  .project-brief__systems {
+    display: grid;
+    gap: clamp(1.25rem, 3vw, 2rem);
+    margin-top: 0.35rem;
+  }
+
+  .project-brief__column-title {
+    margin: 0 0 0.85rem;
+    color: var(--ml-ink);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  /* Solution pipeline */
+  .project-brief__pipeline {
+    display: grid;
+    gap: 0;
+    margin: 0 0 1.75rem;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--ml-line);
+  }
+
+  .project-brief__pipeline li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: 0.85rem;
+    align-items: baseline;
+    padding: 0.95rem 1.1rem;
+    border-bottom: 1px solid var(--ml-line);
+  }
+
+  .project-brief__pipeline li:last-child {
+    border-bottom: 0;
+  }
+
+  .project-brief__pipeline span {
+    color: var(--ml-muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+  }
+
+  .project-brief__pipeline p {
+    margin: 0;
+    color: var(--ml-ink);
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.45;
+  }
+
+  .project-brief__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 1.5rem 0 0;
+  }
+
+  .project-brief__chips span {
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--ml-line);
+    color: var(--ml-ink-soft, var(--ml-muted));
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
   .project-brief__shot {
-    margin: 1.75rem 0 0;
+    margin: 2rem 0 0;
   }
 
   .project-brief__shot img {
@@ -156,5 +493,108 @@ const sections = [
     font-size: 0.62rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+  }
+
+  /* Build challenges */
+  .project-brief__challenges {
+    display: grid;
+    gap: 1px;
+    border: 1px solid var(--ml-line);
+    background: var(--ml-line);
+  }
+
+  .project-brief__challenge {
+    display: grid;
+    gap: 0.55rem;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--ml-paper, #f7f6f1);
+  }
+
+  .project-brief__challenge-index {
+    margin: 0;
+    color: var(--ml-muted);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  .project-brief__challenge h3 {
+    margin: 0;
+    color: var(--ml-ink);
+    font-family: var(--font-sans);
+    font-size: 1.12rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+
+  .project-brief__challenge > p {
+    margin: 0;
+    color: var(--ml-ink-soft, var(--ml-muted));
+    font-size: 0.94rem;
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  .project-brief__tradeoff {
+    margin-top: 0.25rem !important;
+    color: var(--ml-ink) !important;
+    font-family: var(--font-mono, ui-monospace, monospace) !important;
+    font-size: 0.68rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.03em;
+    line-height: 1.45 !important;
+  }
+
+  /* Results */
+  .project-brief__pullquote {
+    margin: 1.75rem 0 0;
+    padding: 1.25rem 0 1.25rem 1.15rem;
+    border-left: 2px solid var(--ml-ink);
+    color: var(--ml-ink);
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.45;
+    max-width: 48rem;
+  }
+
+  .project-brief__next {
+    margin-top: 1.75rem;
+  }
+
+  @media (min-width: 860px) {
+    .project-brief__overview--split {
+      grid-template-columns: minmax(0, 1.35fr) minmax(14rem, 0.75fr);
+    }
+
+    .project-brief__columns,
+    .project-brief__systems {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-brief__pipeline {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .project-brief__pipeline li {
+      grid-template-columns: 1fr;
+      gap: 0.55rem;
+      min-height: 100%;
+      border-bottom: 0;
+      border-right: 1px solid var(--ml-line);
+    }
+
+    .project-brief__pipeline li:last-child {
+      border-right: 0;
+    }
+
+    .project-brief__challenges {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-brief__challenge:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
   }
 </style>

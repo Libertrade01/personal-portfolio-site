@@ -1,16 +1,15 @@
 ---
 title: SENTINEL — Mental-Game Agent
-description: >-
-  A desktop mental-game agent that catches FOMO, impatience and half-setups in
-  real time — then interrupts the chase before it becomes a trade.
+description: A lightweight desktop coaching tool for live trading sessions — always-on-top HUD, emotion tags, and immediate AI feedback when risk states appear.
 descriptionExtra: >-
-  SENTINEL sits on the desk during live sessions: capture the thought, tag the
-  emotion, and get a caution when the urge is running ahead of the setup.
+  Capture the thought, tag the emotion, and get a short tiered intervention
+  before FOMO or revenge becomes poor execution. Built as an embedded agentic
+  loop, not a chatbot.
 date: 2026-07-21
 status: Prototype
 category: Trading psychology system
 type: product
-stack: [Python, PyQt6, Anthropic API, Supabase]
+stack: [Python, PyQt6, Anthropic Claude, Supabase]
 featured: true
 order: 4
 role: Solo builder — product design, desktop UX, agent logic
@@ -19,7 +18,7 @@ coverImage: /images/projects/sentinel/cover.png
 cardImage: /images/projects/sentinel/cover-card.png
 coverFit: contain
 coverPosition: center
-systemLine: Thought → Emotion → Caution → Reset
+systemLine: Thought → Emotion → Coach → Journal
 ---
 
 import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro';
@@ -27,54 +26,121 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
 <ProjectCaseBrief
   overview={{
     title: 'Overview',
-    lead: 'A live interrupt for trading psychology — before the click.',
-    items: [
-      'Solo build — product design, desktop UX, and agent logic.',
-      'Stack: Python, PyQt6, Anthropic API, Supabase.',
-      'Status: prototype desktop overlay for live sessions.',
+    lead: 'A desktop mental-game copilot for live sessions.',
+    body: 'SENTINEL sits always-on-top as a lightweight HUD. Log thoughts, emotions, and lessons without leaving the desk. When a risky emotional state is tagged, an AI coach returns immediate, targeted feedback — preloaded with a trader profile and a private mental-game knowledge base.',
+    note: 'The coach is grounded in personal notes, trading psychology resources, stress and self-regulation material, and trusted books — not a generic chat prompt.',
+    facts: [
+      { label: 'Role', value: 'Solo builder — product design, desktop UX, agent logic' },
+      { label: 'Stack', value: 'Python, PyQt6, Anthropic Claude, Supabase, global hotkeys' },
+      { label: 'Status', value: 'Prototype desktop HUD for live sessions' },
+      { label: 'Form', value: 'Always-on-top overlay · pill + expanded modes' },
     ],
   }}
   problem={{
     title: 'Problem',
-    lead: 'Most trading mistakes start in the body before they show up on the chart.',
-    items: [
-      'FOMO and impatience arrive as a story that feels urgent and rational in the moment.',
-      'Journaling after the session is too late — the scratch trade already happened.',
-      'There is no interrupt between the urge and the click.',
+    lead: 'Psychology review happens after the session — when the state is already gone.',
+    body: 'The goal was not a better journal. It was a real-time self-regulation agent that could intervene while the market is still open.',
+    columns: [
+      {
+        title: 'What had to work live',
+        items: [
+          'Capture thoughts without breaking focus',
+          'Tag emotional state in one pass',
+          'Detect FOMO, revenge, hesitation, frustration, anxiety, overconfidence, or caution',
+          'Return short coaching feedback in the moment',
+        ],
+      },
+      {
+        title: 'What the system must preserve',
+        items: [
+          'Store the entry and coach response for later review',
+          'Stay lightweight enough for active trading',
+          'Interrupt the urge before it becomes a trade',
+          'Avoid becoming another post-session essay tool',
+        ],
+      },
     ],
-    note: 'The gap is not more education. It is a live agent while the market is open.',
   }}
   solution={{
     title: 'Solution',
-    lead: 'Sit on the desk and intervene before the chase becomes a trade.',
-    items: [
-      'Always-on-top status pill keeps the agent present without owning the screen.',
-      'Capture panel logs the thought and emotion tags in one pass.',
-      'Caution alert names the pattern, explains the trap, and prescribes a short reset.',
+    lead: 'Log state. Classify risk. Intervene. Persist.',
+    body: 'A desktop HUD logs session thoughts and emotions to Supabase, then triggers a context-loaded AI coach when risk states appear. Output is constrained to 3–4 direct sentences so it stays usable mid-session.',
+    pipeline: [
+      'Thought + emotion capture',
+      'Supabase journal entry',
+      'Risk-state detection',
+      'Context-loaded AI coach',
+      'Tiered overlay → saved response',
     ],
+    systems: [
+      {
+        title: 'Desktop HUD (PyQt6)',
+        items: [
+          'Always-on-top pill and expanded journal modes',
+          'Draggable positioning and global hotkeys',
+          'Async coaching calls in a QThread so the UI never freezes',
+        ],
+      },
+      {
+        title: 'AI coach (Claude)',
+        items: [
+          'Deterministic emotion → tier routing before the model runs',
+          'Private trader-profile and psychology knowledge-base context',
+          'Constrained 3–4 sentence response with an explicit tier label',
+        ],
+      },
+    ],
+    sections: ['Caution', 'Advice', 'Check'],
+    note: 'CAUTION for high-risk states (FOMO, revenge, overconfidence). ADVICE for anxiety, frustration, hesitation, impatience. CHECK for a softer heads-up when caution is rising.',
   }}
   build={{
     title: 'Implementation & challenges',
-    lead: 'Speed and specificity over post-session analysis.',
-    items: [
-      'Desktop overlay (PyQt6) so the tool stays available during live sessions.',
-      'LLM caution layer (Anthropic) to reframe the urge with a concrete next action.',
-      'Trade-off: interrupt quality over journaling completeness — the win is the pause.',
-      'Hardest problem: naming the pattern clearly enough to change behaviour without becoming noise.',
+    lead: 'Deterministic routing first. Then a tightly scoped model call.',
+    challenges: [
+      {
+        title: 'Native HUD that stays out of the way',
+        body: 'PyQt6 always-on-top overlay with collapsed pill mode, expanded journal mode, draggable positioning, and global hotkeys — present during live sessions without owning the screen.',
+        tradeoff: 'Trade-off: desktop complexity over a simpler web note form.',
+      },
+      {
+        title: 'Emotion taxonomy before the LLM',
+        body: 'Risk emotions map into intervention tiers deterministically. The model is not asked to invent the severity — it receives a routed tier and must coach inside that constraint.',
+        tradeoff: 'Trade-off: fixed taxonomy over free-form “how do you feel” chat.',
+      },
+      {
+        title: 'Private coaching context',
+        body: 'Claude gets a tightly scoped system prompt loaded from trader-profile and psychology knowledge-base files — personal notes and trusted sources, not a generic therapist persona.',
+        tradeoff: 'Trade-off: curation and file maintenance over one-shot prompting.',
+      },
+      {
+        title: 'Non-blocking coach calls',
+        body: 'Coaching runs asynchronously in a QThread so capture and hotkeys stay responsive while the model returns. The agent must never freeze the desk during a live session.',
+        tradeoff: 'Trade-off: thread and state management over a blocking request.',
+      },
+      {
+        title: 'Real desktop packaging',
+        body: 'Windows launch paths and SSL fixes were required for actual desk use — not just a happy-path script on a developer machine.',
+        tradeoff: 'Trade-off: platform friction for a tool that has to open faster than the chase.',
+      },
     ],
   }}
   results={{
     title: 'Results & learnings',
-    lead: 'Post-session journaling turned into an in-session interrupt.',
+    lead: 'Journaling became a real-time agentic feedback loop.',
     items: [
-      'Prototype desk composition: status pill, capture panel, and caution alert.',
-      'Emotion tagging and pattern naming happen while the market is still open.',
-      'Learning: a mental-game tool only works if it is faster to open than it is to chase.',
+      'Detect a risky state as it happens and return a concise intervention before poor execution.',
+      'Architecture: capture live state → classify risk deterministically → use personal context → generate constrained intervention → display immediately → store for review.',
+      'Tiered overlays (CAUTION / ADVICE / CHECK) keep severity readable at a glance.',
+      'Entries and coach responses persist in Supabase for later review.',
+      'Feels less like a chatbot and more like a lightweight mental-game copilot.',
     ],
+    pullquote:
+      'SENTINEL combines deterministic state routing with LLM-based coaching. The desktop app captures live trading context, emotion tags, session phase, and journal text, maps risk emotions into intervention tiers, then calls Claude with a tightly scoped system prompt loaded from private trader-profile and psychology context. The result is an embedded agentic loop: observe, classify, retrieve personal context, intervene, and persist.',
+    note: 'Effective applied AI does not always need a big interface. Sometimes the best agent is small, narrow, and embedded directly into the workflow.',
   }}
   screenshot={{
     src: '/images/projects/sentinel/cover.png',
     alt: 'SENTINEL mental-game agent on the desktop',
-    caption: 'Thought · emotion · caution · reset',
+    caption: 'Thought · emotion · coach · journal',
   }}
 />

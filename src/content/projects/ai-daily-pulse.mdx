@@ -1,21 +1,22 @@
 ---
 title: AI Daily Pulse
-description: A daily AI news briefing that turns a noisy feed of product, research and infra signal into a short edition you can actually finish.
-descriptionExtra: Editions are structured around three things to know, one featured story, and a filtered signal feed — so scanning the AI landscape takes minutes, not tabs.
+description: A scheduled agent system that gathers AI signal, synthesizes a fixed daily briefing, and publishes it into a reader you can finish in minutes.
+descriptionExtra: Hermes Agent runs on a cron, posts a validated briefing to the app API, and a Next.js reader surfaces a structured edition — not another infinite feed.
 date: 2026-07-20
 status: Live
-category: AI editorial system
+category: Applied AI product
 type: product
-stack: [Next.js, TypeScript, Vercel]
+stack: [Hermes Agent, Next.js, Vercel, Supabase, TypeScript]
 featured: true
 order: 2
-role: Solo builder — product design, editorial structure, implementation
+role: Builder / product owner / workflow designer
 audience: [employer, personal]
 coverImage: /images/projects/ai-briefing/cover.png
 cardImage: /images/projects/ai-briefing/cover-card.png
 coverFit: contain
 coverPosition: top
-systemLine: Sources → Filter → Pulse → Signal feed
+systemLine: Hermes cron → synthesize → API → Supabase → reader
+github: https://github.com/Libertrade01/AI-Daily-Pulse
 ---
 
 import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro';
@@ -23,54 +24,137 @@ import ProjectCaseBrief from '../../components/case-study/ProjectCaseBrief.astro
 <ProjectCaseBrief
   overview={{
     title: 'Overview',
-    lead: 'A fixed daily edition for the AI landscape.',
-    items: [
-      'Solo build — product design, editorial structure, and implementation.',
-      'Stack: Next.js, TypeScript, Vercel.',
-      'Status: live daily briefing product.',
+    lead: 'A daily AI briefing product with a fixed reading contract.',
+    body: 'AI Daily Pulse turns a noisy stream of product, research, and infra signal into one short edition you can finish. A Hermes Agent gathers and synthesizes on a schedule; the app validates, stores, and renders the result.',
+    note: 'This case study covers AI Daily Pulse only. It started inside a broader Briefing Studio, then was deliberately split — macro podcasts and newsletters moved into a separate Macro Intelligence project so each product could stay focused.',
+    facts: [
+      { label: 'Role', value: 'Builder / product owner / workflow designer' },
+      { label: 'Stack', value: 'Hermes Agent, Next.js, Vercel, Supabase, serverless API, markdown' },
+      { label: 'Status', value: 'Live daily briefing product' },
+      { label: 'Repo', value: 'github.com/Libertrade01/AI-Daily-Pulse' },
     ],
   }}
   problem={{
     title: 'Problem',
-    lead: 'AI news arrives as an endless stream, not a finished picture.',
-    items: [
-      'Useful signal is buried under duplicate headlines and low-context posts.',
-      'Reading five sources still leaves no clear view of what mattered today.',
-      'There is no stable format for returning to the same beat tomorrow.',
+    lead: 'Useful AI signal is scattered. Nothing packages the day.',
+    body: 'The issue is not access to information. It is the absence of a stable daily format — and an engineering path from raw sources to a finished edition.',
+    columns: [
+      {
+        title: 'Where signal lives',
+        items: [
+          'Product launches and model updates across vendors',
+          'Research papers and model cards',
+          'Infra, security, and policy shifts',
+          'High-noise social threads with occasional signal',
+        ],
+      },
+      {
+        title: 'What the system must do',
+        items: [
+          'Gather on a schedule without manual tab-chasing',
+          'Synthesize into a fixed editorial structure',
+          'Validate before anything reaches the reader',
+          'Render a finishable edition, not another feed',
+        ],
+      },
     ],
-    note: 'The issue is not access to information. It is the absence of an editorial system.',
   }}
   solution={{
     title: 'Solution',
-    lead: 'Package the day into a short, repeatable pulse.',
-    items: [
-      'Open with three things to know — orientation before depth.',
-      'Give one featured story room to breathe, with a source link out.',
-      'Keep the rest as a scannable signal feed filtered by pulse, product, research, and infra.',
+    lead: 'Agent synthesizes. App validates, stores, and renders.',
+    body: 'The product is a pipeline with a hard boundary: Hermes owns gathering and synthesis; the Next.js app owns ingest, storage, and reading.',
+    pipeline: [
+      'Hermes cron wakes on schedule',
+      'Gather + synthesize the day',
+      'Validate against briefing contract',
+      'POST /api/briefings → Supabase',
+      'Next.js reader surfaces the edition',
     ],
+    systems: [
+      {
+        title: 'Hermes Agent (VPS)',
+        items: [
+          'Scheduled run — gather sources, synthesize markdown',
+          'Owns editorial judgment and source selection',
+          'Posts a structured payload to the app ingest endpoint',
+        ],
+      },
+      {
+        title: 'App (Next.js / Vercel)',
+        items: [
+          'Bearer-auth ingest API with schema validation',
+          'Supabase storage for editions',
+          'Section-aware reader with a fixed reading path',
+        ],
+      },
+    ],
+    sections: [
+      'Day in 30 seconds',
+      'The Pulse',
+      'Product / Model Releases',
+      'Research / Models',
+      'Infra / Security / Policy',
+      'X List',
+      'Watchlist',
+      'Your takeaway',
+    ],
+    note: 'Every edition shares the same section frame so the reader learns the product once and returns for the content.',
   }}
   build={{
     title: 'Implementation & challenges',
-    lead: 'Design for finishability, not completeness.',
-    items: [
-      'Fixed edition frame (date, reading time, path) so every day shares the same reading contract.',
-      'Chose a dense terminal aesthetic to make scanning faster than browsing tabs.',
-      'Trade-off: editorial reduction over exhaustive coverage — the product succeeds when the pulse is finishable.',
-      'Hardest problem: ranking what belongs in “three things to know” without turning the page into another feed.',
+    lead: 'Applied AI is contracts, boundaries, and rendering — not just prompts.',
+    challenges: [
+      {
+        title: 'Briefing contract before clever prompts',
+        body: 'The edition only works if every run produces the same sections in a parseable shape. Spec and validation came before polishing synthesis quality.',
+        tradeoff: 'Trade-off: rigid structure over free-form agent output.',
+      },
+      {
+        title: 'Authenticated ingest, not open writes',
+        body: 'The agent posts into production storage. Bearer auth on POST /api/briefings keeps the boundary clear between trusted synthesis and public reading.',
+        tradeoff: 'Trade-off: operational key management over “just drop markdown in a folder.”',
+      },
+      {
+        title: 'Agent on VPS, app on Vercel',
+        body: 'Long-running scheduled gathering does not belong in serverless request paths. Hermes stays on a VPS cron; the app stays deployable and cacheable on Vercel.',
+        tradeoff: 'Trade-off: two runtimes to operate, clearer failure domains.',
+      },
+      {
+        title: 'Section-aware reader parsing',
+        body: 'The UI is not a generic markdown dump. Parsing has to map headings into the fixed reading path so filters and hierarchy stay intentional.',
+        tradeoff: 'Trade-off: tighter coupling to the contract, faster scan in the product.',
+      },
+      {
+        title: 'Product split from Briefing Studio',
+        body: 'Macro podcasts and newsletters diluted the AI pulse. Splitting into AI Daily Pulse and Macro Intelligence kept each product’s job clear.',
+        tradeoff: 'Trade-off: two products to maintain, stronger positioning for each.',
+      },
     ],
   }}
   results={{
     title: 'Results & learnings',
-    lead: 'A monitoring habit turned into a productized daily edition.',
+    lead: 'A monitoring habit became a shippable daily product.',
     items: [
-      'Stable daily composition: edition frame, three takeaways, featured story, filtered feed.',
-      'Category filters keep secondary signal available without breaking the primary path.',
-      'Learning: orientation beats completeness when the goal is a finished daily read.',
+      'Live pipeline: scheduled Hermes run → validated ingest → stored edition → reader.',
+      'Fixed editorial contract makes every day feel like the same product.',
+      'Clear runtime split: agent synthesis vs app delivery.',
+      'Bearer-auth boundary between write path and public read path.',
+      'Deliberate product split kept Pulse focused on AI signal.',
+      'Reader path optimized for finishability, not completeness.',
+    ],
+    pullquote:
+      'Hiring managers evaluating applied AI should see contracts, validation, storage, auth boundaries, and rendering — not a demo that stops at the prompt.',
+    next: [
+      'Tighter source ranking and confidence labels on claims',
+      'Edition history and compare-day views',
+      'Richer watchlist → follow-up workflows',
+      'Stronger eval loop on synthesis quality over time',
+      'Optional personalization without breaking the shared contract',
     ],
   }}
   screenshot={{
     src: '/images/projects/ai-briefing/cover.png',
     alt: 'AI Daily Pulse edition layout',
-    caption: 'Edition frame · featured story · signal feed',
+    caption: 'Fixed edition frame · pulse · signal sections',
   }}
 />
